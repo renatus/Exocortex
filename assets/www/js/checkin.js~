@@ -1,0 +1,114 @@
+//Button Check-in was clicked
+$(document).on('click','#button_checkin',function(){
+    //Get current position
+    //enableHighAccuracy:true options asks device to provide as precise location as possible
+    //Without enableHighAccuracy:true option Android emulatior will not return location at all
+    //timeout - time period in milliseconds, after that device will give up trying to find it's position
+    //maximumAge - time period in milliseconds, we can use previous mesurements that old
+    navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy:true, timeout: 120000, maximumAge: 20000});
+    
+    function onSuccess(position) {
+    	checkinPost(position);        
+    };
+    
+    // onError Callback receives a PositionError object
+    function onError(error) {
+        alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
+    };
+    
+});
+
+
+
+//Create Check-in node at IS
+//position should be geolocation object
+var checkinPost = function(position) {
+	var title = "Check-in";
+	
+	//Date, Time and Timezone format examples:
+    //var curDate = "2013-05-30";
+    //var curTime = "23:00:07";
+    //var timeZoneName = "Europe/Moscow";
+	
+	//Usually timestamp is at seconds, and JavaScript works with milliseconds
+	//So we have to multiply timestamp value by 1000, but with position.timestamp we don't have to do that
+	//Date and time from GPS can be wrong in Android emulator, that's OK.
+	curTimestamp = new Date(position.timestamp);
+	//Months numbers counts from 0, not from 1
+	var curDate = curTimestamp.getFullYear() + '-' + ("0" + (curTimestamp.getMonth()+1)).slice(-2) + '-' + ("0" + curTimestamp.getDate()).slice(-2);
+    var curTime = ("0" + curTimestamp.getHours()).slice(-2) + ':' + ("0" + curTimestamp.getMinutes()).slice(-2);
+	//Determine the time zone of the browser client, jstz.min.js required
+    var timeZone = jstz.determine();
+    timeZoneName = timeZone.name();
+    
+	var curLat = position.coords.latitude;
+	var curLon = position.coords.longitude;
+
+    $.ajax({
+        url: backendDomain + "/rest/node.json",
+        type: 'post',
+        beforeSend: function (request) {
+            //Get Drupal Services token
+            var servicesToken = getServicesToken(backendDomain);
+            request.setRequestHeader("X-CSRF-Token", servicesToken);
+        },
+        data: 'node[type]=check_in&node[language]=en&node[title]=' + encodeURIComponent(title) +
+              '&node[field_place_latlon][und][0][lat]=' + curLat +
+              '&node[field_place_latlon][und][0][lon]=' + curLon +
+              '&node[field_datetime_start][und][0][value][date]=' + curDate +
+              '&node[field_datetime_start][und][0][value][time]=' + curTime +
+              '&node[field_datetime_start][und][0][timezone][timezone]=' + timeZoneName,
+        dataType: 'json',
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert('page_node_create_submit - failed to login');
+            console.log(JSON.stringify(XMLHttpRequest));
+            console.log(JSON.stringify(textStatus));
+            console.log(JSON.stringify(errorThrown));
+        },
+        success: function (data) {
+            alert("You've checked-in successfully!" +
+                  'Latitude: '          + position.coords.latitude          + '\n' +
+                  'Longitude: '         + position.coords.longitude         + '\n' +
+                  'Altitude: '          + position.coords.altitude          + '\n' +
+                  'Accuracy: '          + position.coords.accuracy          + '\n' +
+                  'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+                  'Heading: '           + position.coords.heading           + '\n' +
+                  'Speed: '             + position.coords.speed             + '\n' +
+                  'Timestamp: '         + position.timestamp                + '\n');
+        }
+    });
+    
+    return false;
+}
+
+
+
+//Test geolocation without storing current position
+$(document).on('click','#button_geolocation_test',function(){
+    //Get current position
+    //enableHighAccuracy:true options asks device to provide as precise location as possible
+    //Without enableHighAccuracy:true option Android emulatior will not return location at all
+    //timeout - time period in milliseconds, after that device will give up trying to find it's position
+    //maximumAge - time period in milliseconds, we can use previous mesurements that old
+    navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy:true, timeout: 60000, maximumAge: 20000});
+    
+    function onSuccess(position) {
+        alert("GPS works fine!" +
+                'Latitude: '          + position.coords.latitude          + '\n' +
+                'Longitude: '         + position.coords.longitude         + '\n' +
+                'Altitude: '          + position.coords.altitude          + '\n' +
+                'Accuracy: '          + position.coords.accuracy          + '\n' +
+                'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+                'Heading: '           + position.coords.heading           + '\n' +
+                'Speed: '             + position.coords.speed             + '\n' +
+                'Timestamp: '         + position.timestamp                + '\n');       
+    };
+
+    // onError Callback receives a PositionError object
+    function onError(error) {
+        alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
+    };
+    
+});

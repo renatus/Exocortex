@@ -1,0 +1,199 @@
+// When Cordova is loaded and talking with the native device,
+// it will call the event `deviceready`.
+//To fire this function, we should modify HTML '<body>' tag: <body onload="onLoad()">
+function onLoad() {
+    document.addEventListener("deviceready", onDeviceReady, false);
+}
+
+// Cordova is loaded and it is now safe to make calls Cordova methods
+function onDeviceReady() {
+
+    //Get network connection type
+    var networkState = navigator.connection.type;
+    //If we're connected to the internet
+    if(!(networkState === Connection.NONE)) {
+        //Put all active activities from backend to app DB
+        get_activities_from_backend("/json/activities/active");
+    }
+
+
+
+    //If menu button was pressed
+    document.addEventListener("menubutton", onMenuKeyDown, false);
+
+    //App menu +    
+    
+    //Declare all buttons of your app's menu
+    //You can declare multiple rows and multiple buttons in a row
+    
+    //You shoul use at least one animated .gif as button icon. Without it menu will not be shown when you press menu button. 
+    //If there is animated GIF, other icons will be shown fine as well.
+    //This behavior was noted at Android 4.0.3 emulator and on real device (running 4.0.4). At 4.2.2-based emulator that example worked just fine without any GIFs.
+//    var optionsmenu = new OptionsMenu({
+//        id: "optionsmenu",
+//        items: [ 
+            //First menu row
+//            [ {
+//                label: "Frontpage",
+//                image: "libs/images/menus/ruby.gif",
+//                action: onFrontPage
+//            }, 
+//            {
+//                label: "Today activities",
+//                image: "",
+//                action: onTodayActivitiesPage
+//            },
+//            {
+//                label: "Outdated activities",
+//                image: "",
+//                action: onOutdatedActivitiesPage
+//            } ],
+            //Second menu row
+            //[ {
+            //    label: "Row 3",
+            //    image: "libs/images/tst.jpg",
+            //    action: onSettings
+            //}, 
+            //{
+            //    label: "More Help",
+            //    image: "libs/images/tst.gif",
+            //    action: onHelp
+            //}, 
+            //{
+            //    label: "Even More Help",
+            //    //To set image, enter it's relative URL, like images/img.png
+            //    image: "libs/images/settings.png",
+            //    action: onHelp
+            //} ],
+//        ], 
+//    });
+    //App menu -
+}
+
+
+//Menu button was pressed
+function onMenuKeyDown() {
+    //For now you should put jQuery Mobile panel at every app's page
+    //We have to call panels from ALL pages - one of them will open
+    $("#page_dashboard_panel").panel("open");
+    $("#page_settings_panel").panel("open");
+    $("#page_login_panel").panel("open");
+    $("#page_activities_main_panel").panel("open");
+    $("#page_activities_tomorrow_panel").panel("open");
+    $("#page_activities_future_panel").panel("open");
+    $("#page_activities_past_panel").panel("open");
+    $("#page_activities_completed_panel").panel("open");
+    $("#page_node_activity_view").panel("open");
+}
+
+//Button in menu was pressed
+//var onFrontPage = function() {
+    //Show whether we're logged in IS or not
+//    loggedInIndicator();
+    //Switch to desired HTML [sub]page
+//    $.mobile.changePage( "#page_dashboard", { transition: "slide"} );
+//};
+ 
+//Button in menu was pressed
+//var onTodayActivitiesPage = function() {
+    //Fill desired HTML [sub]page with data from server
+//    get_node_list("/json/activities/today", "#page_node_pages_list");
+    //Switch to desired HTML [sub]page
+//    $.mobile.changePage( "#page_activities_main", { transition: "slide"} );
+//};
+
+//Button in menu was pressed
+//var onOutdatedActivitiesPage = function() {
+    //Fill desired HTML [sub]page with data from server
+//    get_node_list("/json/activities/past", "#page_activities_past_list");
+    //Switch to desired HTML [sub]page
+//    $.mobile.changePage( "#page_activities_past", { transition: "slide"} );
+//};
+
+
+
+//Create TaffyDB for unique IDs for TaffyDB tables entries
+//To obtain IDs columns with autoincrement values, we have to store biggest used ID value here
+//We can't get in from appropriate table, as latest row may be removed, and one ID will be used two times
+var tablesIDsTDB = TAFFY([
+]);
+//Storing DB records in localStorage
+//Newly-added information syncs automatically to localStorage
+//DB syncs automatically from localStorage during app loading
+tablesIDsTDB.store("tablesIDsTDB"); 
+
+
+
+// Create TaffyDB for IS Activities
+var activitiesTDB = TAFFY([
+]);
+//Storing DB records in localStorage
+//Newly-added information syncs automatically to localStorage
+//DB syncs automatically from localStorage during app loading
+activitiesTDB.store("activitiesTDB"); 
+
+
+
+function getNewTDBTableID(TDBTableName) {
+    
+}
+
+
+
+//If we're logged in, set global variable with IS domain
+if (window.localStorage.getItem("userLogged") == "loggedIn") {
+    //Don't forget to change backendDomain when you log in or log out
+    //backendDomain variable should be global
+	var backendDomain = window.localStorage.getItem("backendDomain");
+}
+    
+    
+    
+//Clear all app's cache, if appropriate button was pressed
+$(document).on('click','#page_login_clear_cache',function() {
+	window.localStorage.clear();
+	alert("Cache cleared!")
+})
+
+
+
+//Show whether we're logged in IS or not
+//If you'll reload indicator page, i.e. with {reloadPage:true}, all JavaScript alterations will vanish
+var loggedInIndicator = function() {
+	if (window.localStorage.getItem("userLogged") == "loggedIn") {
+        $("#user_logged_status").css("background-color","green");
+	} else {
+		$("#user_logged_status").css("background-color","red");
+	}
+}
+
+
+
+//Get Drupal Services token (security measure implemented by this module)
+//To put jQuery AJAX request in a separate function, make it synchronous: async:false,
+//You should return a value after the call to AJAX, not inside success handler
+var getServicesToken = function(backendDomain) {
+    var servicesToken;
+
+    try {
+        // Obtain session token.
+        $.ajax({
+            url: backendDomain + "/services/session/token",
+            type:"get",
+            dataType:"text",
+            async:false,
+            error:function (jqXHR, textStatus, errorThrown) {
+                //alert('Failed to retrieve backend token');
+                if (errorThrown) {
+                    alert(errorThrown);
+                }
+            },
+            success: function (token) {
+                servicesToken = token;
+            }
+        });
+
+        return servicesToken;
+    }
+    catch (error) { alert("Failed to retrieve backend token - " + error); }
+}
