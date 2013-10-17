@@ -100,7 +100,7 @@ function checkinAdd(position) {
 //Sync checkin to IS backend
 function checkin_sync_to_backend(entryID) {
 
-    //Example of data to send to IS to modify Drupal node:
+    //Example of data to send to IS to create or modify Drupal node:
     //'node[type]=activity&node[language]=en&node[title]=' + encodeURIComponent(title) +
     //'node[field_datetime][und][0][value][date]=' + curDate +
     //'&node[field_datetime][und][0][value][time]=' + curTime;

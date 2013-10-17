@@ -38,10 +38,6 @@
     <!-- index.html <body> contains all App pages -->
     <body onload="onLoad()">
         
-        <div id="timebox_ended_popup" data-role="popup">
-            <p>This is a completely basic popup, no options set.<p>
-        </div>
-        
         <!--jQuery Mobile panel - Global menu -->
         <div id="panel_global_menu" data-role="panel" data-position="right" data-display="overlay" data-theme="b">
             <!-- JavaScript we need to create Time box nodes at IS -->
@@ -54,6 +50,14 @@
             <p><a href="#page_activities_past" data-role="button" class="button_activities_past">Outdated activities</a></p>
             <p><a href="#" data-role="button" class="button_sync_from_backend">Sync from server</a></p>
         </div><!-- /panel -->
+        
+        
+        <!-- jQuery Mobile dialog - TimeBox -->
+        <!-- Dialog should show standard page, but page, placed here, will be displayed as frontpage -->
+        <!-- So we can either put Menus and dialogs at different place, or use data-role="popup" for Dialog pages -->
+        <!--<div id="timebox_ended" data-role="popup">
+            <p>This is a completely basic popup, no options set.<p>
+        </div> --><!-- /jQuery Mobile panel - dialog -->
         
         
         
@@ -89,8 +93,6 @@
                     <!-- Button to show list of activities -->
                     <a href="#page_activities_main" data-role="button" data-theme="b" class="button_activities_main exo_square_button">Activities</a>
                 </div>
-                
-                <a href="#timebox_ended_popup" data-rel="popup">Open Popup</a>
 
             </div><!-- /content -->
 

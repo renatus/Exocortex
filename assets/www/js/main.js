@@ -64,6 +64,14 @@ checkinsTDB.store("checkinsTDB");
 
 
 
+// Create TaffyDB for IS Timeboxes
+var timeboxesTDB = TAFFY([]);
+//Storing DB records in localStorage
+//Newly-added information syncs automatically to localStorage
+timeboxesTDB.store("timeboxesTDB"); 
+
+
+
 //Get a new ID for a new app DB entry
 //IDs are unique per DB table
 //They can be only reused in case all DB was cleared - including all entries
@@ -97,6 +105,13 @@ if (window.localStorage.getItem("userLogged") == "loggedIn") {
     //backendDomain variable should be global
 	var backendDomain = window.localStorage.getItem("backendDomain");
 }
+
+
+
+//Set default Planned timebox duration, in seconds
+var timeboxDurationPlannedDefault = 2;
+//In the future it would be possible to modify Planned timebox duration, so timeboxDurationPlanned will be altered
+var timeboxDurationPlanned = timeboxDurationPlannedDefault;
     
     
     
@@ -112,6 +127,7 @@ $(document).on('click','.page_login_clear_cache',function() {
 $(document).on('click','.button_sync_to_backend',function(){
     sync_modified_activities();
 	sync_modified_checkins();
+    sync_modified_timeboxes();
 });
 
 
