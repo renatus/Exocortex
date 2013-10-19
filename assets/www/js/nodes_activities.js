@@ -90,9 +90,44 @@ $(document).on('click','.button_activities_waiting',function(){
 
 
 
+//We should get all activities only in case there were no updates for a long time
+//We have a page with all activities, created or updated today and yesterday
+//So in case last update wasn't earlier than yestersay, we should use this page
+function get_new_activities_from_backend(){
+    
+    //Get timestamp for the beginnig of yesterday
+    //Get current Date and Time
+    var curDateTime = new Date();
+    //add a day to the date
+    curDateTime.setDate(curDateTime.getDate() - 1);
+    //Months numbers counts from 0, not from 1
+    var yesterDayStart = curDateTime.getFullYear() + '-' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '-' + ("0" + curDateTime.getDate()).slice(-2) + " 00:00:00";
+    var yesterDayStartTimestamp = Date.parse(yesterDayStart);
+    
+    //Get timestamp from LocalStorage to find out, when we've synced activities from the server the last time
+    var lastSyncTimestamp = parseInt(window.localStorage.getItem("activitiesLastUpdatedFromServer"));
+    
+    if(lastSyncTimestamp > yesterDayStartTimestamp){
+        //We've synced today or yesterday
+        //Put from backend to app DB only those active activities, that was created and updated today or yesterday
+        get_activities_from_backend("/json/activities/updated-today-yesterday");
+    } else {
+        //We've NOT synced today or yesterday
+        //Put all active activities from backend to app DB
+        get_activities_from_backend("/json/activities/active");
+    }
+}
+
+
+
 //Get list of nodes (with all properties) from IS and put that list to app's DB
 //URLpart should contain last part of the list URL at IS, like this: "/json/activities/waiting"
 function get_activities_from_backend(URLpart){
+    
+    //Get current timestamp
+    curDateTime = new Date();
+    curTimestamp = Date.parse(curDateTime);
+    
     try {
         $.ajax({
             url: backendDomain + URLpart,
@@ -173,6 +208,9 @@ function get_activities_from_backend(URLpart){
                         }					
                     }
                 });    
+                
+                //Save current timestamp to LocalStorage to be able to know, when we've synced activities from the server the last time
+                window.localStorage.setItem("activitiesLastUpdatedFromServer",curTimestamp); 
                 
                 // Vibrate for 2 seconds
                 navigator.notification.vibrate(2000);

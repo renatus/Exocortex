@@ -12,8 +12,8 @@ function onDeviceReady() {
     var networkState = navigator.connection.type;
     //If we're connected to the internet
     if(!(networkState === Connection.NONE)) {
-        //Put all active activities from backend to app DB
-        get_activities_from_backend("/json/activities/active");
+        //Put new active activities from backend to app DB
+        get_new_activities_from_backend();
     }
 
 
@@ -134,8 +134,8 @@ $(document).on('click','.button_sync_to_backend',function(){
 
 //Command to sync all new and modified entries to app DB FROM backend
 $(document).on('click','.button_sync_from_backend',function(){
-    //Put all active activities from backend to app DB
-    get_activities_from_backend("/json/activities/active");
+    //Put new active activities from backend to app DB
+    get_new_activities_from_backend();
 });
 
 
