@@ -46,6 +46,51 @@ function checkinAdd(position) {
 	//.getTimezoneOffset() will return result in minutes, Drupal uses seconds
     timeZoneOffset = curDateTime.getTimezoneOffset()*60;
     
+    //We should not put inappropriate values, like NULL, at app DB
+    //So we can't put geolocation object properties directly to DB, we should check them first
+    //NULL and other non-numeric values should be replaced by an empty field
+    if($.isNumeric(position.coords.latitude)){
+        var coordsLatitude = position.coords.latitude;
+    } else {
+        var coordsLatitude = "";
+    }
+    
+    if($.isNumeric(position.coords.longitude)){
+        var coordsLongitude = position.coords.longitude;
+    } else {
+        var coordsLongitude = "";
+    }
+    
+    if($.isNumeric(position.coords.accuracy)){
+        var coordsAccuracy = position.coords.accuracy;
+    } else {
+        var coordsAccuracy = "";
+    }
+        
+    if($.isNumeric(position.coords.altitude)){
+        var coordsAltitude = position.coords.altitude;
+    } else {
+        var coordsAltitude = "";
+    }
+    
+    if($.isNumeric(position.coords.altitudeAccuracy)){
+        var coordsAltitudeAccuracy = position.coords.altitudeAccuracy;
+    } else {
+        var coordsAltitudeAccuracy = "";
+    }
+    
+    if($.isNumeric(position.coords.heading)){
+        var coordsHeading = position.coords.heading;
+    } else {
+        var coordsHeading = "";
+    }
+    
+    if($.isNumeric(position.coords.speed)){
+        var coordsSpeed = position.coords.speed;
+    } else {
+        var coordsSpeed = "";
+    }
+    
 	//Get new ID for new entry at checkinsTDB table
 	var entryID = getNewTDBEntryID("checkinsTDB");
 
@@ -59,19 +104,19 @@ function checkinAdd(position) {
 					   "dateTimeTZ":timeZoneName,
                        "dateTimeOffset":timeZoneOffset,
 					   //like 55.58175515 Latitude in decimal degrees. (Number)
-					   "latitude":position.coords.latitude,
+					   "latitude":coordsLatitude,
 					   //like 37.67745413 Longitude in decimal degrees. (Number)
-					   "longitude":position.coords.longitude,
+					   "longitude":coordsLongitude,
 					   //like 17 Accuracy level of the latitude and longitude coordinates in meters. (Number)
-					   "latLonAccuracy":position.coords.accuracy,
+					   "latLonAccuracy":coordsAccuracy,
 					   //like 202.3000030517578 Height of the position in meters above the ellipsoid. (Number)
-					   "altitude":position.coords.altitude,
+					   "altitude":coordsAltitude,
 					   //like null Accuracy level of the altitude coordinate in meters. (Number)
-					   "altitudeAccuracy":position.coords.altitudeAccuracy,
+					   "altitudeAccuracy":coordsAltitudeAccuracy,
 					   //like 84.80000305175781 Direction of travel, specified in degrees counting clockwise relative to the true north. (Number)
-					   "heading":position.coords.heading,
+					   "heading":coordsHeading,
 					   //like 1 Current ground speed of the device, specified in meters per second. (Number)
-					   "speed":position.coords.speed,			   
+					   "speed":coordsSpeed,			   
                        //Looks like we should not bother about timezone here
                        //Mark entry as updated locally
                        "lastUpdatedLocally":Math.round(curDateTime.getTime()/1000)}, "id");
@@ -111,9 +156,17 @@ function checkin_sync_to_backend(entryID) {
 
     //Put all data to send to IS to modify Drupal node at this variable
     //In case Drupal Date field already has both start and end values stored, you have to send both value and value2
+    //Looks like at least Decimal fields will accept emty values, like this:
+    //&node[field_altitude][und][0][value]=&node[field_altitude_accuracy][und][0][value]=
+    //So we can not to check whether value is here
     var dataToSend = 'node[type]=check_in&node[language]=en&node[title]=' + encodeURIComponent("Check-in") +
                      '&node[field_place_latlon][und][0][lat]=' + curEntry.latitude +
                      '&node[field_place_latlon][und][0][lon]=' + curEntry.longitude +
+                     '&node[field_latlon_accuracy][und][0][value]=' + curEntry.latLonAccuracy +
+                     '&node[field_altitude][und][0][value]=' + curEntry.altitude +
+                     '&node[field_altitude_accuracy][und][0][value]=' + curEntry.altitudeAccuracy +
+                     '&node[field_heading][und][0][value]=' + curEntry.heading +
+                     '&node[field_speed][und][0][value]=' + curEntry.speed +        
                      '&node[field_datetime_start][und][0][value][date]=' + curEntry.date +
                      '&node[field_datetime_start][und][0][value][time]=' + curEntry.time +
                      '&node[field_datetime_start][und][0][timezone][timezone]=' + curEntry.dateTimeTZ;
