@@ -551,12 +551,10 @@ function change_activity_planned_to_date(entryID, numberOfDays) {
 
         curDateTime = new Date();
     
-        //Get old planned end timestamp
-        var oldPlannedEndDateTime = new Date(parseInt(curActivityEntry.dateTimePlannedEndTimestamp));   
-        //We should populate variable with arbitrary Date object
-        var newPlannedEndDateTime = new Date();
-        //.getDate will give us correct date, but with CURRENT time
-        //We should use DB-stored time value instead
+        //Create Date object with old planned end date and time
+        var oldPlannedEndDateTime = new Date(parseInt(curActivityEntry.dateTimePlannedEndTimestamp)); 
+        //We should populate variable for a NEW date with a Date object, and it should be created from OLD timestamp (in milliseconds)
+        var newPlannedEndDateTime = new Date(parseInt(curActivityEntry.dateTimePlannedEndTimestamp));
         newPlannedEndDateTime.setDate(oldPlannedEndDateTime.getDate() + numberOfDays);
         var plannedEndDate = newPlannedEndDateTime.getFullYear() + '-' + ("0" + (newPlannedEndDateTime.getMonth()+1)).slice(-2) + '-' + ("0" + newPlannedEndDateTime.getDate()).slice(-2);
         var plannedEndTime = curActivityEntry.timePlannedEnd;
