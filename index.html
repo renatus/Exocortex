@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+        <!-- Custom CSS we need globally -->
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+
+
+
+        <!-- Timezone operations -->
+        <script src="libs/jstz.min.js"></script>
+        <!-- JS database engine script -->
+        <script src="libs/taffy-min.js"></script>
+        <script src="libs/jquery-2.0.3.min.js"></script>
+        <link rel="stylesheet" href="libs/jquery.mobile-1.4.0-beta.1.min.css" />
+        <script src="libs/jquery.mobile-1.4.0-beta.1.min.js"></script>
+
+        <!-- Custom JavaScript we need globally -->
+        <script src="js/main.js"></script>
+
+
+
+
+        <title>Exocortex app</title>
+    </head>
+
+
+
+    <!-- index.html <body> contains all App pages -->
+    <body onload="onLoad()">
+        
+        <!--jQuery Mobile panel - Global menu -->
+        <!--We should initialize jQuery Mobile panel, if it is located outside of page, or it will be treated as page-->
+        <div id="panel_global_menu" data-role="panel" data-position="right" data-display="overlay" data-theme="b">
+            <!-- JavaScript we need to create Time box nodes at IS -->
+            <!-- <script src="js/timebox.js"></script> -->
+            
+            <p><a href="#" data-role="button" class="button_timebox_start">Timebox</a></p>
+            <p><a href="#page_dashboard" data-role="button" class="button_dashboard">Frontpage</a></p>
+            <p><a href="#page_activities_main" data-role="button" class="button_activities_main">Today activities</a></p>
+            <p><a href="#page_activities_tomorrow" data-role="button" class="button_activities_tomorrow">Tomorrow activities</a></p>
+            <p><a href="#page_activities_past" data-role="button" class="button_activities_past">Outdated activities</a></p>
+            <p><a href="#" data-role="button" class="button_sync_from_backend">Sync from server</a></p>
+        </div><!-- /panel -->
+        
+        <!-- jQuery Mobile dialog - TimeBox -->
+        <!-- Dialog should show standard page, but page, placed here, will be displayed as frontpage -->
+        <!-- So we can either put Menus and dialogs at different place, or use data-role="popup" for Dialog pages -->
+        <!--<div id="timebox_ended" data-role="popup">
+            <p>This is a completely basic popup, no options set.<p>
+        </div> --><!-- /jQuery Mobile panel - dialog -->
+        
+        
+        
+        <!-- Application frontpage -->
+        <div data-role="page" id="page_dashboard" data-add-back-btn="true">
+
+            <div data-role="header">
+                <h1>Dashboard</h1>
+                <a href="#panel_global_menu" data-role="button" class="ui-btn-right button_menu_main" data-icon="gear" data-iconpos="notext">Menu</a>
+            </div><!-- /header -->
+
+            <!-- JavaScript we need to create Check-in nodes at IS -->
+            <script src="js/checkin.js"></script>
+
+            <div data-role="content">
+                <div>
+                    <!-- Visual logged-in/logged-out indicator, changes it's color -->
+                    <div id="user_logged_status"></div>
+                    <!-- Settings button -->
+                    <a href="#page_settings" data-role="button" data-theme="a" class="button_settings">Settings</a>
+                </div>
+                <p></p>
+                <div data-role="controlgroup" data-type="horizontal">
+                    <!-- GPS test button -->
+                    <a href="#" data-role="button" data-theme="a" class="exo_square_button button_geolocation_test">Test GPS</a>
+                    <!-- Check-in button -->
+                    <a href="#" data-role="button" data-theme="b" class="exo_square_button button_checkin">Check in!</a>
+                </div>
+                <p></p>
+                <div data-role="controlgroup" data-type="horizontal">
+                    <!-- Add activity button -->
+                    <a href="#" data-role="button" data-theme="a" class="button_add_activity exo_square_button">Add activity</a>
+                    <!-- Button to show list of activities -->
+                    <a href="#page_activities_main" data-role="button" data-theme="b" class="button_activities_main exo_square_button">Activities</a>
+                </div>
+
+            </div><!-- /content -->
+
+        </div><!-- /page -->
+
+
+
+        <!-- Settings page -->
+        <div data-role="page" id="page_settings" data-add-back-btn="true">
+
+            <div data-role="header">
+                <h1>Settings</h1>
+                <a href="#panel_global_menu" data-role="button" class="ui-btn-right button_menu_main" data-icon="gear" data-iconpos="notext">Menu</a>
+            </div><!-- /header -->
+
+            <!-- JavaScript file to test arbitrary JS code -->
+            <script src="js/test.js"></script>
+
+            <div data-role="content" class='content'>
+
+                <div data-role="controlgroup" data-type="horizontal">
+                    <!-- Button to test arbitrary JS code -->
+                    <a href="#" data-role="button" data-theme="a" class="exo_square_button button_test">Test!</a>
+                    <!-- Button to get to login page -->
+                    <a href="#page_login" data-role="button" data-theme="b" class="exo_square_button button_login">Log in!</a>
+                </div>
+
+                <div data-role="controlgroup" data-type="horizontal">
+                    <!-- Button to sync data from app DB to backend -->
+                    <a href="#" data-role="button" data-theme="a" class="exo_square_button button_sync_to_backend">Sync</a>
+                    <!-- Button to -->
+                    <a href="#page_login" data-role="button" data-theme="b" class="exo_square_button button_not_used1"></a>
+                </div>
+
+            </div><!-- /content -->
+
+        </div> <!-- /page -->
+        
+        
+        
+        <!-- Login page -->
+        <div data-role="page" id="page_login" data-add-back-btn="true">
+
+            <div data-role="header">
+                <h1>Login</h1>
+                <a href="#panel_global_menu" data-role="button" class="ui-btn-right button_menu_main" data-icon="gear" data-iconpos="notext">Menu</a>
+            </div><!-- /header -->
+
+            <!-- JavaScript we need to log in IS -->
+            <script src="js/login.js"></script>
+
+            <div data-role="content" class='content'>
+                <!-- IS domain -->
+                <div>
+                    <label for="page_login_domain">Backend domain</label>
+                    <input type="url" id="page_login_domain" />
+                </div>
+
+                <!-- IS user username -->
+                <div>
+                    <label for="page_login_name">Username</label>
+                    <input type="text" id="page_login_name" />
+                </div>
+
+                <!-- IS user password -->
+                <div>
+                    <label for="page_login_pass">Password</label>
+                    <input type="password" id="page_login_pass" />
+                </div>
+
+                <p></p>
+
+                <div data-role="controlgroup" data-type="horizontal">
+                    <!-- Logout button -->
+                    <a href="#" data-role="button" data-theme="a" class="exo_square_button button_logout">Logout</a>
+                    <!-- Login button -->
+                    <a href="#" data-role="button" data-theme="b" class="exo_square_button page_login_submit">Login</a>
+                </div>
+
+                <p></p>
+
+                <!-- Button to clear all app cache -->
+                <div><button type="button" data-theme="b" class="page_login_clear_cache">Clear cache</button></div>
+
+            </div><!-- /content -->
+
+        </div><!-- /page -->
+
+
+
+
+    <!-- Group of pages - activities lists + -->
+        <!-- Main activities page - list of activities for today, buttons to access other types of activities -->
+        <div data-role="page" id="page_activities_main" data-add-back-btn="true">
+
+            <!-- JavaScript we need to work with Activities nodes at IS -->
+            <script type="text/javascript" charset="utf-8" src="js/nodes_activities.js"></script>
+
+            <div data-role="header">
+                <a href="#page_activities_main_panel" data-role="button" class="ui-btn-left button_menu_main" data-icon="star" data-iconpos="notext">Local menu</a>
+                <h1>Today</h1>
+                <a href="#panel_global_menu" data-role="button" class="ui-btn-right button_menu_main" data-icon="gear" data-iconpos="notext">Menu</a>
+            </div><!-- /header -->
+
+            <!-- List to include appropriate Activities Titles by JS -->
+            <div data-role="content" class='content'>
+                <ul data-role="listview" data-theme="a" data-inset="true" id="page_activities_today_list"></ul>
+
+                <!-- Buttons to access all available Activities lists -->
+                <p></p>
+                <p></p>
+                <p><a href="#page_activities_tomorrow" data-role="button" class="button_activities_tomorrow">Tomorrow</a></p>
+                <p><a href="#page_activities_future" data-role="button" class="button_activities_future">Future</a></p>
+                <p><a href="#page_activities_past" data-role="button" class="button_activities_past">Outdated</a></p>
+                <p><a href="#page_activities_low-prio" data-role="button" class="button_activities_low-prio">Low priority</a></p>
+                <p><a href="#page_activities_high-prio" data-role="button" class="button_activities_high-prio">High priority</a></p>
+                <p><a href="#page_activities_postponed" data-role="button" class="button_activities_postponed">Postponed</a></p>
+                <p><a href="#page_activities_waiting" data-role="button" class="button_activities_waiting">Waiting</a></p>
+                <p><a href="#page_activities_completed" data-role="button" class="button_activities_completed">Completed</a></p>
+                <!-- <p><a href="#page_activities_waiting" data-role="button" data-theme="a" id="button_activities_waiting">Waiting</a></p> -->
+            </div><!-- /content -->
+
+            <!-- We add buttons to footer to ease access to 'neighboring' lists of nodes -->
+            <div data-role="footer">
+                <a href="#page_activities_completed" data-role="button" class="ui-btn-left button_activities_completed" data-icon="arrow-l" data-iconpos="left">Completed</a>
+                <p>.</p> <!-- Without that footer background will not be shown at Android 4.2 -->
+                <a href="#page_activities_tomorrow" data-role="button" class="ui-btn-right button_activities_tomorrow" data-icon="arrow-r" data-iconpos="right">Tomorrow</a>
+            </div> <!-- /footer -->
+
+            <!--jQuery Mobile panel - Local menu -->
+            <div data-role="panel" id="page_activities_main_panel" data-position="left" data-display="overlay">
+                <p><a href="#page_dashboard" data-role="button" class="button_dashboard">Frontpage</a></p>
+                <p><a href="#page_activities_main" data-role="button" class="button_activities_main">Today activities</a></p>
+                <p><a href="#page_activities_past" data-role="button" class="button_activities_past">Outdated activities</a></p>
+            </div><!-- /panel -->
+            
+        </div><!-- /page -->
+
+
+        <!-- List of activities for tomorrow -->
+        <div data-role="page" id="page_activities_tomorrow" data-add-back-btn="true">
+
+            <div data-role="header">
+                <h1>Tomorrow</h1>
+                <a href="#panel_global_menu" data-role="button" class="ui-btn-right button_menu_main" data-icon="gear" data-iconpos="notext">Menu</a>
+            </div><!-- /header -->
+
+            <!-- List to include appropriate Activities Titles by JS -->
+            <div data-role="content" class='content'>
+                <ul data-role="listview" data-theme="a" data-inset="true" id="page_activities_tomorrow_list"></ul>
+            </div><!-- /content -->
+
+            <div data-role="footer">
+                <a href="#page_activities_main" data-role="button" class="ui-btn-left button_activities_main" data-icon="arrow-l" data-iconpos="left">Today</a>
+                <p>.</p><!-- Without that footer background will not be shown at Android 4.2 -->
+                <a href="#page_activities_future" data-role="button" class="ui-btn-right button_activities_future" data-icon="arrow-r" data-iconpos="right">Future</a>
+            </div><!-- /footer -->
+
+        </div><!-- /page -->
+
+
+        <!-- List of activities for future (except tomorrow)  -->
+        <div data-role="page" id="page_activities_future" data-add-back-btn="true">
+
+            <div data-role="header">
+                <h1>Future</h1>
+                <a href="#panel_global_menu" data-role="button" class="ui-btn-right button_menu_main" data-icon="gear" data-iconpos="notext">Menu</a>
+            </div><!-- /header -->
+
+            <div data-role="content" class='content'>
+                <ul data-role="listview" data-theme="a" data-inset="true" id="page_activities_future_list"></ul>
+            </div><!-- /content -->
+
+            <div data-role="footer">
+                <a href="#page_activities_tomorrow" data-role="button" class="ui-btn-left button_activities_tomorrow" data-icon="arrow-l" data-iconpos="left">Tomorrow</a>
+                <p>.</p><!-- Without that footer background will not be shown at Android 4.2 -->
+                <a href="#page_activities_past" data-role="button" class="ui-btn-right button_activities_past" data-icon="arrow-r" data-iconpos="right">Past</a>
+            </div><!-- /footer -->
+
+        </div><!-- /page -->
+
+
+        <!-- List of activities for past  -->
+        <div data-role="page" id="page_activities_past" data-add-back-btn="true">
+
+            <div data-role="header">
+                <h1>Outdated</h1>
+                <a href="#panel_global_menu" data-role="button" class="ui-btn-right button_menu_main" data-icon="gear" data-iconpos="notext">Menu</a>
+            </div><!-- /header -->
+
+            <!-- List to include appropriate Activities Titles by JS -->
+            <div data-role="content" class='content'>
+                <ul data-role="listview" data-theme="a" data-inset="true" id="page_activities_past_list"></ul>
+            </div><!-- /content -->
+
+            <div data-role="footer">
+                <a href="#page_activities_future" data-role="button" class="ui-btn-left button_activities_future" data-icon="arrow-l" data-iconpos="left">Future</a>
+                <p>.</p><!-- Without that footer background will not be shown at Android 4.2 -->
+                <a href="#page_activities_low-prio" data-role="button" class="ui-btn-right button_activities_low-prio" data-icon="arrow-r" data-iconpos="right">Low prio</a>
+            </div><!-- /footer -->
+
+        </div><!-- /page -->
+
+
+        <!-- List of low priority activities -->
+        <div data-role="page" id="page_activities_low-prio" data-add-back-btn="true">
+
+            <div data-role="header">
+                <h1>Low priority</h1>
+                <a href="#panel_global_menu" data-role="button" class="ui-btn-right button_menu_main" data-icon="gear" data-iconpos="notext">Menu</a>
+            </div><!-- /header -->
+
+            <!-- List to include appropriate Activities Titles by JS -->
+            <div data-role="content" class='content'>
+                <ul data-role="listview" data-theme="a" data-inset="true" id="page_activities_low-prio_list"></ul>
+            </div><!-- /content -->
+
+            <div data-role="footer">
+                <a href="#page_activities_past" data-role="button" class="ui-btn-left button_activities_past" data-icon="arrow-l" data-iconpos="left">Past</a>
+                <p>.</p><!-- Without that footer background will not be shown at Android 4.2 -->
+                <a href="#page_activities_high-prio" data-role="button" class="ui-btn-right button_activities_high-prio" data-icon="arrow-r" data-iconpos="right">High prio</a>
+            </div><!-- /footer -->
+
+        </div><!-- /page -->
+
+
+        <!-- List of high priority activities -->
+        <div data-role="page" id="page_activities_high-prio" data-add-back-btn="true">
+
+            <div data-role="header">
+                <h1>High priority</h1>
+                <a href="#panel_global_menu" data-role="button" class="ui-btn-right button_menu_main" data-icon="gear" data-iconpos="notext">Menu</a>
+            </div><!-- /header -->
+
+            <!-- List to include appropriate Activities Titles by JS -->
+            <div data-role="content" class='content'>
+                <ul data-role="listview" data-theme="a" data-inset="true" id="page_activities_high-prio_list"></ul>
+            </div><!-- /content -->
+
+            <div data-role="footer">
+                <a href="#page_activities_low-prio" data-role="button" class="ui-btn-left button_activities_low-prio" data-icon="arrow-l" data-iconpos="left">Low prio</a>
+                <p>.</p><!-- Without that footer background will not be shown at Android 4.2 -->
+                <a href="#page_activities_postponed" data-role="button" class="ui-btn-right button_activities_postponed" data-icon="arrow-r" data-iconpos="right">Postponed</a>
+            </div><!-- /footer -->
+
+        </div><!-- /page -->
+
+
+        <!-- List of postponed activities -->
+        <div data-role="page" id="page_activities_postponed" data-add-back-btn="true">
+
+            <div data-role="header">
+                <h1>Postponed</h1>
+                <a href="#panel_global_menu" data-role="button" class="ui-btn-right button_menu_main" data-icon="gear" data-iconpos="notext">Menu</a>
+            </div><!-- /header -->
+
+            <!-- List to include appropriate Activities Titles by JS -->
+            <div data-role="content" class='content'>
+                <ul data-role="listview" data-theme="a" data-inset="true" id="page_activities_postponed_list"></ul>
+            </div><!-- /content -->
+
+            <div data-role="footer">
+                <a href="#page_activities_high-prio" data-role="button" class="ui-btn-left button_activities_high-prio" data-icon="arrow-l" data-iconpos="left">High prio</a>
+                <p>.</p><!-- Without that footer background will not be shown at Android 4.2 -->
+                <a href="#page_activities_waiting" data-role="button" class="ui-btn-right button_activities_waiting" data-icon="arrow-r" data-iconpos="right">Waiting</a>
+            </div><!-- /footer -->
+
+        </div><!-- /page -->
+
+
+        <!-- List of waiting activities -->
+        <div data-role="page" id="page_activities_waiting" data-add-back-btn="true">
+
+            <div data-role="header">
+                <h1>Waiting</h1>
+                <a href="#panel_global_menu" data-role="button" class="ui-btn-right button_menu_main" data-icon="gear" data-iconpos="notext">Menu</a>
+            </div><!-- /header -->
+
+            <!-- List to include appropriate Activities Titles by JS -->
+            <div data-role="content" class='content'>
+                <ul data-role="listview" data-theme="a" data-inset="true" id="page_activities_waiting_list"></ul>
+            </div><!-- /content -->
+
+            <div data-role="footer">
+                <a href="#page_activities_postponed" data-role="button" class="ui-btn-left button_activities_postponed" data-icon="arrow-l" data-iconpos="left">Postponed</a>
+                <p>.</p><!-- Without that footer background will not be shown at Android 4.2 -->
+                <a href="#page_activities_completed" data-role="button" class="ui-btn-right button_activities_completed" data-icon="arrow-r" data-iconpos="right">Completed</a>
+            </div><!-- /footer -->
+
+        </div><!-- /page -->
+
+
+        <!-- List of completed activities  -->
+        <div data-role="page" id="page_activities_completed" data-add-back-btn="true">
+
+            <div data-role="header">
+                <h1>Completed</h1>
+                <a href="#panel_global_menu" data-role="button" class="ui-btn-right button_menu_main" data-icon="gear" data-iconpos="notext">Menu</a>
+            </div><!-- /header -->
+
+            <!-- List to include appropriate Activities Titles by JS -->
+            <div data-role="content" class='content'>
+                <ul data-role="listview" data-theme="a" data-inset="true" id="page_activities_completed_list"></ul>
+            </div><!-- /content -->
+
+            <div data-role="footer">
+                <a href="#page_activities_waiting" data-role="button" class="ui-btn-left button_activities_waiting" data-icon="arrow-l" data-iconpos="left">Waiting</a>
+                <p>.</p><!-- Without that footer background will not be shown at Android 4.2 -->
+                <a href="#page_activities_main" data-role="button" class="ui-btn-right button_activities_main" data-icon="arrow-r" data-iconpos="right">Today</a>
+            </div><!-- /footer -->
+
+        </div><!-- /page -->
+
+
+    <!-- /Group of pages - activities lists -->
+
+
+
+        <!-- Show single Activity node -->
+        <!-- We're providing set of custom data- attributes to store information about activity, such as completion date, in machine-readable form -->
+        <div data-role="page" id="page_node_activity_view" data-entryID="" data-add-back-btn="true">
+
+            <div data-role="header">
+                <h1></h1>
+                <a href="#panel_global_menu" data-role="button" class="ui-btn-right button_menu_main" data-icon="gear" data-iconpos="notext">Menu</a>
+            </div><!-- /header -->
+
+            <!-- Activity completion planned date -->
+            <div id="page_activity_planned_date"></div>
+            <!-- Date and time of the beginning of task completing -->
+            <div id="page_activity_start_date"></div>
+            <!-- Activity node body -->
+            <div data-role="content" class='content'></div><!-- /content -->
+
+            <!-- TODO: put this controlgroup to content section -->
+            <div data-role="controlgroup" data-type="horizontal">
+                <!-- Button to subtract one day from "Planned to" activity property -->
+                <a href="#" data-role="button" data-theme="b" class="exo_square_button button_planned_to_date_minus_one">p.End -1</a>
+                <!-- Button to add one day to "Planned to" activity property -->
+                <a href="#" data-role="button" data-theme="a" class="exo_square_button button_planned_to_date_plus_one">p.End +1</a>
+            </div>
+
+            <div data-role="controlgroup" data-type="horizontal">
+                <!-- Button to mark beginning of completing task -->
+                <a href="#" data-role="button" data-theme="a" class="exo_square_button button_start_date">Start</a>
+                <!-- Button to mark task completion -->
+                <a href="#" data-role="button" data-theme="b" class="exo_square_button button_end_date">Finished</a>
+            </div>
+
+        </div><!-- /page -->
+
+
+
+        <!-- Add sleep report -->
+        <div data-role="page" id="page_add_sleep_report">
+
+            <!-- JavaScript we need to work with Sleep report nodes at IS -->
+            <script type="text/javascript" charset="utf-8" src="js/nodes_sleep.js"></script>
+
+            <div data-role="header">
+                <h1>Add sleep report</h1>
+            </div><!-- /header -->
+
+            <!-- Sleep beginnig date and time -->
+            <div id="page_sleep_start_date"></div>
+
+            <div data-role="controlgroup" data-type="horizontal">
+                <!-- Button to mark sleep beginning -->
+                <a href="#" data-role="button" data-theme="a" class="exo_square_button button_sleep_start_date">Start</a>
+                <!-- Button to mark sleep ending -->
+                <a href="#" data-role="button" data-theme="b" class="exo_square_button button_sleep_end_date">Finished</a>
+            </div>
+
+        </div><!-- /page -->
+        
+        
+        
+        <!-- Tech non-shown page that should ALWAYS BE BOTTOMMOST -->
+        <div data-role="page" id="page_tech_bottommost">
+
+            <!-- JavaScript to fire actions when app shows some page -->
+            <!-- We need it, for example, to update page when we returned to it with "Back" button  -->
+            <!-- This code will only work if script is plugged iside subpage DIV, and only for that page,  -->
+            <!-- And those subpages, that are placed higher in index.html code, than subpage-scriptplugger -->
+            <!-- Hence this script is placed in special file, that is imported at bottommost unused subpage -->
+            <script type="text/javascript" charset="utf-8" src="js/pageshow_page_update.js"></script>
+
+        </div><!-- /page -->
+        
+
+
+    </body>
+</html>
