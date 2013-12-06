@@ -214,9 +214,9 @@ function get_activities_from_backend(URLpart){
                 
                 // Vibrate for 2 seconds
                 //window.navigator.vibrate is prefixed at Chrome 31, works at Firefox
-                //if(window.navigator.vibrate){
+                if(window.navigator.vibrate){
                     window.navigator.vibrate(2000);
-                //}
+                }
                 alert("App database updated from backend!");
             }
         });

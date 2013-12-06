@@ -167,8 +167,8 @@ var getServicesToken = function(backendDomain) {
         $.ajax({
             url: backendDomain + "/services/session/token",
             type:"get",
-            //dataType:"text",
-            dataType:"jsonp",
+            dataType:"text",
+            //dataType:"jsonp",
             async:false,
             error:function (jqXHR, textStatus, errorThrown) {
                 //alert('Failed to retrieve backend token');
