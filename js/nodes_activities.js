@@ -213,7 +213,8 @@ function get_activities_from_backend(URLpart){
                 window.localStorage.setItem("activitiesLastUpdatedFromServer",curTimestamp); 
                 
                 // Vibrate for 2 seconds
-                navigator.notification.vibrate(2000);
+                //navigator.notification.vibrate(2000);
+                window.navigator.vibrate(2000);
                 alert("App database updated from backend!");
             }
         });
