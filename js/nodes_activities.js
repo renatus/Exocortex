@@ -213,7 +213,7 @@ function get_activities_from_backend(URLpart){
                 window.localStorage.setItem("activitiesLastUpdatedFromServer",curTimestamp); 
                 
                 // Vibrate for 2 seconds
-                //navigator.notification.vibrate(2000);
+                //window.navigator.vibrate is prefixed at Chrome 31, works at Firefox
                 window.navigator.vibrate(2000);
                 alert("App database updated from backend!");
             }
