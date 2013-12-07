@@ -94,15 +94,16 @@ var kelly = testdb({id:2}).first();
     //Get current Date and Time
     var curDateTime = new Date();
     //Months numbers counts from 0, not from 1
-    var curDayStart = curDateTime.getFullYear() + '-' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '-' + ("0" + curDateTime.getDate()).slice(-2) + " 00:00:00";
+    var curDayStart = curDateTime.getFullYear() + '/' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '/' + ("0" + curDateTime.getDate()).slice(-2) + " 00:00:00";
     var plannedStartTimestamp = Date.parse(curDayStart);
     //var curDayEnd = curDateTime.getFullYear() + '-' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '-' + ("0" + curDateTime.getDate()).slice(-2) + " 23:59:59";
     //var plannedEndTimestamp = Date.parse(curDayEnd);
     
     //alert(curDayStart);
-    //alert(plannedStartTimestamp);
+    alert(plannedStartTimestamp);
     //alert(Date.parse("Thu, 01 Jan 1970 00:00:00 GMT-0400"));
-    alert("2013-12-07 00:00:00: " + Date.parse("2013/12/07 00:00:00"));
+    
+    //alert("2013-12-07 00:00:00: " + Date.parse("2013/12/07 00:00:00"));
     //alert("2013-12-07 00:00:00: " + Date.parse("2013-12-07 00:00:00"));
     //alert("2013-12-07T00:00:00: " + Date.parse("2013-12-07T00:00:00"));
     //alert("2013-12-07: " + Date.parse("2013-12-07"));
