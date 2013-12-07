@@ -87,7 +87,7 @@ var kelly = testdb({id:2}).first();
 //alert(kelly.value);
     
     var testvar = activitiesTDB().first();
-    alert(testvar.status);
+    alert(testvar.title);
 
 
 //var funcName2='varfuncname';
