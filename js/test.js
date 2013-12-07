@@ -111,7 +111,6 @@ var kelly = testdb({id:2}).first();
     
     
     //Switch app to fullscreen mode
-    toggleFullScreen();
     //var docElm = document.documentElement;
     //if (docElm.requestFullscreen) {
     //    docElm.requestFullscreen();
