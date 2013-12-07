@@ -134,14 +134,8 @@ $(document).on('click','.button_sync_from_backend',function(){
 
 
 
-//Command to toggle Fullscreen mode
-//$(document).on('click','.button_fullscreen_toggle',function(){
+//Command to switch to Fullscreen mode on all clicks
 $(document).on('click',function(){
-    switchToFullScreen();
-});
-
-//Command to toggle Fullscreen mode
-$(document).on('click','.button_fullscreen_toggle',function(){
     switchToFullScreen();
 });
 
@@ -150,6 +144,7 @@ $(document).on('click','.button_fullscreen_toggle',function(){
 //Switch to fullscreen mode, if app is not yet in it
 //It's impossible to force full-screen onLoad, only after some click event
 var switchToFullScreen = function() {
+    //If app is not in fullscreen mode yet
     if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
         if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen();
@@ -159,30 +154,6 @@ var switchToFullScreen = function() {
             document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
         }
     } 
-}
-
-
-
-//Switch to fullscreen mode, if app is not yet in it, and switch out out of it, if app is already in fullscreen mode
-//It's impossible to force full-screen onLoad, only after some click event
-var toggleFullScreen = function() {
-    if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
-        if (document.documentElement.requestFullscreen) {
-            document.documentElement.requestFullscreen();
-        } else if (document.documentElement.mozRequestFullScreen) {
-            document.documentElement.mozRequestFullScreen();
-        } else if (document.documentElement.webkitRequestFullscreen) {
-            document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-        }
-    } else {
-        if (document.cancelFullScreen) {
-            document.cancelFullScreen();
-        } else if (document.mozCancelFullScreen) {
-            document.mozCancelFullScreen();
-        } else if (document.webkitCancelFullScreen) {
-            document.webkitCancelFullScreen();
-        }
-    }
 }
 
 
