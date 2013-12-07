@@ -4,6 +4,8 @@
 //Show activities planned for today
 //$(document).on('click','.button_activities_main',function(){
 function show_activities_today(){
+    alert('function show_activities_today works');
+    
     //Get current Date and Time
     var curDateTime = new Date();
     //Months numbers counts from 0, not from 1
