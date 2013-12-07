@@ -10,7 +10,7 @@ alert("Code is executed at main.js");
 //DOM is loaded and it is now safe to execute JavaScript code
 //function onDeviceReady() {
 function onLoad() {
-$(document).ready(function(){
+//$(document).ready(function(){
 
     alert("Code is executed on device load");
     
@@ -46,7 +46,7 @@ $(document).ready(function(){
     //If menu button was pressed, fire appropriate function
     //document.addEventListener("menubutton", onMenuKeyDown, false);
 }
-}
+
 
 
 //Menu button was pressed
