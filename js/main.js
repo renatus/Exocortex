@@ -3,6 +3,7 @@
 //To fire this function, we should modify HTML '<body>' tag: <body onload="onLoad()">
 function onLoad() {
     document.addEventListener("deviceready", onDeviceReady, false);
+    alert("Function onLoad works");
 }
 
 // Cordova is loaded and it is now safe to make calls Cordova methods
