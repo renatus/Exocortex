@@ -1,18 +1,5 @@
-// When Cordova is loaded and talking with the native device,
-// it will call the event `deviceready`.
-//To fire this function, we should modify HTML '<body>' tag: <body onload="onLoad()">
-//function onLoad() {
-//    document.addEventListener("deviceready", onDeviceReady, false);
-//    alert("Function onLoad works");
-//}
-
-
-//DOM is loaded and it is now safe to execute JavaScript code
-//function onDeviceReady() {
+//onLoad function will be executed once all content (including images, HTML, JS and CSS files, etc.) is completely loaded
 function onLoad() {
-//$(document).ready(function(){
-
-    alert("Code is executed on device load");
     
     //Get network connection type
     //var networkState = navigator.connection.type;
@@ -33,7 +20,7 @@ function onLoad() {
     
     
     
-    //Switch to fullscreen mode
+    //Switch app to fullscreen mode
     var docElm = document.documentElement;
     if (docElm.requestFullscreen) {
         docElm.requestFullscreen();
