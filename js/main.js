@@ -6,6 +6,7 @@
 //    alert("Function onLoad works");
 //}
 
+alert("Code is executed at main.js");
 //DOM is loaded and it is now safe to execute JavaScript code
 //function onDeviceReady() {
 $(document).ready(function(){
