@@ -105,8 +105,9 @@ var kelly = testdb({id:2}).first();
     
     //alert("2013-12-07 00:00:00: " + Date.parse("2013/12/07 00:00:00"));
     //alert("2013-12-07 00:00:00: " + Date.parse("2013-12-07 00:00:00"));
-    //alert("2013-12-07T00:00:00: " + Date.parse("2013-12-07T00:00:00"));
-    //alert("2013-12-07: " + Date.parse("2013-12-07"));
+    alert("2013-12-07T00:00:00: " + Date.parse("2013-12-07T00:00:00Z"));
+    alert("2013-12-07T00:00:00: " + Date.parse("2013-12-07T00:00:00"));
+    alert("2013-12-07: " + Date.parse("2013-12-07"));
     
     
     //Switch app to fullscreen mode
