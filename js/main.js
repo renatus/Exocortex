@@ -1,19 +1,6 @@
 //onLoad function will be executed once all content (including images, HTML, JS and CSS files, etc.) is completely loaded
 function onLoad() {
-    
-    //Switch app to fullscreen mode
-    toggleFullScreen();
-    //var docElm = document.documentElement;
-    //if (docElm.requestFullscreen) {
-    //    docElm.requestFullscreen();
-    //} else if (docElm.mozRequestFullScreen) {
-    //    docElm.mozRequestFullScreen();
-    //} else if (docElm.webkitRequestFullScreen) {
-    //    docElm.webkitRequestFullScreen();
-    //}
-    
-    
-    
+        
     //If we're connected to the internet
     //navigator.onLine will always return True at desktop Linux, and at Chrome for Android
     if (navigator.onLine) {
@@ -147,7 +134,15 @@ $(document).on('click','.button_sync_from_backend',function(){
 
 
 
+//Command to toggle Fullscreen mode
+$(document).on('click','.button_fullscreen_toggle',function(){
+    toggleFullScreen();
+});
+
+
+
 //Switch to fullscreen mode, if app is not yet in it, and switch out out of it, if app is already in fullscreen mode
+//It's impossible to force full-screen onLoad, only after some click event
 var toggleFullScreen = function() {
     if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
         if (document.documentElement.requestFullscreen) {
