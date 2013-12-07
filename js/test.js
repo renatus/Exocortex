@@ -84,7 +84,7 @@ var testdb = TAFFY([
 ]);
 
 var kelly = testdb({id:2}).first();
-//alert(kelly.value);
+alert(kelly.value);
 
 
 //var funcName2='varfuncname';
