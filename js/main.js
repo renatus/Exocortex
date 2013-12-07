@@ -8,6 +8,8 @@ function onLoad() {
 // Cordova is loaded and it is now safe to make calls Cordova methods
 function onDeviceReady() {
 
+    alert("Code is executed on device load");
+    
     //Get network connection type
     //var networkState = navigator.connection.type;
     //If we're connected to the internet
@@ -25,6 +27,17 @@ function onDeviceReady() {
     //We should initialize jQuery Mobile panel, if it is located outside of page, or it will be treated as page
     $('#panel_global_menu').panel();
     
+    
+    
+    //Switch to fullscreen mode
+    var docElm = document.documentElement;
+    if (docElm.requestFullscreen) {
+        docElm.requestFullscreen();
+    } else if (docElm.mozRequestFullScreen) {
+        docElm.mozRequestFullScreen();
+    } else if (docElm.webkitRequestFullScreen) {
+        docElm.webkitRequestFullScreen();
+    }
     
     //If menu button was pressed, fire appropriate function
     //document.addEventListener("menubutton", onMenuKeyDown, false);
