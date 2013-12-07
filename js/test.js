@@ -99,7 +99,9 @@ var kelly = testdb({id:2}).first();
     //var curDayEnd = curDateTime.getFullYear() + '-' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '-' + ("0" + curDateTime.getDate()).slice(-2) + " 23:59:59";
     //var plannedEndTimestamp = Date.parse(curDayEnd);
     
+    alert(curDayStart);
     alert(plannedStartTimestamp);
+    alert(Date.parse("Thu, 01 Jan 1970 00:00:00 GMT-0400"));
     
     
     
