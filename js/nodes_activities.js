@@ -4,8 +4,6 @@
 //Show activities planned for today
 //$(document).on('click','.button_activities_main',function(){
 function show_activities_today(){
-    alert('function show_activities_today works');
-    
     //Get current Date and Time
     var curDateTime = new Date();
     //Months numbers counts from 0, not from 1
@@ -231,6 +229,8 @@ function get_activities_from_backend(URLpart){
 //Show list of activities titles for a specified period of time (i.e. for today, or future)
 //UlHtmlElementId should contain HTML list element ID - we'll put list of activities titles there
 function show_activities_list(UlHtmlElementId, plannedStartTimestamp, plannedEndTimestamp) {
+    alert('function show_activities_list works ' + UlHtmlElementId + " " + plannedStartTimestamp + " " + plannedEndTimestamp);
+    
     //put list of items to loading app's HTML page, one by one
     
     //.html("") prevents old page elements from popping up after returning to the page after visiting other pages
@@ -240,6 +240,7 @@ function show_activities_list(UlHtmlElementId, plannedStartTimestamp, plannedEnd
     //Function to filter out appropriate activities from TaffyDB
     activitiesTDB(function(){if(this.dateTimePlannedEndTimestamp >= plannedStartTimestamp && this.dateTimePlannedEndTimestamp <= plannedEndTimestamp && this.statusRAW != "completed" && this.statusRAW != "postponed" && this.statusRAW != "canceled"){return true;}}).each(function(record,recordnumber) {
     
+        alert('Cycle works');
         //Choose activity entry icon based on it's strategic importance
         //TaffyDB stores numbers as strings, you have to use == rather than ===
         if(record["strategicImportanceRAW"] == 2000){
