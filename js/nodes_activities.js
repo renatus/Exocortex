@@ -159,9 +159,7 @@ function get_activities_from_backend(URLpart){
 											 "nid":node_value.node.nid}, "nid");
 					}
     
-                    if(!(curActivityEntry.lastUpdatedLocally)) {
-                        alert(node_value.node.title);
-                        
+                    if(!(curActivityEntry.lastUpdatedLocally)) {                        
                         //Fill Activity entry at TaffyDB
                         //.merge() will add entry or replace it (if already exist)
                         //we should provide id column name to find existing entries, or "id" column will be used
