@@ -86,8 +86,23 @@ var testdb = TAFFY([
 var kelly = testdb({id:2}).first();
 //alert(kelly.value);
     
-    var testvar = activitiesTDB().first();
-    alert(testvar.title);
+    //var testvar = activitiesTDB().first();
+    //alert(testvar.title);
+    
+    
+    
+    //Get current Date and Time
+    var curDateTime = new Date();
+    //Months numbers counts from 0, not from 1
+    var curDayStart = curDateTime.getFullYear() + '-' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '-' + ("0" + curDateTime.getDate()).slice(-2) + " 00:00:00";
+    //var plannedStartTimestamp = Date.parse(curDayStart);
+    //var curDayEnd = curDateTime.getFullYear() + '-' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '-' + ("0" + curDateTime.getDate()).slice(-2) + " 23:59:59";
+    //var plannedEndTimestamp = Date.parse(curDayEnd);
+    
+    alert(curDayStart);
+    
+    
+    
 
 
 //var funcName2='varfuncname';
