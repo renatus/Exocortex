@@ -102,7 +102,7 @@ var kelly = testdb({id:2}).first();
     //alert(curDayStart);
     //alert(plannedStartTimestamp);
     //alert(Date.parse("Thu, 01 Jan 1970 00:00:00 GMT-0400"));
-    alert(Date.parse("2013-12-07T00:00:00"));
+    alert(Date.parse("2013-12-07T00:00:01"));
     alert(Date.parse("2013-12-07"));
     
     
