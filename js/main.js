@@ -135,7 +135,9 @@ $(document).on('click','.button_sync_from_backend',function(){
 
 
 //Command to toggle Fullscreen mode
-$(document).on('click','.button_fullscreen_toggle',function(){
+//$(document).on('click','.button_fullscreen_toggle',function(){
+$(document).on('click',function(){
+    alert("Click traced");
     toggleFullScreen();
 });
 
