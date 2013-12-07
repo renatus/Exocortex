@@ -109,14 +109,16 @@ var kelly = testdb({id:2}).first();
     //alert("2013-12-07: " + Date.parse("2013-12-07"));
     
     
-    var docElm = document.documentElement;
-    if (docElm.requestFullscreen) {
-        docElm.requestFullscreen();
-    } else if (docElm.mozRequestFullScreen) {
-        docElm.mozRequestFullScreen();
-    } else if (docElm.webkitRequestFullScreen) {
-        docElm.webkitRequestFullScreen();
-    }
+    //Switch app to fullscreen mode
+    toggleFullScreen();
+    //var docElm = document.documentElement;
+    //if (docElm.requestFullscreen) {
+    //    docElm.requestFullscreen();
+    //} else if (docElm.mozRequestFullScreen) {
+    //    docElm.mozRequestFullScreen();
+    //} else if (docElm.webkitRequestFullScreen) {
+    //    docElm.webkitRequestFullScreen();
+    //}
     
     
     

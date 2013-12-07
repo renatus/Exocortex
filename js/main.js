@@ -2,14 +2,15 @@
 function onLoad() {
     
     //Switch app to fullscreen mode
-    var docElm = document.documentElement;
-    if (docElm.requestFullscreen) {
-        docElm.requestFullscreen();
-    } else if (docElm.mozRequestFullScreen) {
-        docElm.mozRequestFullScreen();
-    } else if (docElm.webkitRequestFullScreen) {
-        docElm.webkitRequestFullScreen();
-    }
+    toggleFullScreen();
+    //var docElm = document.documentElement;
+    //if (docElm.requestFullscreen) {
+    //    docElm.requestFullscreen();
+    //} else if (docElm.mozRequestFullScreen) {
+    //    docElm.mozRequestFullScreen();
+    //} else if (docElm.webkitRequestFullScreen) {
+    //    docElm.webkitRequestFullScreen();
+    //}
     
     
     
@@ -143,6 +144,29 @@ $(document).on('click','.button_sync_from_backend',function(){
     //Put new active activities from backend to app DB
     get_new_activities_from_backend();
 });
+
+
+
+//Switch to fullscreen mode, if app is not yet in it, and switch out out of it, if app is already in fullscreen mode
+var toggleFullScreen = function() {
+    if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        } else if (document.documentElement.mozRequestFullScreen) {
+            document.documentElement.mozRequestFullScreen();
+        } else if (document.documentElement.webkitRequestFullscreen) {
+            document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+        }
+    } else {
+        if (document.cancelFullScreen) {
+            document.cancelFullScreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.webkitCancelFullScreen) {
+            document.webkitCancelFullScreen();
+        }
+    }
+}
 
 
 
