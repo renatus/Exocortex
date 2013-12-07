@@ -1,10 +1,17 @@
 //onLoad function will be executed once all content (including images, HTML, JS and CSS files, etc.) is completely loaded
 function onLoad() {
     
-    //Get network connection type
-    //var networkState = navigator.connection.type;
-    //If we're connected to the internet
-    //if(!(networkState === Connection.NONE)) {
+    //Switch app to fullscreen mode
+    var docElm = document.documentElement;
+    if (docElm.requestFullscreen) {
+        docElm.requestFullscreen();
+    } else if (docElm.mozRequestFullScreen) {
+        docElm.mozRequestFullScreen();
+    } else if (docElm.webkitRequestFullScreen) {
+        docElm.webkitRequestFullScreen();
+    }
+    
+    
     
     //If we're connected to the internet
     //navigator.onLine will always return True at desktop Linux, and at Chrome for Android
@@ -19,16 +26,6 @@ function onLoad() {
     $('#panel_global_menu').panel();
     
     
-    
-    //Switch app to fullscreen mode
-    var docElm = document.documentElement;
-    if (docElm.requestFullscreen) {
-        docElm.requestFullscreen();
-    } else if (docElm.mozRequestFullScreen) {
-        docElm.mozRequestFullScreen();
-    } else if (docElm.webkitRequestFullScreen) {
-        docElm.webkitRequestFullScreen();
-    }
     
     //If menu button was pressed, fire appropriate function
     //document.addEventListener("menubutton", onMenuKeyDown, false);
