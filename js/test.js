@@ -115,6 +115,7 @@ var kelly = testdb({id:2}).first();
     
     
     alert(moment("2013-12-07 00:00:00"));
+    alert(moment());
     
     
     
