@@ -117,7 +117,8 @@ var kelly = testdb({id:2}).first();
     //alert(moment("2013-12-07 00:00:00"));
     //alert(moment());
     //alert(moment.parseZone("2013-01-01T00:00:00-13:00").zone());
-    alert(moment({hour: 23, minute: 59, seconds: 59}));
+    //alert(moment({hour: 23, minute: 59, seconds: 59}));
+    alert(moment().day(1));
     
     
     
