@@ -107,9 +107,18 @@ var kelly = testdb({id:2}).first();
     //alert("2013-12-07 00:00:00: " + Date.parse("2013-12-07 00:00:00"));
     
     //alert("2013-12-07T00:00:00: " + Date.parse("2013-12-07T00:00:00Z"));
-    alert("2013-12-07T00:00:00: " + Date.parse("2013-12-07T00:00:00"));
-    alert("2013-12-07T00:00:00+04:00: " + Date.parse("2013-12-07T00:00:00+04:00"));
+    //alert("2013-12-07T00:00:00: " + Date.parse("2013-12-07T00:00:00"));
+    //alert("2013-12-07T00:00:00+04:00: " + Date.parse("2013-12-07T00:00:00+04:00"));
     //alert("2013-12-07: " + Date.parse("2013-12-07"));
+    
+    
+    
+    
+    alert(moment("2013-12-07 00:00:00"));
+    
+    
+    
+    
     
     
     //Switch app to fullscreen mode
@@ -182,9 +191,9 @@ var kelly = testdb({id:2}).first();
 
     //navigator.onLine will always return True at desktop Linux, and at Chrome for Android
     if (navigator.onLine) {
-        alert('online');
+        //alert('online');
     } else {
-        alert('offline');
+        //alert('offline');
     }
 
 
