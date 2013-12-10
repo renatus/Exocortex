@@ -136,9 +136,9 @@ $(document).on('click','.button_sync_from_backend',function(){
 
 //Command to switch to Fullscreen mode on all clicks
 //We should switch to fullscreen only if fullscreen mode is not suspended at app's settings
-$(document).on('click',function(){
-    switchToFullScreen();
-});
+//$(document).on('click',function(){
+//    switchToFullScreen();
+//});
 
 
 
