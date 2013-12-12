@@ -162,10 +162,12 @@ function checkin_sync_to_backend(entryID) {
     //Looks like at least Decimal fields will accept emty values, like this:
     //&node[field_altitude][und][0][value]=&node[field_altitude_accuracy][und][0][value]=
     //So we can not to check whether value is here
+    //Attempt to save more digits, than allowed by Drupal Field's Scale setting will give us error
+    //We can put more digits, than specified in Scale setting, though, so we've to limit number of all digits in decimal number
     var dataToSend = 'node[type]=check_in&node[language]=en&node[title]=' + encodeURIComponent("Check-in") +
                      '&node[field_place_latlon][und][0][lat]=' + curEntry.latitude +
                      '&node[field_place_latlon][und][0][lon]=' + curEntry.longitude +
-                     '&node[field_latlon_accuracy][und][0][value]=' + curEntry.latLonAccuracy +
+                     '&node[field_latlon_accuracy][und][0][value]=' + curEntry.latLonAccuracy.toPrecision(32) +
                      '&node[field_altitude][und][0][value]=' + curEntry.altitude +
                      '&node[field_altitude_accuracy][und][0][value]=' + curEntry.altitudeAccuracy +
                      //'&node[field_heading][und][0][value]=' + curEntry.heading +
