@@ -169,7 +169,7 @@ function checkin_sync_to_backend(entryID) {
                      '&node[field_altitude][und][0][value]=' + curEntry.altitude +
                      '&node[field_altitude_accuracy][und][0][value]=' + curEntry.altitudeAccuracy +
                      //'&node[field_heading][und][0][value]=' + curEntry.heading +
-                     '&node[field_heading][und][0][value]=' + testNum.toFixed(10) +
+                     '&node[field_heading][und][0][value]=' + testNum.toPrecision(13) +
                      '&node[field_speed][und][0][value]=' + curEntry.speed +        
                      '&node[field_datetime_start][und][0][value][date]=' + curEntry.date +
                      '&node[field_datetime_start][und][0][value][time]=' + curEntry.time +
