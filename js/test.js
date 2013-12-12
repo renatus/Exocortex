@@ -129,7 +129,7 @@ var kelly = testdb({id:2}).first();
     //alert(moment().day(3));
     
     var testNum = 1.3457888904
-    alert(testNum.toPrecision(5) + 1);
+    alert(testNum.toFixed(5));
     
     
     
