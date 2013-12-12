@@ -156,6 +156,7 @@ function checkin_sync_to_backend(entryID) {
     //Get Checkin entry from JS DB
     var curEntry = checkinsTDB({id:entryID}).first();
 
+    testNum = 13.1234553853348832238383483583484383434845
     //Put all data to send to IS to modify Drupal node at this variable
     //In case Drupal Date field already has both start and end values stored, you have to send both value and value2
     //Looks like at least Decimal fields will accept emty values, like this:
@@ -168,7 +169,7 @@ function checkin_sync_to_backend(entryID) {
                      '&node[field_altitude][und][0][value]=' + curEntry.altitude +
                      '&node[field_altitude_accuracy][und][0][value]=' + curEntry.altitudeAccuracy +
                      //'&node[field_heading][und][0][value]=' + curEntry.heading +
-                     '&node[field_heading][und][0][value]=' + '34.8956712345' +
+                     '&node[field_heading][und][0][value]=' + testNum.toFixed(13) +
                      '&node[field_speed][und][0][value]=' + curEntry.speed +        
                      '&node[field_datetime_start][und][0][value][date]=' + curEntry.date +
                      '&node[field_datetime_start][und][0][value][time]=' + curEntry.time +
