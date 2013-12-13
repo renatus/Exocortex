@@ -38,7 +38,6 @@ function checkinAdd(position) {
 	//So we have to multiply timestamp value by 1000, but with position.timestamp we don't have to do that
 	//Date and time from GPS can be wrong in Android emulator, that's OK.
 	curDateTime = new Date(position.timestamp);
-    alert(curDateTime);
 	curTimestamp = position.timestamp;
 	//Months numbers counts from 0, not from 1
     //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00") or ISO 8601 dates
@@ -135,7 +134,8 @@ function checkinAdd(position) {
           'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
           'Heading: '           + position.coords.heading           + '\n' +
           'Speed: '             + position.coords.speed             + '\n' +
-          'Timestamp: '         + position.timestamp                + '\n');
+          'Timestamp: '         + position.timestamp                + '\n' +
+          'Date and time: '     + curDateTime                       + '\n');
     
     //If we're connected to the internet
     //navigator.onLine will always return True at desktop Linux, and at Chrome for Android
@@ -229,7 +229,8 @@ $(document).on('click','.button_geolocation_test',function(){
                 'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
                 'Heading: '           + position.coords.heading           + '\n' +
                 'Speed: '             + position.coords.speed             + '\n' +
-                'Timestamp: '         + position.timestamp                + '\n');       
+                'Timestamp: '         + position.timestamp                + '\n' +
+                'Date and time: '     + (new Date(position.timestamp))    + '\n');      
     };
 
     // onError Callback receives a PositionError object
