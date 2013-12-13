@@ -6,8 +6,7 @@ $(document).on('click','.button_checkin',function(){
     //Without enableHighAccuracy:true option Android emulatior will not return location at all
     //timeout - time period in milliseconds, after that device will give up trying to find it's position
     //maximumAge - time period in milliseconds, we can use previous mesurements that old
-    navigator.geolocation.getCurrentPosition(onSuccess, onError);
-    //navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy:true, timeout: 120000, maximumAge: 20000});
+    navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy:true, timeout: 120000, maximumAge: 20000});
     
     function onSuccess(position) {
 		//Add checkin to app's DB
@@ -218,7 +217,7 @@ $(document).on('click','.button_geolocation_test',function(){
     //Without enableHighAccuracy:true option Android emulatior will not return location at all
     //timeout - time period in milliseconds, after that device will give up trying to find it's position
     //maximumAge - time period in milliseconds, we can use previous mesurements that old
-    navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy:true, timeout: 60000, maximumAge: 20000});
+    navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy:true, timeout: 60000, maximumAge: 0});
     
     function onSuccess(position) {
         alert("GPS works fine!" +
