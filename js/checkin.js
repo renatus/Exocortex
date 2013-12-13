@@ -1,5 +1,6 @@
 //Button Check-in was clicked
-$(document).off().on('click','.button_checkin',function(){
+//$(document).off().on('click','.button_checkin',function(){
+$(document).on('click','.button_checkin',function(){
     //Get current position
     //enableHighAccuracy:true options asks device to provide as precise location as possible
     //Without enableHighAccuracy:true option Android emulatior will not return location at all
