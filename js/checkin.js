@@ -2,12 +2,20 @@
 //$(document).off().on('click','.button_checkin',function(){
 $(document).on('click','.button_checkin',function(){
     //Get current position
+    
     //enableHighAccuracy:true options asks device to provide as precise location as possible
     //Without enableHighAccuracy:true option Android emulatior will not return location at all
     //timeout - time period in milliseconds, after that device will give up trying to find it's position
-    //maximumAge - time period in milliseconds, we can use previous mesurements that old
-    //navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy:true, timeout: 120000, maximumAge: 20000});
-    navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy:true, timeout: 120000, maximumAge: 0});
+    //maximumAge - time period in milliseconds, we can use previous measurements that old
+    
+    //navigator.geolocation.getCurrentPosition returns previous location rather than current at Firefox for Android 27
+    //https://bugzilla.mozilla.org/show_bug.cgi?id=950303
+    //So we have to call navigator.geolocation.getCurrentPosition two times, second one will return actual location
+    navigator.geolocation.getCurrentPosition(onSuccessTemp, onError, {enableHighAccuracy:true, timeout: 120000, maximumAge: 20000});
+    
+    function onSuccessTemp(position) {
+        navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy:true, timeout: 120000, maximumAge: 20000});
+    };
     
     function onSuccess(position) {
 		//Add checkin to app's DB
@@ -135,7 +143,8 @@ function checkinAdd(position) {
           'Heading: '           + position.coords.heading           + '\n' +
           'Speed: '             + position.coords.speed             + '\n' +
           'Timestamp: '         + position.timestamp                + '\n' +
-          'Date and time: '     + curDateTime                       + '\n');
+          'Measurement time: '  + curDateTime                       + '\n' +
+          'Current time: '      + new Date()                        + '\n');
     
     //If we're connected to the internet
     //navigator.onLine will always return True at desktop Linux, and at Chrome for Android
@@ -214,11 +223,20 @@ function sync_modified_checkins() {
 //Test geolocation without storing current position
 $(document).on('click','.button_geolocation_test',function(){
     //Get current position
+    
     //enableHighAccuracy:true options asks device to provide as precise location as possible
     //Without enableHighAccuracy:true option Android emulatior will not return location at all
     //timeout - time period in milliseconds, after that device will give up trying to find it's position
-    //maximumAge - time period in milliseconds, we can use previous mesurements that old
-    navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy:true, timeout: 60000, maximumAge: 0});
+    //maximumAge - time period in milliseconds, we can use previous measurements that old
+    
+    //navigator.geolocation.getCurrentPosition returns previous location rather than current at Firefox for Android 27
+    //https://bugzilla.mozilla.org/show_bug.cgi?id=950303
+    //So we have to call navigator.geolocation.getCurrentPosition two times, second one will return actual location
+    navigator.geolocation.getCurrentPosition(onSuccessTemp, onError, {enableHighAccuracy:true, timeout: 120000, maximumAge: 0});
+    
+    function onSuccessTemp(position) {
+        navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy:true, timeout: 120000, maximumAge: 20000});
+    };
     
     function onSuccess(position) {
         alert("GPS works fine!" +
@@ -230,7 +248,8 @@ $(document).on('click','.button_geolocation_test',function(){
                 'Heading: '           + position.coords.heading           + '\n' +
                 'Speed: '             + position.coords.speed             + '\n' +
                 'Timestamp: '         + position.timestamp                + '\n' +
-                'Date and time: '     + (new Date(position.timestamp))    + '\n');      
+                'Measurement time: '  + (new Date(position.timestamp))    + '\n' +
+                'Current time: '      + new Date()                        + '\n');
     };
 
     // onError Callback receives a PositionError object
