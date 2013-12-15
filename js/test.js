@@ -127,9 +127,13 @@ var kelly = testdb({id:2}).first();
     //alert(moment().add('days', -1).endOf('day'));
     //alert(moment({hour: 0, minute: 0, seconds: 0}));
     //alert(moment().day(3));
+    alert(moment().startOf('day').format());
     
-    var testNum = 1.3457888904
-    alert(testNum.toFixed(5));
+    
+    
+    
+    //var testNum = 1.3457888904
+    //alert(testNum.toFixed(5));
     
     
     
