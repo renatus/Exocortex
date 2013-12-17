@@ -128,6 +128,7 @@ var kelly = testdb({id:2}).first();
     //alert(moment({hour: 0, minute: 0, seconds: 0}));
     //alert(moment().day(3));
     alert(moment().startOf('day').format());
+    alert(new Date().getTime());
     
     
     

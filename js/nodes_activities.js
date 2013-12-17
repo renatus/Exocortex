@@ -313,43 +313,6 @@ function dateTimeSplit(dateTime, toReturn){
         return dateTimeSplitted[1];
     }
 }   
-    
-    
-
-//Not used for now - but may be adjusted for timezone correction
-
-//Return timezone-adjusted Date or Time
-function dateTimeConvert(dateTime, TZOffsetRAW, toReturn){
-    //Date field raw value is like this: "2013-05-29 01:22:55"
-    //Via Services module Date field returns time in UTC timezone, not in timezone time was saved. Via Views it'll return values in timezone we saved that values.
-    //Services responce: [{"value":"2013-07-04 16:00:48","value2":"2013-07-09 16:00:10","timezone":"Europe/Moscow","offset":"14400","offset2":"14400","timezone_db":"UTC","date_type":"datetime"}]
-
-    if(!dateTime){
-        //If there are no Date and time (i.e. we haven't planned start and end date yet)
-        return "";
-    }
-    
-    //Parse Date string and create Date object with that string's value, and DON'T apply timezone offset to it
-    //Timezone offset should be applied like this: TZSplit(TZOffsetRAW)*1000
-    //Timezone offset is stored in seconds at Drupal, JS works with milliseconds
-    dateTimeObject = new Date(Date.parse(dateTime) + TZSplit(TZOffsetRAW)*1000);
-    
-    if (toReturn === "date") {
-        //Return timezone-adjusted date
-        //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00")
-        dateValue = dateTimeObject.getFullYear() + '/' + 
-                    //Months numbers counts from 0, not from 1
-                    ("0" + (dateTimeObject.getMonth() + 1)).slice(-2) + '/' + 
-                    ("0" + dateTimeObject.getDate()).slice(-2);
-        return dateValue;
-    } else {
-        //Return timezone-adjusted time
-        timeValue = ("0" + dateTimeObject.getHours()).slice(-2) + ':' +
-                    ("0" + dateTimeObject.getMinutes()).slice(-2) + ':' +
-                    ("0" + dateTimeObject.getSeconds()).slice(-2);
-        return timeValue;
-    }
-}
 
 
 
