@@ -51,8 +51,10 @@ function checkinAdd(position) {
     //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00") or ISO 8601 dates
     //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
     //So for now we'll send such dates as "2013-12-07 00:00:00", and will get such as "1997-07-16T19:20+01:00"
-	var curDate = curDateTime.getFullYear() + '-' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '-' + ("0" + curDateTime.getDate()).slice(-2);
-    var curTime = ("0" + curDateTime.getHours()).slice(-2) + ':' + ("0" + curDateTime.getMinutes()).slice(-2);
+	//var curDate = curDateTime.getFullYear() + '-' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '-' + ("0" + curDateTime.getDate()).slice(-2);
+    var curDate = moment(curDateTime).format('YYYY-MM-DD');
+    //var curTime = ("0" + curDateTime.getHours()).slice(-2) + ':' + ("0" + curDateTime.getMinutes()).slice(-2);
+    var curTime = moment(curDateTime).format('HH-mm-ss');
 	//Determine the time zone of the browser client, jstz.min.js required
     var timeZone = jstz.determine();
     timeZoneName = timeZone.name();
@@ -131,8 +133,8 @@ function checkinAdd(position) {
 					   //like 1 Current ground speed of the device, specified in meters per second. (Number)
 					   "speed":coordsSpeed,			   
                        //Looks like we should not bother about timezone here
-                       //Mark entry as updated locally
-                       "lastUpdatedLocally":Math.round(curDateTime.getTime()/1000)}, "id");
+                       //Mark entry as updated locally, by putting in last update timestamp
+                       "lastUpdatedLocally":moment(curDateTime).format('X')}, "id");
 	
 	alert("You've checked-in successfully!" +
           'Latitude: '          + position.coords.latitude          + '\n' +
