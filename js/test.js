@@ -124,11 +124,13 @@ var kelly = testdb({id:2}).first();
     //alert(moment().add('days', 1).startOf('day').unix);
     //alert(moment([2070, 11, 17]).fromNow());
     
-    //alert(moment().add('days', -1).endOf('day'));
+    alert(moment().add('days', -1).endOf('day'));
     //alert(moment({hour: 0, minute: 0, seconds: 0}));
     //alert(moment().day(3));
-    alert(moment().startOf('day').format());
-    alert(new Date().getTime());
+    
+    //alert(moment().startOf('day').format());
+    alert(moment().hour());
+    //alert(new Date().getTime());
     
     
     
