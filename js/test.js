@@ -129,7 +129,7 @@ var kelly = testdb({id:2}).first();
     //alert(moment().day(3));
     
     //alert(moment().startOf('day').format());
-    alert(moment().hours());
+    alert(moment().format('YYYY-MM-DD'));
     //alert(new Date().getTime());
     
     
