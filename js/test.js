@@ -120,7 +120,8 @@ var kelly = testdb({id:2}).first();
     //alert(moment({hour: 23, minute: 59, seconds: 59}));
     //alert(moment().add('days', 1).startOf('day').format());
     
-    alert(moment().add('days', 1).startOf('day').format('X'));
+    //alert(moment().add('days', 1).startOf('day').format('X'));
+    
     //alert(moment().add('days', 1).startOf('day').unix);
     //alert(moment([2070, 11, 17]).fromNow());
     
@@ -129,7 +130,8 @@ var kelly = testdb({id:2}).first();
     //alert(moment().day(3));
     
     //alert(moment().startOf('day').format());
-    alert(moment(new Date()).format('YYYY-MM-DD'));
+    //alert(moment(new Date()).format('YYYY-MM-DD'));
+    alert(moment(new Date()).format('HH-mm-ss'));
     //alert(new Date().getTime());
     
     
