@@ -559,7 +559,6 @@ function change_activity_planned_to_date(entryID, numberOfDays) {
         var plannedEndDate = moment(curActivityEntry.dateTimePlannedEndTimestamp, 'X').add('days', numberOfDays).format('YYYY-MM-DD');
         var plannedEndTime = curActivityEntry.timePlannedEnd;
         var plannedEndTimestamp = moment(curActivityEntry.dateTimePlannedEndTimestamp, 'X').add('days', numberOfDays).format('X');
-        alert(moment(curActivityEntry.dateTimePlannedEndTimestamp, 'X').add('days', +1).format('YYYY-MM-DD'));
         
         //Planned end date can't be earlier, than planned start date
         //We can reduce planned start date as well, but this is not always desirable
