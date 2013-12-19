@@ -133,7 +133,7 @@ var kelly = testdb({id:2}).first();
     //alert(moment(new Date()).format('YYYY-MM-DD'));
     //alert(moment(new Date()).format('HH-mm-ss'));
     //alert(new Date().getTime());
-    alert(moment("1387481862").format('YYYY-MM-DD'));
+    alert(moment("1387481862", "X").format('YYYY-MM-DD'));
     
     
     
