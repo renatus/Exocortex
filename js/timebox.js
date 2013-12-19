@@ -28,8 +28,10 @@ function timeboxStarted(durationPlanned){
     //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00") or ISO 8601 dates
     //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
     //So for now we'll send such dates as "2013-12-07 00:00:00", and will get such as "1997-07-16T19:20+01:00"
-	var curDate = curDateTime.getFullYear() + '-' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '-' + ("0" + curDateTime.getDate()).slice(-2);
-    var curTime = ("0" + curDateTime.getHours()).slice(-2) + ':' + ("0" + curDateTime.getMinutes()).slice(-2) + ':' + ("0" + curDateTime.getSeconds()).slice(-2);
+	//var curDate = curDateTime.getFullYear() + '-' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '-' + ("0" + curDateTime.getDate()).slice(-2);
+    var curDate = moment(curDateTime).format('YYYY-MM-DD');
+    //var curTime = ("0" + curDateTime.getHours()).slice(-2) + ':' + ("0" + curDateTime.getMinutes()).slice(-2) + ':' + ("0" + curDateTime.getSeconds()).slice(-2);
+    var curTime = moment(curDateTime).format('HH:mm:ss');
 	//Determine the time zone of the browser client, jstz.min.js required
     var timeZone = jstz.determine();
     timeZoneName = timeZone.name();
@@ -55,7 +57,7 @@ function timeboxStarted(durationPlanned){
                         //"duration":"",
                         "durationPlanned":durationPlanned,
 					    //Mark entry as updated locally
-                        "lastUpdatedLocally":Math.round(curDateTime.getTime()/1000)}, "id");
+                        "lastUpdatedLocally":moment(curDateTime).format('X')}, "id");
     
     //For now we can't sync started (but not yet ended) timebox, we have to check, if dateEnd is filled
 }
@@ -121,8 +123,10 @@ function timeboxClosed(entryID, status, statusRAW){
     //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00") or ISO 8601 dates
     //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
     //So for now we'll send such dates as "2013-12-07 00:00:00", and will get such as "1997-07-16T19:20+01:00"
-	var curDate = curDateTime.getFullYear() + '-' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '-' + ("0" + curDateTime.getDate()).slice(-2);
-    var curTime = ("0" + curDateTime.getHours()).slice(-2) + ':' + ("0" + curDateTime.getMinutes()).slice(-2) + ':' + ("0" + curDateTime.getSeconds()).slice(-2);
+	//var curDate = curDateTime.getFullYear() + '-' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '-' + ("0" + curDateTime.getDate()).slice(-2);
+    var curDate = moment(curDateTime).format('YYYY-MM-DD');
+    //var curTime = ("0" + curDateTime.getHours()).slice(-2) + ':' + ("0" + curDateTime.getMinutes()).slice(-2) + ':' + ("0" + curDateTime.getSeconds()).slice(-2);
+    var curTime = moment(curDateTime).format('HH:mm:ss');
     
     //Get Timebox entry from JS DB
     var curTimeboxEntry = timeboxesTDB({id:entryID}).first();
@@ -141,7 +145,7 @@ function timeboxClosed(entryID, status, statusRAW){
                         "dateTimeEndTimestamp":curTimestamp,
                         "duration":duration,
 					    //Mark entry as updated locally
-                        "lastUpdatedLocally":Math.round(curDateTime.getTime()/1000)}, "id");
+                        "lastUpdatedLocally":moment(curDateTime).format('X')}, "id");
     
     //If we're connected to the internet
     //navigator.onLine will always return True at desktop Linux, and at Chrome for Android

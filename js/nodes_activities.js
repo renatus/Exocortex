@@ -5,16 +5,19 @@
 //$(document).on('click','.button_activities_main',function(){
 function show_activities_today(){
     //Get current Date and Time
-    var curDateTime = new Date();
+    //var curDateTime = new Date();
     //Months numbers counts from 0, not from 1
     //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00") or ISO 8601 dates
     //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
     //So for now we'll send such dates as "2013-12-07 00:00:00", and will get such as "1997-07-16T19:20+01:00"
-    var curDayStart = curDateTime.getFullYear() + '-' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '-' + ("0" + curDateTime.getDate()).slice(-2) + " 00:00:00";
-    var plannedStartTimestamp = Date.parse(curDayStart);
+    //var curDayStart = curDateTime.getFullYear() + '-' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '-' + ("0" + curDateTime.getDate()).slice(-2) + " 00:00:00";
+    
+    //var plannedStartTimestamp = Date.parse(curDayStart);
+    var plannedStartTimestamp = moment().startOf('day').format('X');
     //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00")
-    var curDayEnd = curDateTime.getFullYear() + '-' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '-' + ("0" + curDateTime.getDate()).slice(-2) + " 23:59:59";
-    var plannedEndTimestamp = Date.parse(curDayEnd);
+    //var curDayEnd = curDateTime.getFullYear() + '-' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '-' + ("0" + curDateTime.getDate()).slice(-2) + " 23:59:59";
+    //var plannedEndTimestamp = Date.parse(curDayEnd);
+    var plannedEndTimestamp = moment().endOf('day').format('X');
     
     //Show activities with plannned end date between beginning and ending of current day
     show_activities_list("#page_activities_today_list", plannedStartTimestamp, plannedEndTimestamp);
@@ -24,17 +27,18 @@ function show_activities_today(){
 //$(document).on('click','.button_activities_tomorrow',function(){
 function show_activities_tomorrow(){
     //Get current Date and Time
-    var curDateTime = new Date();
+    //var curDateTime = new Date();
     //add a day to the date
-    curDateTime.setDate(curDateTime.getDate() + 1);
+    //curDateTime.setDate(curDateTime.getDate() + 1);
     //Months numbers counts from 0, not from 1
     //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00")
-    var tomorrowDayStart = curDateTime.getFullYear() + '/' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '/' + ("0" + curDateTime.getDate()).slice(-2) + " 00:00:00";
-    var plannedStartTimestamp = Date.parse(tomorrowDayStart);
+    //var tomorrowDayStart = curDateTime.getFullYear() + '/' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '/' + ("0" + curDateTime.getDate()).slice(-2) + " 00:00:00";
+    //var plannedStartTimestamp = Date.parse(tomorrowDayStart);
+    var plannedStartTimestamp = moment().add('days', +1).startOf('day').format('X');
     //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00")
-    var tomorrowDayEnd = curDateTime.getFullYear() + '/' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '/' + ("0" + curDateTime.getDate()).slice(-2) + " 23:59:59";
-    var plannedEndTimestamp = Date.parse(tomorrowDayEnd);
-    
+    //var tomorrowDayEnd = curDateTime.getFullYear() + '/' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '/' + ("0" + curDateTime.getDate()).slice(-2) + " 23:59:59";
+    //var plannedEndTimestamp = Date.parse(tomorrowDayEnd);
+    var plannedEndTimestamp = moment().add('days', +1).endOf('day').format('X');
     show_activities_list("#page_activities_tomorrow_list", plannedStartTimestamp, plannedEndTimestamp);
 }
 
@@ -42,16 +46,18 @@ function show_activities_tomorrow(){
 //$(document).on('click','.button_activities_future',function(){
 function show_activities_future(){
     //Get current Date and Time
-    var curDateTime = new Date();
+    //var curDateTime = new Date();
     //add a two days to the date
-    curDateTime.setDate(curDateTime.getDate() + 2);
+    //curDateTime.setDate(curDateTime.getDate() + 2);
     //Months numbers counts from 0, not from 1
     //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00")
-    var futureDayStart = curDateTime.getFullYear() + '/' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '/' + ("0" + curDateTime.getDate()).slice(-2) + " 00:00:00";
-    var plannedStartTimestamp = Date.parse(futureDayStart);
+    //var futureDayStart = curDateTime.getFullYear() + '/' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '/' + ("0" + curDateTime.getDate()).slice(-2) + " 00:00:00";
+    //var plannedStartTimestamp = Date.parse(futureDayStart);
+    var plannedStartTimestamp = moment().add('days', +2).startOf('day').format('X');
     //Future has no "end", we can choose any day not too near to current
-    var futureDayEnd = "2025/12/31 23:59:59";
-    var plannedEndTimestamp = Date.parse(futureDayEnd);
+    //var futureDayEnd = "2025/12/31 23:59:59";
+    //var plannedEndTimestamp = Date.parse(futureDayEnd);
+    var plannedEndTimestamp = moment('2025-12-31 23:59:59').endOf('day').format('X');
     
     show_activities_list("#page_activities_future_list", plannedStartTimestamp, plannedEndTimestamp);
 }
@@ -62,16 +68,18 @@ function show_activities_future(){
 //Show outdated activities
 function show_activities_outdated(){
     //Get current Date and Time
-    var curDateTime = new Date();
+    //var curDateTime = new Date();
     //add a two days to the date
-    curDateTime.setDate(curDateTime.getDate() - 1);
+    //curDateTime.setDate(curDateTime.getDate() - 1);
     //Past has no "start", we can choose any day not too near to current
-    var pastDayStart = "2001/01/01 00:00:00";
-    var plannedStartTimestamp = Date.parse(pastDayStart);
+    //var pastDayStart = "2001/01/01 00:00:00";
+    //var plannedStartTimestamp = Date.parse(pastDayStart);
+    var plannedStartTimestamp = moment('2001-01-01 00:00:00').startOf('day').format('X');
     //Months numbers counts from 0, not from 1
     //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00")
-    var pastDayEnd = curDateTime.getFullYear() + '/' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '/' + ("0" + curDateTime.getDate()).slice(-2) + " 23:59:59";
-    var plannedEndTimestamp = Date.parse(pastDayEnd);
+    //var pastDayEnd = curDateTime.getFullYear() + '/' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '/' + ("0" + curDateTime.getDate()).slice(-2) + " 23:59:59";
+    //var plannedEndTimestamp = Date.parse(pastDayEnd);
+    var plannedEndTimestamp = moment().add('days', -1).endOf('day').format('X');
     
     show_activities_list("#page_activities_past_list", plannedStartTimestamp, plannedEndTimestamp);
 }
@@ -105,12 +113,14 @@ function get_new_activities_from_backend(){
     
     //Get timestamp for the beginnig of yesterday
     //Get current Date and Time
-    var curDateTime = new Date();
+    //var curDateTime = new Date();
     //add a day to the date
-    curDateTime.setDate(curDateTime.getDate() - 1);
+    //curDateTime.setDate(curDateTime.getDate() - 1);
     //Months numbers counts from 0, not from 1
-    var yesterDayStart = curDateTime.getFullYear() + '/' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '/' + ("0" + curDateTime.getDate()).slice(-2) + " 00:00:00";
-    var yesterDayStartTimestamp = Date.parse(yesterDayStart);
+    //var yesterDayStart = curDateTime.getFullYear() + '/' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '/' + ("0" + curDateTime.getDate()).slice(-2) + " 00:00:00";
+    //var yesterDayStartTimestamp = Date.parse(yesterDayStart);
+    var yesterDayStartTimestamp = moment().add('days', -1).startOf('day').format('X');
+    
     
     //Get timestamp from LocalStorage to find out, when we've synced activities from the server the last time
     var lastSyncTimestamp = parseInt(window.localStorage.getItem("activitiesLastUpdatedFromServer"));
@@ -187,18 +197,18 @@ function get_activities_from_backend(URLpart){
                                              "difficultyRAW":node_value.node.difficultyRAW,
                                              "group":node_value.node.group, 
                                              "groupRAW":node_value.node.groupRAW, 
-                                             "dateTimePlannedStartTimestamp":Date.parse(node_value.node.dateTimePlannedStart),
+                                             "dateTimePlannedStartTimestamp":moment(node_value.node.dateTimePlannedStart).format('X'),
                                              "datePlannedStart":dateTimeSplit(node_value.node.dateTimePlannedStart, "date"), 
                                              "timePlannedStart":dateTimeSplit(node_value.node.dateTimePlannedStart, "time"), 
-                                             "dateTimePlannedEndTimestamp":Date.parse(node_value.node.dateTimePlannedEnd),
+                                             "dateTimePlannedEndTimestamp":moment(node_value.node.dateTimePlannedEnd).format('X'),
                                              "datePlannedEnd":dateTimeSplit(node_value.node.dateTimePlannedEnd, "date"), 
                                              "timePlannedEnd":dateTimeSplit(node_value.node.dateTimePlannedEnd, "time"),
                                              "dateTimePlannedTZ":TZSplit(node_value.node.dateTimePlannedTZ), 
                                              "dateTimePlannedOffset":TZSplit(node_value.node.dateTimePlannedOffset), 
-                                             "dateTimeStartTimestamp":Date.parse(node_value.node.dateTimeStart), 
+                                             "dateTimeStartTimestamp":moment(node_value.node.dateTimeStart).format('X'), 
                                              "dateStart":dateTimeSplit(node_value.node.dateTimeStart, "date"), 
                                              "timeStart":dateTimeSplit(node_value.node.dateTimeStart, "time"), 
-                                             "dateTimeEndTimestamp":Date.parse(node_value.node.dateTimeEnd), 
+                                             "dateTimeEndTimestamp":moment(node_value.node.dateTimeEnd).format('X'), 
                                              "dateEnd":dateTimeSplit(node_value.node.dateTimeEnd, "date"), 
                                              "timeEnd":dateTimeSplit(node_value.node.dateTimeEnd, "time"),
                                              "dateTimeTZ":TZSplit(node_value.node.dateTimeTZ), 
@@ -375,11 +385,14 @@ $(document).on('click','.button_start_date',function(){
     
     //Get current Date, Time and Timezone, convert them to Drupal-readable form
     curDateTime = new Date();
-    curTimestamp = Date.parse(curDateTime);
+    //curTimestamp = Date.parse(curDateTime);
+    curTimestamp = moment(curDateTime).format('X');
     //Months numbers counts from 0, not from 1
     //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00")
-    var curDate = curDateTime.getFullYear() + '/' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '/' + ("0" + curDateTime.getDate()).slice(-2);
-    var curTime = ("0" + curDateTime.getHours()).slice(-2) + ':' + ("0" + curDateTime.getMinutes()).slice(-2) + ':' + ("0" + curDateTime.getSeconds()).slice(-2);
+    //var curDate = curDateTime.getFullYear() + '/' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '/' + ("0" + curDateTime.getDate()).slice(-2);
+    var curDate = moment(curDateTime).format('YYYY-MM-DD');
+    //var curTime = ("0" + curDateTime.getHours()).slice(-2) + ':' + ("0" + curDateTime.getMinutes()).slice(-2) + ':' + ("0" + curDateTime.getSeconds()).slice(-2);
+    var curTime = moment(curDateTime).format('HH:mm:ss');
     //Determine the time zone of the browser client, jstz.min.js required
     var timeZone = jstz.determine();
     timeZoneName = timeZone.name();
@@ -404,7 +417,7 @@ $(document).on('click','.button_start_date',function(){
                          "dateTimeTZ":timeZoneName, 
                          "dateTimeOffset":timeZoneOffset, 
                          //Mark entry as updated locally
-                         "lastUpdatedLocally":Math.round(curDateTime.getTime()/1000)}, "id");
+                         "lastUpdatedLocally":moment(curDateTime).format('X')}, "id");
     
     //If we're connected to the internet
     //navigator.onLine will always return True at desktop Linux, and at Chrome for Android
@@ -433,11 +446,14 @@ $(document).on('click','.button_end_date',function(){
     
     //Get current Date, Time and Timezone, convert them to Drupal-readable form
     curDateTime = new Date();
-    curTimestamp = Date.parse(curDateTime);
+    //curTimestamp = Date.parse(curDateTime);
+    curTimestamp = moment(curDateTime).format('X');
     //Months numbers counts from 0, not from 1
     //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00")
-    var curDate = curDateTime.getFullYear() + '/' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '/' + ("0" + curDateTime.getDate()).slice(-2);
-    var curTime = ("0" + curDateTime.getHours()).slice(-2) + ':' + ("0" + curDateTime.getMinutes()).slice(-2) + ':' + ("0" + curDateTime.getSeconds()).slice(-2);
+    //var curDate = curDateTime.getFullYear() + '/' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '/' + ("0" + curDateTime.getDate()).slice(-2);
+    //var curTime = ("0" + curDateTime.getHours()).slice(-2) + ':' + ("0" + curDateTime.getMinutes()).slice(-2) + ':' + ("0" + curDateTime.getSeconds()).slice(-2);
+    var curDate = moment(curDateTime).format('YYYY-MM-DD');
+    var curTime = moment(curDateTime).format('HH:mm:ss');
     //Determine the time zone of the browser client, jstz.min.js required
     var timeZone = jstz.determine();
     timeZoneName = timeZone.name();
@@ -476,7 +492,7 @@ $(document).on('click','.button_end_date',function(){
                          "difficulty":curActivityEntry.difficultyPlanned, 
                          "difficultyRAW":curActivityEntry.difficultyPlannedRAW,
                          //Mark entry as updated locally
-                         "lastUpdatedLocally":Math.round(curDateTime.getTime()/1000)}, "id");
+                         "lastUpdatedLocally":moment(curDateTime).format('X')}, "id");
     
     
     //If we're connected to the internet
@@ -531,14 +547,18 @@ function change_activity_planned_to_date(entryID, numberOfDays) {
         curDateTime = new Date();
     
         //Create Date object with old planned end date and time
-        var oldPlannedEndDateTime = new Date(parseInt(curActivityEntry.dateTimePlannedEndTimestamp)); 
+        //var oldPlannedEndDateTime = new Date(parseInt(curActivityEntry.dateTimePlannedEndTimestamp)); 
         //We should populate variable for a NEW date with a Date object, and it should be created from OLD timestamp (in milliseconds)
-        var newPlannedEndDateTime = new Date(parseInt(curActivityEntry.dateTimePlannedEndTimestamp));
-        newPlannedEndDateTime.setDate(oldPlannedEndDateTime.getDate() + numberOfDays);
+        //var newPlannedEndDateTime = new Date(parseInt(curActivityEntry.dateTimePlannedEndTimestamp));
+        //newPlannedEndDateTime.setDate(oldPlannedEndDateTime.getDate() + numberOfDays);
         //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00")
-        var plannedEndDate = newPlannedEndDateTime.getFullYear() + '/' + ("0" + (newPlannedEndDateTime.getMonth()+1)).slice(-2) + '/' + ("0" + newPlannedEndDateTime.getDate()).slice(-2);
+        //var plannedEndDate = newPlannedEndDateTime.getFullYear() + '/' + ("0" + (newPlannedEndDateTime.getMonth()+1)).slice(-2) + '/' + ("0" + newPlannedEndDateTime.getDate()).slice(-2);
+        //var plannedEndTime = curActivityEntry.timePlannedEnd;
+        //var plannedEndTimestamp = Date.parse(plannedEndDate + " " + plannedEndTime);
+        
+        var plannedEndDate = moment(curActivityEntry.dateTimePlannedEndTimestamp).add('days', numberOfDays).format('YYYY-MM-DD');
         var plannedEndTime = curActivityEntry.timePlannedEnd;
-        var plannedEndTimestamp = Date.parse(plannedEndDate + " " + plannedEndTime);
+        var plannedEndTimestamp = moment(curActivityEntry.dateTimePlannedEndTimestamp).add('days', numberOfDays).format('X');
         
         //Planned end date can't be earlier, than planned start date
         //We can reduce planned start date as well, but this is not always desirable
@@ -553,7 +573,7 @@ function change_activity_planned_to_date(entryID, numberOfDays) {
                                  "dateTimePlannedEndTimestamp":plannedEndTimestamp,
                                  //Looks like we should not bother about timezone here
                                  //Mark entry as updated locally
-                                 "lastUpdatedLocally":Math.round(curDateTime.getTime()/1000)}, "id");
+                                 "lastUpdatedLocally":moment(curDateTime).format('X')}, "id");
     
             //If we're connected to the internet
             //navigator.onLine will always return True at desktop Linux, and at Chrome for Android
