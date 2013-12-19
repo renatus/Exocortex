@@ -133,7 +133,19 @@ var kelly = testdb({id:2}).first();
     //alert(moment(new Date()).format('YYYY-MM-DD'));
     //alert(moment(new Date()).format('HH-mm-ss'));
     //alert(new Date().getTime());
-    alert(moment("1387481862", "X").format('YYYY-MM-DD'));
+    //alert(moment("1387481862", "X").format('YYYY-MM-DD'));
+    
+    curDateTime = new Date();
+
+    //add a day to the date
+    curDateTime.setDate(curDateTime.getDate() + 1);
+    //Months numbers counts from 0, not from 1
+    //Firefox will return NaN for Date.parse("2013-12-21 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00")
+    //Write tomorrow date in this form (2013-12-21):
+    var curDate = curDateTime.getFullYear() + '-' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '-' + ("0" + curDateTime.getDate()).slice(-2);
+    //Write current time in this form (00:00:00):
+    var curTime = ("0" + curDateTime.getHours()).slice(-2) + ':' + ("0" + curDateTime.getMinutes()).slice(-2) + ':' + ("0" + curDateTime.getSeconds()).slice(-2);
+    alert(curDate + " " + curTime);
     
     
     
