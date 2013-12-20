@@ -213,7 +213,8 @@ function show_activities_list(UlHtmlElementId, plannedStartTimestamp, plannedEnd
     
     //Function to filter out appropriate activities from TaffyDB by Planned end date and Status
     activitiesTDB(function(){if(this.dateTimePlannedEndTimestamp >= plannedStartTimestamp && this.dateTimePlannedEndTimestamp <= plannedEndTimestamp && this.statusRAW != "completed" && this.statusRAW != "postponed" && this.statusRAW != "canceled"){return true;}}).each(function(record,recordnumber) {
-    
+    alert('a');
+        
         //Choose activity entry icon based on it's strategic importance
         //TaffyDB stores numbers as strings, you have to use == rather than ===
         if(record["strategicImportanceRAW"] == 2000){
