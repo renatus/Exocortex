@@ -46,7 +46,8 @@ function show_activities_past(){
     //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
     //So for now we'll use such dates as "2013-12-07 00:00:00", and in future - such as "1997-07-16T19:20+01:00"
     //Get "start" of past except yesterday - it has no "start", we can choose any day not too near to current
-    var plannedStartTimestamp = moment('2001-01-01 00:00:00').startOf('day').format('X');
+    //var plannedStartTimestamp = moment('2001-01-01 00:00:00').startOf('day').format('X');
+    var plannedStartTimestamp = moment().add('days', -60).startOf('day').format('X');
     //Get end of past except yesterday
     var plannedEndTimestamp = moment().add('days', -1).endOf('day').format('X');
     alert(plannedStartTimestamp + " " + plannedEndTimestamp);
