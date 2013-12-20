@@ -11,7 +11,7 @@ $("div").on("pageshow", function(event, ui){
     } else if($(this).attr('id') == "page_activities_future"){
         show_activities_future();
     } else if($(this).attr('id') == "page_activities_past"){
-        show_activities_outdated();
+        show_activities_past();
     } else if($(this).attr('id') == "page_activities_yesterday"){
         show_activities_yesterday();
     }
