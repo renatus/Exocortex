@@ -1,22 +1,14 @@
 //React on button pressure
 //There can be more than one button (at different places) for loading of a same page
 //These buttons loads Activities lists (scheduled for today, tomorrow, future etc) 
+
 //Show activities planned for today
-//$(document).on('click','.button_activities_main',function(){
 function show_activities_today(){
-    //Get current Date and Time
-    //var curDateTime = new Date();
-    //Months numbers counts from 0, not from 1
-    //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00") or ISO 8601 dates
     //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
-    //So for now we'll send such dates as "2013-12-07 00:00:00", and will get such as "1997-07-16T19:20+01:00"
-    //var curDayStart = curDateTime.getFullYear() + '-' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '-' + ("0" + curDateTime.getDate()).slice(-2) + " 00:00:00";
-    
-    //var plannedStartTimestamp = Date.parse(curDayStart);
+    //So for now we'll use such dates as "2013-12-07 00:00:00", and in future - such as "1997-07-16T19:20+01:00"
+    //Get start of current day
     var plannedStartTimestamp = moment().startOf('day').format('X');
-    //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00")
-    //var curDayEnd = curDateTime.getFullYear() + '-' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '-' + ("0" + curDateTime.getDate()).slice(-2) + " 23:59:59";
-    //var plannedEndTimestamp = Date.parse(curDayEnd);
+    //Get end of current day
     var plannedEndTimestamp = moment().endOf('day').format('X');
     
     //Show activities with plannned end date between beginning and ending of current day
@@ -24,63 +16,41 @@ function show_activities_today(){
 }
 
 //Show activities planned for tomorrow
-//$(document).on('click','.button_activities_tomorrow',function(){
 function show_activities_tomorrow(){
-    //Get current Date and Time
-    //var curDateTime = new Date();
-    //add a day to the date
-    //curDateTime.setDate(curDateTime.getDate() + 1);
-    //Months numbers counts from 0, not from 1
-    //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00")
-    //var tomorrowDayStart = curDateTime.getFullYear() + '/' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '/' + ("0" + curDateTime.getDate()).slice(-2) + " 00:00:00";
-    //var plannedStartTimestamp = Date.parse(tomorrowDayStart);
+    //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
+    //So for now we'll use such dates as "2013-12-07 00:00:00", and in future - such as "1997-07-16T19:20+01:00"
+    //Get start of tomorrow
     var plannedStartTimestamp = moment().add('days', +1).startOf('day').format('X');
-    //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00")
-    //var tomorrowDayEnd = curDateTime.getFullYear() + '/' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '/' + ("0" + curDateTime.getDate()).slice(-2) + " 23:59:59";
-    //var plannedEndTimestamp = Date.parse(tomorrowDayEnd);
+    //Get end of tomorrow
     var plannedEndTimestamp = moment().add('days', +1).endOf('day').format('X');
+    
+    //Show activities with plannned end date between beginning and ending of tomorrow
     show_activities_list("#page_activities_tomorrow_list", plannedStartTimestamp, plannedEndTimestamp);
 }
 
 //Show activities planned for future except tomorrow
-//$(document).on('click','.button_activities_future',function(){
 function show_activities_future(){
-    //Get current Date and Time
-    //var curDateTime = new Date();
-    //add a two days to the date
-    //curDateTime.setDate(curDateTime.getDate() + 2);
-    //Months numbers counts from 0, not from 1
-    //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00")
-    //var futureDayStart = curDateTime.getFullYear() + '/' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '/' + ("0" + curDateTime.getDate()).slice(-2) + " 00:00:00";
-    //var plannedStartTimestamp = Date.parse(futureDayStart);
+    //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
+    //So for now we'll use such dates as "2013-12-07 00:00:00", and in future - such as "1997-07-16T19:20+01:00"
+    //Get start of future except tomorrow
     var plannedStartTimestamp = moment().add('days', +2).startOf('day').format('X');
-    //Future has no "end", we can choose any day not too near to current
-    //var futureDayEnd = "2025/12/31 23:59:59";
-    //var plannedEndTimestamp = Date.parse(futureDayEnd);
+    //Get "end" of future except tomorrow - it has no "end", we can choose any day not too near to current
     var plannedEndTimestamp = moment('2025-12-31 23:59:59').endOf('day').format('X');
     
+    //Show activities with plannned end date between beginning and ending of future except tomorrow
     show_activities_list("#page_activities_future_list", plannedStartTimestamp, plannedEndTimestamp);
 }
-
-
-
-//$(document).on('click','.button_activities_past',function(){               
+             
 //Show outdated activities
 function show_activities_outdated(){
-    //Get current Date and Time
-    //var curDateTime = new Date();
-    //add a two days to the date
-    //curDateTime.setDate(curDateTime.getDate() - 1);
-    //Past has no "start", we can choose any day not too near to current
-    //var pastDayStart = "2001/01/01 00:00:00";
-    //var plannedStartTimestamp = Date.parse(pastDayStart);
+    //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
+    //So for now we'll use such dates as "2013-12-07 00:00:00", and in future - such as "1997-07-16T19:20+01:00"
+    //Get "start" of past except yesterday - it has no "start", we can choose any day not too near to current
     var plannedStartTimestamp = moment('2001-01-01 00:00:00').startOf('day').format('X');
-    //Months numbers counts from 0, not from 1
-    //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00")
-    //var pastDayEnd = curDateTime.getFullYear() + '/' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '/' + ("0" + curDateTime.getDate()).slice(-2) + " 23:59:59";
-    //var plannedEndTimestamp = Date.parse(pastDayEnd);
+    //Get end of past except yesterday
     var plannedEndTimestamp = moment().add('days', -1).endOf('day').format('X');
     
+    //Show activities with plannned end date between beginning and ending of past except yesterday
     show_activities_list("#page_activities_past_list", plannedStartTimestamp, plannedEndTimestamp);
 }
 
@@ -110,24 +80,16 @@ $(document).on('click','.button_activities_waiting',function(){
 //We have a page with all activities, created or updated today and yesterday
 //So in case last update wasn't earlier than yestersay, we should use this page
 function get_new_activities_from_backend(){
-    
+    //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
+    //So for now we'll use such dates as "2013-12-07 00:00:00", and in future - such as "1997-07-16T19:20+01:00"
     //Get timestamp for the beginnig of yesterday
-    //Get current Date and Time
-    //var curDateTime = new Date();
-    //add a day to the date
-    //curDateTime.setDate(curDateTime.getDate() - 1);
-    //Months numbers counts from 0, not from 1
-    //var yesterDayStart = curDateTime.getFullYear() + '/' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '/' + ("0" + curDateTime.getDate()).slice(-2) + " 00:00:00";
-    //var yesterDayStartTimestamp = Date.parse(yesterDayStart);
     var yesterDayStartTimestamp = moment().add('days', -1).startOf('day').format('X');
-    
-    
     //Get timestamp from LocalStorage to find out, when we've synced activities from the server the last time
     var lastSyncTimestamp = parseInt(window.localStorage.getItem("activitiesLastUpdatedFromServer"));
     
     if(lastSyncTimestamp > yesterDayStartTimestamp){
         //We've synced today or yesterday
-        //Put from backend to app DB only those active activities, that was created and updated today or yesterday
+        //Put from backend to app DB only those active activities, that were created and updated today or yesterday
         get_activities_from_backend("/json/activities/updated-today-yesterday");
     } else {
         //We've NOT synced today or yesterday
@@ -249,15 +211,13 @@ function get_activities_from_backend(URLpart){
 //Show list of activities titles for a specified period of time (i.e. for today, or future)
 //UlHtmlElementId should contain HTML list element ID - we'll put list of activities titles there
 function show_activities_list(UlHtmlElementId, plannedStartTimestamp, plannedEndTimestamp) {
-    //alert('function show_activities_list works ' + UlHtmlElementId + " " + plannedStartTimestamp + " " + plannedEndTimestamp);
-    
     //put list of items to loading app's HTML page, one by one
     
     //.html("") prevents old page elements from popping up after returning to the page after visiting other pages
     //Not a replacement for listview("destroy")
     $(UlHtmlElementId).html("");
     
-    //Function to filter out appropriate activities from TaffyDB
+    //Function to filter out appropriate activities from TaffyDB by Planned end date and Status
     activitiesTDB(function(){if(this.dateTimePlannedEndTimestamp >= plannedStartTimestamp && this.dateTimePlannedEndTimestamp <= plannedEndTimestamp && this.statusRAW != "completed" && this.statusRAW != "postponed" && this.statusRAW != "canceled"){return true;}}).each(function(record,recordnumber) {
     
         //Choose activity entry icon based on it's strategic importance
@@ -292,7 +252,6 @@ function show_activities_list(UlHtmlElementId, plannedStartTimestamp, plannedEnd
         
         
         //Add <li> list item element to DOM
-	    //$(UlHtmlElementId).append($('<li></li>',{"html":"<a href='#page_node_activity_view' id='" + record["nid"] + "' class='page_node_pages_list_title'>" + record["title"] + "</a>"}));
 	    $(UlHtmlElementId).append("<li data-icon='" + dataIcon + "' data-theme='" + dataTheme + "'><a href='#page_node_activity_view' id='" + record["id"] + "' class='page_node_pages_list_title'>" + record["title"] + "</a></li>");
     });
     
@@ -313,6 +272,7 @@ function dateTimeSplit(dateTime, toReturn){
         return "";
     }
     
+    //Split Date and Time values ("2013-05-29 01:22:55")
     dateTimeSplitted=dateTime.split(" ");
     
     if (toReturn === "date") {
@@ -336,9 +296,9 @@ function TZSplit(TZRAW){
 
 
 //Each Activity node title is rendered as button
-//If we've pressed Activity title, we should draw activity HTML page
+//If we've pressed Activity title, we should render activity HTML page
 $(document).on('click','a.page_node_pages_list_title',function(){
-    //Get Drupal node ID from app's page HTML attribute - don't forget to convert it in number
+    //Get Drupal node ID from app's page HTML attribute - don't forget to convert it to number
     entryID = parseInt($(this).attr('id'));
 	render_activity("#page_node_activity_view", ".content", entryID);
 });
@@ -347,14 +307,14 @@ $(document).on('click','a.page_node_pages_list_title',function(){
 
 //Show single IS activity node
 //HTMLpageID should contain ID of app's page, where we'll insert retrieved data
-//All activities are drawn at the same empty app's page
+//All activities are rendered at the same empty app's page
 //ContentHtmlElementClass should contain CSS class of element we'll insert data in
 //entryID should contain app's DB entry id
 function render_activity(HTMLpageID, ContentHtmlElementClass, entryID) {
     //Get current Activity entry from JS DB
     var curActivityEntry = activitiesTDB({id:entryID}).first();
                      
-    //Draw Activity HTML page at app, with machine-readable data- attributes
+    //Render Activity HTML page at app, with machine-readable data- attributes
     //Set Page title
     $(HTMLpageID + " h1").html(curActivityEntry.title);  
     //Set activity Planned from to                       
@@ -373,6 +333,7 @@ function render_activity(HTMLpageID, ContentHtmlElementClass, entryID) {
 
 //Set Activity completion start date at app's DB, and, if possible, in IS
 $(document).on('click','.button_start_date',function(){
+    //Get current Activity entry ID from HTML5 custom property
     entryID = parseInt($("#page_node_activity_view").attr("data-entryID"));
     
     //Get current Activity entry from JS DB
@@ -385,13 +346,8 @@ $(document).on('click','.button_start_date',function(){
     
     //Get current Date, Time and Timezone, convert them to Drupal-readable form
     curDateTime = new Date();
-    //curTimestamp = Date.parse(curDateTime);
     curTimestamp = moment(curDateTime).format('X');
-    //Months numbers counts from 0, not from 1
-    //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00")
-    //var curDate = curDateTime.getFullYear() + '/' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '/' + ("0" + curDateTime.getDate()).slice(-2);
     var curDate = moment(curDateTime).format('YYYY-MM-DD');
-    //var curTime = ("0" + curDateTime.getHours()).slice(-2) + ':' + ("0" + curDateTime.getMinutes()).slice(-2) + ':' + ("0" + curDateTime.getSeconds()).slice(-2);
     var curTime = moment(curDateTime).format('HH:mm:ss');
     //Determine the time zone of the browser client, jstz.min.js required
     var timeZone = jstz.determine();
@@ -434,6 +390,7 @@ $(document).on('click','.button_start_date',function(){
 
 //Set Activity completion end date, status and difficulty at app's DB, and, if possible, in IS
 $(document).on('click','.button_end_date',function(){
+    //Get current Activity entry ID from HTML5 custom property
     entryID = parseInt($("#page_node_activity_view").attr("data-entryID"));
     
     //Get current Activity entry from JS DB
@@ -446,12 +403,7 @@ $(document).on('click','.button_end_date',function(){
     
     //Get current Date, Time and Timezone, convert them to Drupal-readable form
     curDateTime = new Date();
-    //curTimestamp = Date.parse(curDateTime);
     curTimestamp = moment(curDateTime).format('X');
-    //Months numbers counts from 0, not from 1
-    //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00")
-    //var curDate = curDateTime.getFullYear() + '/' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '/' + ("0" + curDateTime.getDate()).slice(-2);
-    //var curTime = ("0" + curDateTime.getHours()).slice(-2) + ':' + ("0" + curDateTime.getMinutes()).slice(-2) + ':' + ("0" + curDateTime.getSeconds()).slice(-2);
     var curDate = moment(curDateTime).format('YYYY-MM-DD');
     var curTime = moment(curDateTime).format('HH:mm:ss');
     //Determine the time zone of the browser client, jstz.min.js required
@@ -510,6 +462,7 @@ $(document).on('click','.button_end_date',function(){
 
 //Add one day to "Planned to" activity property
 $(document).on('click','.button_planned_to_date_plus_one',function(){
+    //Get current Activity entry ID from HTML5 custom property
     entryID = parseInt($("#page_node_activity_view").attr("data-entryID"));
     change_activity_planned_to_date(entryID, 1);
     
@@ -521,6 +474,7 @@ $(document).on('click','.button_planned_to_date_plus_one',function(){
 
 //Subtract one day from "Planned to" activity property
 $(document).on('click','.button_planned_to_date_minus_one',function(){
+    //Get current Activity entry ID from HTML5 custom property
     entryID = parseInt($("#page_node_activity_view").attr("data-entryID"));
     change_activity_planned_to_date(entryID, -1);
     
@@ -546,18 +500,11 @@ function change_activity_planned_to_date(entryID, numberOfDays) {
 
         curDateTime = new Date();
     
-        //Create Date object with old planned end date and time
-        //var oldPlannedEndDateTime = new Date(parseInt(curActivityEntry.dateTimePlannedEndTimestamp)); 
-        //We should populate variable for a NEW date with a Date object, and it should be created from OLD timestamp (in milliseconds)
-        //var newPlannedEndDateTime = new Date(parseInt(curActivityEntry.dateTimePlannedEndTimestamp));
-        //newPlannedEndDateTime.setDate(oldPlannedEndDateTime.getDate() + numberOfDays);
-        //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00")
-        //var plannedEndDate = newPlannedEndDateTime.getFullYear() + '/' + ("0" + (newPlannedEndDateTime.getMonth()+1)).slice(-2) + '/' + ("0" + newPlannedEndDateTime.getDate()).slice(-2);
-        //var plannedEndTime = curActivityEntry.timePlannedEnd;
-        //var plannedEndTimestamp = Date.parse(plannedEndDate + " " + plannedEndTime);
-        
+        //Get new Planned end date by adding desired number of days (can be negative)        
         var plannedEndDate = moment(curActivityEntry.dateTimePlannedEndTimestamp, 'X').add('days', numberOfDays).format('YYYY-MM-DD');
+        //Planned end time should not change
         var plannedEndTime = curActivityEntry.timePlannedEnd;
+        //Get new Planned end timestamp by adding desired number of days (can be negative) 
         var plannedEndTimestamp = moment(curActivityEntry.dateTimePlannedEndTimestamp, 'X').add('days', numberOfDays).format('X');
         
         //Planned end date can't be earlier, than planned start date
@@ -592,6 +539,7 @@ function change_activity_planned_to_date(entryID, numberOfDays) {
 //Sync all new and modified activities one by one
 //Each new and modified activity is marked by modification timestamp at lastUpdatedLocally column
 function sync_modified_activities() {
+    //Iterate through all Activities with filled lastUpdatedLocally DB properties
     activitiesTDB({lastUpdatedLocally:{"!is":""}}).each(function(record,recordnumber) {
 	    activity_sync_to_backend(record["id"]);
     });

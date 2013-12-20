@@ -20,17 +20,12 @@ function timeboxStarted(durationPlanned){
     //var curTime = "23:00:07";
     //var timeZoneName = "Europe/Moscow";
 	
-    //Get current Date, Time and Timezone, convert them to Drupal-readable form
-	//Usually timestamp is at seconds, and JavaScript works with milliseconds
+    //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
+    //So for now we'll use such dates as "2013-12-07 00:00:00", and in future - such as "1997-07-16T19:20+01:00"
+    //Get current Date, Time, Timestamp and Timezone, convert them to Drupal-readable form
     curDateTime = new Date();
     curTimestamp = Date.parse(curDateTime);
-	//Months numbers counts from 0, not from 1
-    //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00") or ISO 8601 dates
-    //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
-    //So for now we'll send such dates as "2013-12-07 00:00:00", and will get such as "1997-07-16T19:20+01:00"
-	//var curDate = curDateTime.getFullYear() + '-' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '-' + ("0" + curDateTime.getDate()).slice(-2);
     var curDate = moment(curDateTime).format('YYYY-MM-DD');
-    //var curTime = ("0" + curDateTime.getHours()).slice(-2) + ':' + ("0" + curDateTime.getMinutes()).slice(-2) + ':' + ("0" + curDateTime.getSeconds()).slice(-2);
     var curTime = moment(curDateTime).format('HH:mm:ss');
 	//Determine the time zone of the browser client, jstz.min.js required
     var timeZone = jstz.determine();
@@ -56,7 +51,7 @@ function timeboxStarted(durationPlanned){
                         "dateTimeOffset":timeZoneOffset,
                         //"duration":"",
                         "durationPlanned":durationPlanned,
-					    //Mark entry as updated locally
+					    //Mark entry as updated locally by putting current timestamp at lastUpdatedLocally DB property
                         "lastUpdatedLocally":moment(curDateTime).format('X')}, "id");
     
     //For now we can't sync started (but not yet ended) timebox, we have to check, if dateEnd is filled
@@ -114,18 +109,12 @@ function timeboxClosed(entryID, status, statusRAW){
     //Probably we should clear timeoutTimebox variable only in case timebox was voided
     window.clearTimeout(timeoutTimebox);
     
-    //Get current Date and Time, convert them to Drupal-readable form
-    //Usually timestamp is at seconds, and JavaScript works with milliseconds
-    //For now we just don't modify timezone we've set when timebox started
+    //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
+    //So for now we'll use such dates as "2013-12-07 00:00:00", and in future - such as "1997-07-16T19:20+01:00"
+    //Get current Date, Time, Timestamp and Timezone, convert them to Drupal-readable form
     curDateTime = new Date();
     curTimestamp = Date.parse(curDateTime);
-	//Months numbers counts from 0, not from 1
-    //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00") or ISO 8601 dates
-    //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
-    //So for now we'll send such dates as "2013-12-07 00:00:00", and will get such as "1997-07-16T19:20+01:00"
-	//var curDate = curDateTime.getFullYear() + '-' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '-' + ("0" + curDateTime.getDate()).slice(-2);
     var curDate = moment(curDateTime).format('YYYY-MM-DD');
-    //var curTime = ("0" + curDateTime.getHours()).slice(-2) + ':' + ("0" + curDateTime.getMinutes()).slice(-2) + ':' + ("0" + curDateTime.getSeconds()).slice(-2);
     var curTime = moment(curDateTime).format('HH:mm:ss');
     
     //Get Timebox entry from JS DB

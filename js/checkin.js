@@ -45,15 +45,12 @@ function checkinAdd(position) {
 	//Usually timestamp is at seconds, and JavaScript works with milliseconds
 	//So we have to multiply timestamp value by 1000, but with position.timestamp we don't have to do that
 	//Date and time from GPS can be wrong in Android emulator, that's OK.
+    //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
+    //So for now we'll use such dates as "2013-12-07 00:00:00", and in future - such as "1997-07-16T19:20+01:00"
+    //Get current Date, Time, Timestamp and Timezone
 	curDateTime = new Date(position.timestamp);
 	curTimestamp = position.timestamp;
-	//Months numbers counts from 0, not from 1
-    //Firefox will return NaN for Date.parse("2013-12-07 00:00:00"). All browsers will accept Date.parse("2013/12/07 00:00:00") or ISO 8601 dates
-    //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
-    //So for now we'll send such dates as "2013-12-07 00:00:00", and will get such as "1997-07-16T19:20+01:00"
-	//var curDate = curDateTime.getFullYear() + '-' + ("0" + (curDateTime.getMonth()+1)).slice(-2) + '-' + ("0" + curDateTime.getDate()).slice(-2);
     var curDate = moment(curDateTime).format('YYYY-MM-DD');
-    //var curTime = ("0" + curDateTime.getHours()).slice(-2) + ':' + ("0" + curDateTime.getMinutes()).slice(-2);
     var curTime = moment(curDateTime).format('HH:mm');
 	//Determine the time zone of the browser client, jstz.min.js required
     var timeZone = jstz.determine();
@@ -136,7 +133,7 @@ function checkinAdd(position) {
                        //Mark entry as updated locally, by putting in last update timestamp
                        "lastUpdatedLocally":moment(curDateTime).format('X')}, "id");
 	
-	alert("You've checked-in successfully!" +
+	alert("You've checked-in successfully! " +
           'Latitude: '          + position.coords.latitude          + '\n' +
           'Longitude: '         + position.coords.longitude         + '\n' +
           'Altitude: '          + position.coords.altitude          + '\n' +
@@ -207,7 +204,6 @@ function checkin_sync_to_backend(entryID) {
 var funcName = "checkin_sync_to_backend_success";
 window[funcName]=function(entryID, msgOnSuccess) {
     checkinsTDB.merge({"id":entryID, "lastUpdatedLocally":""}, "id");
-	//alert(msgOnSuccess);
 }
 
 
@@ -215,6 +211,7 @@ window[funcName]=function(entryID, msgOnSuccess) {
 //Sync to backend all new and modified checkins one by one
 //Each new and modified checkin is marked by modification timestamp at lastUpdatedLocally column
 function sync_modified_checkins() {
+    //Iterate through all Checkins with filled lastUpdatedLocally DB properties
     checkinsTDB({lastUpdatedLocally:{"!is":""}}).each(function(record,recordnumber) {
 	    checkin_sync_to_backend(record["id"]);
     });
@@ -241,7 +238,7 @@ $(document).on('click','.button_geolocation_test',function(){
     };
     
     function onSuccess(position) {
-        alert("GPS works fine!" +
+        alert("GPS works fine! " +
                 'Latitude: '          + position.coords.latitude          + '\n' +
                 'Longitude: '         + position.coords.longitude         + '\n' +
                 'Altitude: '          + position.coords.altitude          + '\n' +
@@ -256,6 +253,7 @@ $(document).on('click','.button_geolocation_test',function(){
 
     // onError Callback receives a PositionError object
     function onError(error) {
+        //Display error message
         alert('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
     };
