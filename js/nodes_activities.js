@@ -41,38 +41,31 @@ function show_activities_future(){
     show_activities_list("#page_activities_future_list", plannedStartTimestamp, plannedEndTimestamp);
 }
              
-//Show outdated activities
+//Show activities planned for past except yesterday
 function show_activities_outdated(){
     //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
     //So for now we'll use such dates as "2013-12-07 00:00:00", and in future - such as "1997-07-16T19:20+01:00"
     //Get "start" of past except yesterday - it has no "start", we can choose any day not too near to current
     var plannedStartTimestamp = moment('2001-01-01 00:00:00').startOf('day').format('X');
     //Get end of past except yesterday
-    var plannedEndTimestamp = moment().add('days', -1).endOf('day').format('X');
+    var plannedEndTimestamp = moment().add('days', -2).endOf('day').format('X');
     
     //Show activities with plannned end date between beginning and ending of past except yesterday
     show_activities_list("#page_activities_past_list", plannedStartTimestamp, plannedEndTimestamp);
 }
 
-$(document).on('click','.button_activities_low-prio',function(){
-    //get_node_list("/json/activities/low-prio", "#page_activities_low-prio_list");
-});
-
-$(document).on('click','.button_activities_high-prio',function(){
-    //get_node_list("/json/activities/high-prio", "#page_activities_high-prio_list");
-});
-
-$(document).on('click','.button_activities_completed',function(){
-    //get_node_list("/json/activities/completed", "#page_activities_completed_list");
-});
-
-$(document).on('click','.button_activities_postponed',function(){
-    //get_node_list("/json/activities/postponed", "#page_activities_postponed_list");
-});
-
-$(document).on('click','.button_activities_waiting',function(){
-    //get_node_list("/json/activities/waiting", "#page_activities_waiting_list");
-});
+//Show activities planned for yesterday
+function show_activities_yesterday(){
+    //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
+    //So for now we'll use such dates as "2013-12-07 00:00:00", and in future - such as "1997-07-16T19:20+01:00"
+    //Get start of yesterday
+    var plannedStartTimestamp = moment().add('days', -1).startOf('day').format('X');
+    //Get end of yesterday
+    var plannedEndTimestamp = moment().add('days', -1).endOf('day').format('X');
+    
+    //Show activities with plannned end date between beginning and ending of past except yesterday
+    show_activities_list("#page_activities_yesterday_list", plannedStartTimestamp, plannedEndTimestamp);
+}
 
 
 

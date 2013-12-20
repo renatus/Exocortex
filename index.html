@@ -62,7 +62,7 @@
         <div data-role="page" id="page_dashboard" data-add-back-btn="true">
 
             <div data-role="header">
-                <h1>Dashboard</h1>
+                <h1>Exocortex</h1>
                 <a href="#panel_global_menu" data-role="button" class="ui-btn-right button_menu_main" data-icon="gear" data-iconpos="notext">Menu</a>
             </div><!-- /header -->
 
@@ -288,115 +288,27 @@
             <div data-role="footer">
                 <a href="#page_activities_future" data-role="button" class="ui-btn-left button_activities_future" data-icon="arrow-l" data-iconpos="left">Future</a>
                 <p>.</p><!-- Without that footer background will not be shown at Android 4.2 -->
-                <a href="#page_activities_low-prio" data-role="button" class="ui-btn-right button_activities_low-prio" data-icon="arrow-r" data-iconpos="right">Low prio</a>
+                <a href="#page_activities_yesterday" data-role="button" class="ui-btn-right button_activities_yesterday" data-icon="arrow-r" data-iconpos="right">Yesterday</a>
             </div><!-- /footer -->
 
         </div><!-- /page -->
 
 
-        <!-- List of low priority activities -->
-        <div data-role="page" id="page_activities_low-prio" data-add-back-btn="true">
+        <!-- List of activities for yesterday -->
+        <div data-role="page" id="page_activities_yesterday" data-add-back-btn="true">
 
             <div data-role="header">
-                <h1>Low priority</h1>
+                <h1>Yesterday</h1>
                 <a href="#panel_global_menu" data-role="button" class="ui-btn-right button_menu_main" data-icon="gear" data-iconpos="notext">Menu</a>
             </div><!-- /header -->
 
             <!-- List to include appropriate Activities Titles by JS -->
             <div data-role="content" class='content'>
-                <ul data-role="listview" data-theme="a" data-inset="true" id="page_activities_low-prio_list"></ul>
+                <ul data-role="listview" data-theme="a" data-inset="true" id="page_activities_yesterday_list"></ul>
             </div><!-- /content -->
 
             <div data-role="footer">
                 <a href="#page_activities_past" data-role="button" class="ui-btn-left button_activities_past" data-icon="arrow-l" data-iconpos="left">Past</a>
-                <p>.</p><!-- Without that footer background will not be shown at Android 4.2 -->
-                <a href="#page_activities_high-prio" data-role="button" class="ui-btn-right button_activities_high-prio" data-icon="arrow-r" data-iconpos="right">High prio</a>
-            </div><!-- /footer -->
-
-        </div><!-- /page -->
-
-
-        <!-- List of high priority activities -->
-        <div data-role="page" id="page_activities_high-prio" data-add-back-btn="true">
-
-            <div data-role="header">
-                <h1>High priority</h1>
-                <a href="#panel_global_menu" data-role="button" class="ui-btn-right button_menu_main" data-icon="gear" data-iconpos="notext">Menu</a>
-            </div><!-- /header -->
-
-            <!-- List to include appropriate Activities Titles by JS -->
-            <div data-role="content" class='content'>
-                <ul data-role="listview" data-theme="a" data-inset="true" id="page_activities_high-prio_list"></ul>
-            </div><!-- /content -->
-
-            <div data-role="footer">
-                <a href="#page_activities_low-prio" data-role="button" class="ui-btn-left button_activities_low-prio" data-icon="arrow-l" data-iconpos="left">Low prio</a>
-                <p>.</p><!-- Without that footer background will not be shown at Android 4.2 -->
-                <a href="#page_activities_postponed" data-role="button" class="ui-btn-right button_activities_postponed" data-icon="arrow-r" data-iconpos="right">Postponed</a>
-            </div><!-- /footer -->
-
-        </div><!-- /page -->
-
-
-        <!-- List of postponed activities -->
-        <div data-role="page" id="page_activities_postponed" data-add-back-btn="true">
-
-            <div data-role="header">
-                <h1>Postponed</h1>
-                <a href="#panel_global_menu" data-role="button" class="ui-btn-right button_menu_main" data-icon="gear" data-iconpos="notext">Menu</a>
-            </div><!-- /header -->
-
-            <!-- List to include appropriate Activities Titles by JS -->
-            <div data-role="content" class='content'>
-                <ul data-role="listview" data-theme="a" data-inset="true" id="page_activities_postponed_list"></ul>
-            </div><!-- /content -->
-
-            <div data-role="footer">
-                <a href="#page_activities_high-prio" data-role="button" class="ui-btn-left button_activities_high-prio" data-icon="arrow-l" data-iconpos="left">High prio</a>
-                <p>.</p><!-- Without that footer background will not be shown at Android 4.2 -->
-                <a href="#page_activities_waiting" data-role="button" class="ui-btn-right button_activities_waiting" data-icon="arrow-r" data-iconpos="right">Waiting</a>
-            </div><!-- /footer -->
-
-        </div><!-- /page -->
-
-
-        <!-- List of waiting activities -->
-        <div data-role="page" id="page_activities_waiting" data-add-back-btn="true">
-
-            <div data-role="header">
-                <h1>Waiting</h1>
-                <a href="#panel_global_menu" data-role="button" class="ui-btn-right button_menu_main" data-icon="gear" data-iconpos="notext">Menu</a>
-            </div><!-- /header -->
-
-            <!-- List to include appropriate Activities Titles by JS -->
-            <div data-role="content" class='content'>
-                <ul data-role="listview" data-theme="a" data-inset="true" id="page_activities_waiting_list"></ul>
-            </div><!-- /content -->
-
-            <div data-role="footer">
-                <a href="#page_activities_postponed" data-role="button" class="ui-btn-left button_activities_postponed" data-icon="arrow-l" data-iconpos="left">Postponed</a>
-                <p>.</p><!-- Without that footer background will not be shown at Android 4.2 -->
-                <a href="#page_activities_completed" data-role="button" class="ui-btn-right button_activities_completed" data-icon="arrow-r" data-iconpos="right">Completed</a>
-            </div><!-- /footer -->
-
-        </div><!-- /page -->
-
-
-        <!-- List of completed activities  -->
-        <div data-role="page" id="page_activities_completed" data-add-back-btn="true">
-
-            <div data-role="header">
-                <h1>Completed</h1>
-                <a href="#panel_global_menu" data-role="button" class="ui-btn-right button_menu_main" data-icon="gear" data-iconpos="notext">Menu</a>
-            </div><!-- /header -->
-
-            <!-- List to include appropriate Activities Titles by JS -->
-            <div data-role="content" class='content'>
-                <ul data-role="listview" data-theme="a" data-inset="true" id="page_activities_completed_list"></ul>
-            </div><!-- /content -->
-
-            <div data-role="footer">
-                <a href="#page_activities_waiting" data-role="button" class="ui-btn-left button_activities_waiting" data-icon="arrow-l" data-iconpos="left">Waiting</a>
                 <p>.</p><!-- Without that footer background will not be shown at Android 4.2 -->
                 <a href="#page_activities_main" data-role="button" class="ui-btn-right button_activities_main" data-icon="arrow-r" data-iconpos="right">Today</a>
             </div><!-- /footer -->
