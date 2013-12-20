@@ -44,7 +44,7 @@
             <p><a href="#page_dashboard" data-role="button" class="button_dashboard">Frontpage</a></p>
             <p><a href="#page_activities_main" data-role="button" class="button_activities_main">Today activities</a></p>
             <p><a href="#page_activities_tomorrow" data-role="button" class="button_activities_tomorrow">Tomorrow activities</a></p>
-            <p><a href="#page_activities_past" data-role="button" class="button_activities_past">Outdated activities</a></p>
+            <p><a href="#page_activities_yesterday" data-role="button" class="button_activities_yesterday">Yesterday activities</a></p>
             <p><a href="#" data-role="button" class="button_sync_from_backend">Sync from server</a></p>
             <p><a href="#" data-role="button" class="button_timebox_start">Timebox</a></p>
         </div><!-- /panel -->
@@ -203,18 +203,13 @@
                 <p></p>
                 <p><a href="#page_activities_tomorrow" data-role="button" class="button_activities_tomorrow">Tomorrow</a></p>
                 <p><a href="#page_activities_future" data-role="button" class="button_activities_future">Future</a></p>
-                <p><a href="#page_activities_past" data-role="button" class="button_activities_past">Outdated</a></p>
-                <p><a href="#page_activities_low-prio" data-role="button" class="button_activities_low-prio">Low priority</a></p>
-                <p><a href="#page_activities_high-prio" data-role="button" class="button_activities_high-prio">High priority</a></p>
-                <p><a href="#page_activities_postponed" data-role="button" class="button_activities_postponed">Postponed</a></p>
-                <p><a href="#page_activities_waiting" data-role="button" class="button_activities_waiting">Waiting</a></p>
-                <p><a href="#page_activities_completed" data-role="button" class="button_activities_completed">Completed</a></p>
-                <!-- <p><a href="#page_activities_waiting" data-role="button" data-theme="a" id="button_activities_waiting">Waiting</a></p> -->
+                <p><a href="#page_activities_past" data-role="button" class="button_activities_past">Past</a></p>
+                <p><a href="#page_activities_yesterday" data-role="button" class="button_activities_yesterday">Yesterday</a></p>
             </div><!-- /content -->
 
             <!-- We add buttons to footer to ease access to 'neighboring' lists of nodes -->
             <div data-role="footer">
-                <a href="#page_activities_completed" data-role="button" class="ui-btn-left button_activities_completed" data-icon="arrow-l" data-iconpos="left">Completed</a>
+                <a href="#page_activities_yesterday" data-role="button" class="ui-btn-left button_activities_yesterday" data-icon="arrow-l" data-iconpos="left">Yesterday</a>
                 <p>.</p> <!-- Without that footer background will not be shown at Android 4.2 -->
                 <a href="#page_activities_tomorrow" data-role="button" class="ui-btn-right button_activities_tomorrow" data-icon="arrow-r" data-iconpos="right">Tomorrow</a>
             </div> <!-- /footer -->
