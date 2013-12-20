@@ -211,6 +211,7 @@ function show_activities_list(UlHtmlElementId, plannedStartTimestamp, plannedEnd
     //Not a replacement for listview("destroy")
     $(UlHtmlElementId).html("");
     
+    alert('b');
     //Function to filter out appropriate activities from TaffyDB by Planned end date and Status
     activitiesTDB(function(){if(this.dateTimePlannedEndTimestamp >= plannedStartTimestamp && this.dateTimePlannedEndTimestamp <= plannedEndTimestamp && this.statusRAW != "completed" && this.statusRAW != "postponed" && this.statusRAW != "canceled"){return true;}}).each(function(record,recordnumber) {
     alert('a');
