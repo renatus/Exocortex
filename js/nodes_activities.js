@@ -49,6 +49,7 @@ function show_activities_past(){
     var plannedStartTimestamp = moment('2001-01-01 00:00:00').startOf('day').format('X');
     //Get end of past except yesterday
     var plannedEndTimestamp = moment().add('days', -2).endOf('day').format('X');
+    alert(plannedStartTimestamp + " " + plannedEndTimestamp);
     
     //Show activities with plannned end date between beginning and ending of past except yesterday
     show_activities_list("#page_activities_past_list", plannedStartTimestamp, plannedEndTimestamp);
