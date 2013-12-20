@@ -35,7 +35,7 @@ function show_activities_future(){
     //Get start of future except tomorrow
     var plannedStartTimestamp = moment().add('days', +2).startOf('day').format('X');
     //Get "end" of future except tomorrow - it has no "end", we can choose any day not too near to current
-    var plannedEndTimestamp = moment('2025-12-31 23:59:59').endOf('day').format('X');
+    var plannedEndTimestamp = moment().add('years', +10).endOf('day').format('X');
     
     //Show activities with plannned end date between beginning and ending of future except tomorrow
     show_activities_list("#page_activities_future_list", plannedStartTimestamp, plannedEndTimestamp);
@@ -46,10 +46,9 @@ function show_activities_past(){
     //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
     //So for now we'll use such dates as "2013-12-07 00:00:00", and in future - such as "1997-07-16T19:20+01:00"
     //Get "start" of past except yesterday - it has no "start", we can choose any day not too near to current
-    //var plannedStartTimestamp = moment('2001-01-01 00:00:00').startOf('day').format('X');
-    var plannedStartTimestamp = moment().add('days', -60).startOf('day').format('X');
+    var plannedStartTimestamp = moment().add('years', -10).startOf('day').format('X');
     //Get end of past except yesterday
-    var plannedEndTimestamp = moment().add('days', -1).endOf('day').format('X');
+    var plannedEndTimestamp = moment().add('days', -2).endOf('day').format('X');
     alert(plannedStartTimestamp + " " + plannedEndTimestamp);
     
     //Show activities with plannned end date between beginning and ending of past except yesterday
@@ -212,10 +211,8 @@ function show_activities_list(UlHtmlElementId, plannedStartTimestamp, plannedEnd
     //Not a replacement for listview("destroy")
     $(UlHtmlElementId).html("");
     
-    alert('b');
     //Function to filter out appropriate activities from TaffyDB by Planned end date and Status
     activitiesTDB(function(){if(this.dateTimePlannedEndTimestamp >= plannedStartTimestamp && this.dateTimePlannedEndTimestamp <= plannedEndTimestamp && this.statusRAW != "completed" && this.statusRAW != "postponed" && this.statusRAW != "canceled"){return true;}}).each(function(record,recordnumber) {
-    alert('a');
         
         //Choose activity entry icon based on it's strategic importance
         //TaffyDB stores numbers as strings, you have to use == rather than ===

@@ -135,6 +135,7 @@ var kelly = testdb({id:2}).first();
     //alert(new Date().getTime());
     //alert(moment("1387481862", "X").format('YYYY-MM-DD'));
     
+    alert(moment('2001-01-01 00:00:00').startOf('day').format('X'));
     
     
     //var testNum = 1.3457888904
