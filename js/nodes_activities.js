@@ -193,7 +193,7 @@ function get_activities_from_backend(URLpart){
                     window.navigator.vibrate(2000);
                 }
                 alert("App database updated from backend!");
-                alert($(this).attr('id'));
+                alert($.mobile.activePage.attr("id"));
             }
         });
     }
