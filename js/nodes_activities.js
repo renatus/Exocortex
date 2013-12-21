@@ -194,6 +194,7 @@ function get_activities_from_backend(URLpart){
                 }
                 alert("App database updated from backend!");
                 alert($.mobile.activePage.attr("id"));
+                alert($.mobile.activePage.attr("data-role"));
             }
         });
     }
