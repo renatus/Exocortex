@@ -12,7 +12,7 @@ function onLoad() {
 
     //We should initialize jQuery Mobile panel, if it is located outside of page, or it will be treated as page
     //If you'll use $('#panel_global_menu').panel(); without .enhanceWithin(), panel conten will not be enhanced by jQuery Mobile
-    //You can call jQuery Mobile functions for each widget individually
+    //You can call jQuery Mobile functions for each widget individually, if that widget is located outsude of regular subpage
     $('#panel_global_menu').panel().enhanceWithin();
     
     
