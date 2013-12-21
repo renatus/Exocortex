@@ -262,7 +262,7 @@ function reload_activities_list() {
     //alert($.mobile.activePage.attr("id"));
     //alert($.mobile.activePage.attr("data-role"));
     alert($(':mobile-pagecontainer').pagecontainer("getActivePage")[0].id);
-    alert($(':mobile-pagecontainer').pagecontainer("getActivePage").attr("id"));
+    alert($(':mobile-pagecontainer').pagecontainer("getActivePage").attr("data-role"));
     
     curPageID = $.mobile.activePage.attr("id");
     
