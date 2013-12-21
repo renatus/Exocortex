@@ -193,8 +193,8 @@ function get_activities_from_backend(URLpart){
                     window.navigator.vibrate(2000);
                 }
                 alert("App database updated from backend!");
-                alert($.mobile.activePage.attr("id"));
-                alert($.mobile.activePage.attr("data-role"));
+                //Reload list of Activities titles if we're on Activities list page for specified period of time (i.e. for today, or for future)
+                reload_activities_list();
             }
         });
     }
@@ -254,6 +254,28 @@ function show_activities_list(UlHtmlElementId, plannedStartTimestamp, plannedEnd
     //Refreshing list also will reveal new items, but old will stay there as well
     $(UlHtmlElementId).listview("destroy").listview(); 
 };
+
+
+
+//Reload list of Activities titles if we're on Activities list page for specified period of time (i.e. for today, or for future)
+function reload_activities_list() {
+    //alert($.mobile.activePage.attr("id"));
+    //alert($.mobile.activePage.attr("data-role"));
+    
+    curPageID = $.mobile.activePage.attr("id");
+    
+    if(curPageID == "page_activities_main"){
+        show_activities_today();
+    } else if(curPageID == "page_activities_tomorrow"){
+        show_activities_tomorrow();
+    } else if(curPageID == "page_activities_future"){
+        show_activities_future();
+    } else if(curPageID == "page_activities_past"){
+        show_activities_past();
+    } else if(curPageID == "page_activities_yesterday"){
+        show_activities_yesterday();
+    }
+}
 
 
 
