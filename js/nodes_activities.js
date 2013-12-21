@@ -261,7 +261,7 @@ function show_activities_list(UlHtmlElementId, plannedStartTimestamp, plannedEnd
 function reload_activities_list() {
     //alert($.mobile.activePage.attr("id"));
     //alert($.mobile.activePage.attr("data-role"));
-    alert($().pagecontainer("getActivePage").attr("id"));
+    alert($().pagecontainer("getActivePage")[0].id);
     
     curPageID = $.mobile.activePage.attr("id");
     
