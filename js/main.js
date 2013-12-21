@@ -11,7 +11,8 @@ function onLoad() {
 
 
     //We should initialize jQuery Mobile panel, if it is located outside of page, or it will be treated as page
-    $('#panel_global_menu').panel();
+    //$('#panel_global_menu').panel();
+    $('#panel_global_menu').panel().enhanceWithin();
     
     
     
