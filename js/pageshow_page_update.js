@@ -27,6 +27,6 @@
 
 
 
-$(":mobile-pagecontainer").on("pagecontainershow", function(event, ui) {
-  alert($(":mobile-pagecontainer").pagecontainer("getActivePage").attr("id"));
+$("div").on("pagecontainershow", function(event, ui) {
+    alert($(":mobile-pagecontainer").pagecontainer("getActivePage").attr("id"));
 });
