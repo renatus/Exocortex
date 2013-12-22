@@ -9,6 +9,7 @@ $("div").on("pageshow", function(event, ui){
         var funcName = "fill_" + curPageID;
         window[funcName]();
     }
+    alert('a');
     
     
     //alert($(this).attr('id'));
