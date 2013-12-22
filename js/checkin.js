@@ -200,9 +200,7 @@ function checkin_sync_to_backend(entryID) {
 
 //If activity was updated at backend, we should delete lastUpdatedLocally value at app's DB
 //We have to declare function that way to make it possible to call it by name from variable
-//We can use funcName variable everywhere, as we set appropriate value just before each use
-var funcName = "checkin_sync_to_backend_success";
-window[funcName]=function(entryID, msgOnSuccess) {
+window["checkin_sync_to_backend_success"]=function(entryID, msgOnSuccess) {
     checkinsTDB.merge({"id":entryID, "lastUpdatedLocally":""}, "id");
 }
 

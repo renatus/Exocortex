@@ -185,9 +185,7 @@ function timebox_sync_to_backend(entryID) {
 
 //If DB entry was updated at backend, we should delete lastUpdatedLocally value at app's DB
 //We have to declare function that way to make it possible to call it by name from variable
-//We can use funcName variable everywhere, as we set appropriate value just before each use
-var funcName = "timebox_sync_to_backend_success";
-window[funcName]=function(entryID, msgOnSuccess) {
+window["timebox_sync_to_backend_success"]=function(entryID, msgOnSuccess) {
     timeboxesTDB.merge({"id":entryID, "lastUpdatedLocally":""}, "id");
 }
 

@@ -648,8 +648,7 @@ function activity_sync_to_backend(entryID) {
 
 //If activity was updated at backend, we should delete lastUpdatedLocally value at app's DB
 //We have to declare function that way to make it possible to call it by name from variable
-var funcName = "activity_sync_to_backend_success";
-window[funcName]=function(entryID, msgOnSuccess) {
+window["activity_sync_to_backend_success"]=function(entryID, msgOnSuccess) {
     activitiesTDB.merge({"id":entryID, "lastUpdatedLocally":""}, "id");
 	alert(msgOnSuccess);
 }
