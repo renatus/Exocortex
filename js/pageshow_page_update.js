@@ -28,5 +28,6 @@
 
 
 $("div").on("pagecontainershow", function(event, ui) {
-    alert($(":mobile-pagecontainer").pagecontainer("getActivePage").attr("id"));
+    //alert($(":mobile-pagecontainer").pagecontainer("getActivePage").attr("id"));
+    alert('a');
 });
