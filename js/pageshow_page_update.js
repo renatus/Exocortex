@@ -3,7 +3,7 @@
 //Hence this script is placed in special file, that is imported at bottommost unused subpage
 
 //$("div").on("pageshow", function(event, ui){
-$("div").on("pagecontainershow", function(event, ui) {
+$(':mobile-pagecontainer').on("pagecontainershow", function(event, ui) {
     var webPageType = $(':mobile-pagecontainer').pagecontainer("getActivePage").attr("data-pagetype");
     if(webPageType == "page_activities") {
         var curPageID = $(':mobile-pagecontainer').pagecontainer("getActivePage").attr("id");
