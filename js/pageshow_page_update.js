@@ -3,9 +3,12 @@
 //Hence this script is placed in special file, that is imported at bottommost unused subpage
 
 $("div").on("pageshow", function(event, ui){
-    var curPageID = $(':mobile-pagecontainer').pagecontainer("getActivePage").attr("id");
-    var funcName = "fill_" + curPageID;
-    window[funcName]();
+    var webPageType = $(':mobile-pagecontainer').pagecontainer("getActivePage").attr("data-pagetype");
+    if(webPageType == "page_activities") {
+        var curPageID = $(':mobile-pagecontainer').pagecontainer("getActivePage").attr("id");
+        var funcName = "fill_" + curPageID;
+        window[funcName]();
+    }
     
     
     //alert($(this).attr('id'));

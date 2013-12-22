@@ -75,10 +75,13 @@ window["fill_page_activities_yesterday"]=function() {
 
 
 //Reload list of Activities titles if we're on Activities list page for specified period of time (i.e. for today, or for future)
-function reload_activities_list() {    
-    var curPageID = $(':mobile-pagecontainer').pagecontainer("getActivePage").attr("id");
-    var funcName = "fill_" + curPageID;
-    window[funcName]();
+function reload_activities_list() {
+    var webPageType = $(':mobile-pagecontainer').pagecontainer("getActivePage").attr("data-pagetype");
+    if(webPageType == "page_activities") {
+        var curPageID = $(':mobile-pagecontainer').pagecontainer("getActivePage").attr("id");
+        var funcName = "fill_" + curPageID;
+        window[funcName]();
+    }
     
     //if(curPageID == "page_activities_today"){
     //    show_activities_today();
