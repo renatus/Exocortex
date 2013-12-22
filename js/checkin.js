@@ -51,7 +51,7 @@ function checkinAdd(position) {
 	curDateTime = new Date(position.timestamp);
 	curTimestamp = position.timestamp;
     var curDate = moment(curDateTime).format('YYYY-MM-DD');
-    var curTime = moment(curDateTime).format('HH:mm');
+    var curTime = moment(curDateTime).format('HH:mm:ss');
 	//Determine the time zone of the browser client, jstz.min.js required
     var timeZone = jstz.determine();
     timeZoneName = timeZone.name();
