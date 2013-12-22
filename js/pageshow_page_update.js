@@ -2,35 +2,12 @@
 //And those subpages, that are placed higher in index.html code, than subpage-scriptplugger
 //Hence this script is placed in special file, that is imported at bottommost unused subpage
 
-//$("div").on("pageshow", function(event, ui){
-$(':mobile-pagecontainer').on("pagecontainershow", function(event, ui) {
-    var webPageType = $(':mobile-pagecontainer').pagecontainer("getActivePage").attr("data-pagetype");
-    if(webPageType == "page_activities") {
-        var curPageID = $(':mobile-pagecontainer').pagecontainer("getActivePage").attr("id");
-        var funcName = "fill_" + curPageID;
-        window[funcName]();
-    }
-    alert('a');
-    
-    
-    //alert($(this).attr('id'));
-    //if($(this).attr('id') == "page_activities_today"){
-    //    show_activities_today();
-    //} else if($(this).attr('id') == "page_activities_tomorrow"){
-    //    show_activities_tomorrow();
-    //} else if($(this).attr('id') == "page_activities_future"){
-    //    show_activities_future();
-    //} else if($(this).attr('id') == "page_activities_past"){
-    //    show_activities_past();
-    //} else if($(this).attr('id') == "page_activities_yesterday"){
-    //    show_activities_yesterday();
-    //}
+
+
+//If some JQM page was shown
+//"pageshow" is deprecated since JQM 1.4, should be replaced by "pagecontainershow", but latter don't work for now
+$("div").on("pageshow", function(event, ui){
+    //Reload list of Activities titles if we're on Activities list page for specified period of time (i.e. for today, or for future)
+    alert('s');
+    //reload_activities_list();
 });
-
-
-
-//$("div").on("pageshow", function(event, ui) {
-//$("div").on("pagecontainershow", function(event, ui) {
-    //alert($(":mobile-pagecontainer").pagecontainer("getActivePage").attr("id"));
-//    alert('a');
-//});
