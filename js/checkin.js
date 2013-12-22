@@ -175,14 +175,16 @@ function checkin_sync_to_backend(entryID) {
     //Attempt to save more digits, than allowed by Drupal Field's Scale setting will give us error
     //We can put more digits, than specified in Scale setting, though, so we've to limit number of all digits in decimal number
     //.toPrecision(13) will round number to 13 digits, it will return string rather than number
+    //ECMA-262 requires .toPrecision() precision of up to 21 digits, and Chrome 32 can get arguments between 1 and 21 (Firefox 26 - between 1 and 100)
+    //Switch to .toPrecision(32) in the future, as backend can store up to 32 digits for latLonAccuracy, altitude, altitudeAccuracy and speed
     var dataToSend = 'node[type]=check_in&node[language]=en&node[title]=' + encodeURIComponent("Check-in") +
                      '&node[field_place_latlon][und][0][lat]=' + curEntry.latitude +
                      '&node[field_place_latlon][und][0][lon]=' + curEntry.longitude +
-                     '&node[field_latlon_accuracy][und][0][value]=' + (curEntry.latLonAccuracy).toPrecision(32) +
-                     '&node[field_altitude][und][0][value]=' + (curEntry.altitude).toPrecision(32) +
-                     '&node[field_altitude_accuracy][und][0][value]=' + (curEntry.altitudeAccuracy).toPrecision(32) +
+                     '&node[field_latlon_accuracy][und][0][value]=' + (curEntry.latLonAccuracy).toPrecision(21) +
+                     '&node[field_altitude][und][0][value]=' + (curEntry.altitude).toPrecision(21) +
+                     '&node[field_altitude_accuracy][und][0][value]=' + (curEntry.altitudeAccuracy).toPrecision(21) +
                      '&node[field_heading][und][0][value]=' + (curEntry.heading).toPrecision(13) +
-                     '&node[field_speed][und][0][value]=' + (curEntry.speed).toPrecision(32) +        
+                     '&node[field_speed][und][0][value]=' + (curEntry.speed).toPrecision(21) +        
                      '&node[field_datetime_start][und][0][value][date]=' + curEntry.date +
                      '&node[field_datetime_start][und][0][value][time]=' + curEntry.time +
                      '&node[field_datetime_start][und][0][timezone][timezone]=' + curEntry.dateTimeTZ;
