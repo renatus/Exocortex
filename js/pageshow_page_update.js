@@ -4,7 +4,7 @@
 
 $("div").on("pageshow", function(event, ui){
     //alert($(this).attr('id'));
-    if($(this).attr('id') == "page_activities_main"){
+    if($(this).attr('id') == "page_activities_today"){
         show_activities_today();
     } else if($(this).attr('id') == "page_activities_tomorrow"){
         show_activities_tomorrow();

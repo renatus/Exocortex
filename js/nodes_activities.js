@@ -261,7 +261,7 @@ function show_activities_list(UlHtmlElementId, plannedStartTimestamp, plannedEnd
 function reload_activities_list() {    
     curPageID = $(':mobile-pagecontainer').pagecontainer("getActivePage").attr("id");
     
-    if(curPageID == "page_activities_main"){
+    if(curPageID == "page_activities_today"){
         show_activities_today();
     } else if(curPageID == "page_activities_tomorrow"){
         show_activities_tomorrow();

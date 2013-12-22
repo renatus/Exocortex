@@ -41,7 +41,7 @@
             <!-- <script src="js/timebox.js"></script> -->
             
             <p><a href="#page_dashboard" data-role="button" class="button_dashboard">Frontpage</a></p>
-            <p><a href="#page_activities_main" data-role="button" class="button_activities_main">Today activities</a></p>
+            <p><a href="#page_activities_today" data-role="button" class="button_activities_main">Today activities</a></p>
             <p><a href="#page_activities_tomorrow" data-role="button" class="button_activities_tomorrow">Tomorrow activities</a></p>
             <p><a href="#page_activities_yesterday" data-role="button" class="button_activities_yesterday">Yesterday activities</a></p>
             <p><a href="#" data-role="button" class="button_sync_from_backend">Sync from server</a></p>
@@ -87,7 +87,7 @@
                     <!-- Add activity button -->
                     <a href="#" data-role="button" data-theme="a" class="button_add_activity exo_square_button">Add activity</a>
                     <!-- Button to show list of activities -->
-                    <a href="#page_activities_main" data-role="button" data-theme="b" class="button_activities_main exo_square_button">Activities</a>
+                    <a href="#page_activities_today" data-role="button" data-theme="b" class="button_activities_main exo_square_button">Activities</a>
                 </div>
 
             </div><!-- /content -->
@@ -182,13 +182,13 @@
 
     <!-- Group of pages - activities lists + -->
         <!-- Main activities page - list of activities for today, buttons to access other types of activities -->
-        <div data-role="page" id="page_activities_main" data-add-back-btn="true">
+        <div data-role="page" id="page_activities_today" data-add-back-btn="true">
 
             <!-- JavaScript we need to work with Activities nodes at IS -->
             <script type="text/javascript" charset="utf-8" src="js/nodes_activities.js"></script>
 
             <div data-role="header">
-                <a href="#page_activities_main_panel" data-role="button" class="ui-btn-left button_menu_main" data-icon="star" data-iconpos="notext">Local menu</a>
+                <a href="#page_activities_today_panel" data-role="button" class="ui-btn-left button_menu_main" data-icon="star" data-iconpos="notext">Local menu</a>
                 <h1>Today</h1>
                 <a href="#panel_global_menu" data-role="button" class="ui-btn-right button_menu_main" data-icon="gear" data-iconpos="notext">Menu</a>
             </div><!-- /header -->
@@ -214,9 +214,9 @@
             </div> <!-- /footer -->
 
             <!--jQuery Mobile panel - Local menu -->
-            <div data-role="panel" id="page_activities_main_panel" data-position="left" data-display="overlay">
+            <div data-role="panel" id="page_activities_today_panel" data-position="left" data-display="overlay">
                 <p><a href="#page_dashboard" data-role="button" class="button_dashboard">Frontpage</a></p>
-                <p><a href="#page_activities_main" data-role="button" class="button_activities_main">Today activities</a></p>
+                <p><a href="#page_activities_today" data-role="button" class="button_activities_main">Today activities</a></p>
                 <p><a href="#page_activities_past" data-role="button" class="button_activities_past">Outdated activities</a></p>
             </div><!-- /panel -->
             
@@ -237,7 +237,7 @@
             </div><!-- /content -->
 
             <div data-role="footer">
-                <a href="#page_activities_main" data-role="button" class="ui-btn-left button_activities_main" data-icon="arrow-l" data-iconpos="left">Today</a>
+                <a href="#page_activities_today" data-role="button" class="ui-btn-left button_activities_main" data-icon="arrow-l" data-iconpos="left">Today</a>
                 <p>.</p><!-- Without that footer background will not be shown at Android 4.2 -->
                 <a href="#page_activities_future" data-role="button" class="ui-btn-right button_activities_future" data-icon="arrow-r" data-iconpos="right">Future</a>
             </div><!-- /footer -->
@@ -304,7 +304,7 @@
             <div data-role="footer">
                 <a href="#page_activities_past" data-role="button" class="ui-btn-left button_activities_past" data-icon="arrow-l" data-iconpos="left">Past</a>
                 <p>.</p><!-- Without that footer background will not be shown at Android 4.2 -->
-                <a href="#page_activities_main" data-role="button" class="ui-btn-right button_activities_main" data-icon="arrow-r" data-iconpos="right">Today</a>
+                <a href="#page_activities_today" data-role="button" class="ui-btn-right button_activities_main" data-icon="arrow-r" data-iconpos="right">Today</a>
             </div><!-- /footer -->
 
         </div><!-- /page -->
