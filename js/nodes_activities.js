@@ -259,7 +259,7 @@ function show_activities_list(UlHtmlElementId, plannedStartTimestamp, plannedEnd
 
 //Reload list of Activities titles if we're on Activities list page for specified period of time (i.e. for today, or for future)
 function reload_activities_list() {    
-    curPageID = $(':mobile-pagecontainer').pagecontainer("getActivePage").attr("data-role");
+    curPageID = $(':mobile-pagecontainer').pagecontainer("getActivePage").attr("id");
     
     if(curPageID == "page_activities_main"){
         show_activities_today();
