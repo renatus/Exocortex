@@ -135,11 +135,35 @@ var kelly = testdb({id:2}).first();
     //alert(new Date().getTime());
     //alert(moment("1387481862", "X").format('YYYY-MM-DD'));
     
-    alert(moment('2001-01-01 00:00:00').startOf('day').format('X'));
+    //alert(moment('2001-01-01 00:00:00').startOf('day').format('X'));
     
     
     //var testNum = 1.3457888904
     //alert(testNum.toFixed(5));
+    
+    
+    
+    
+    //We have to declare function that way to make it possible to call it by name from variable
+var funcName = "tstwinfunc2";
+window[funcName]=function() {
+	alert("tstwinfunc2");
+}
+
+window["tstwinfunc"]=function() {
+    alert("tstwinfunc");
+}
+    
+var alterm = "tstwinfunc";
+window[alterm]();
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

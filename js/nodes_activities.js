@@ -69,6 +69,25 @@ function show_activities_yesterday(){
 
 
 
+//Reload list of Activities titles if we're on Activities list page for specified period of time (i.e. for today, or for future)
+function reload_activities_list() {    
+    curPageID = $(':mobile-pagecontainer').pagecontainer("getActivePage").attr("id");
+    
+    if(curPageID == "page_activities_today"){
+        show_activities_today();
+    } else if(curPageID == "page_activities_tomorrow"){
+        show_activities_tomorrow();
+    } else if(curPageID == "page_activities_future"){
+        show_activities_future();
+    } else if(curPageID == "page_activities_past"){
+        show_activities_past();
+    } else if(curPageID == "page_activities_yesterday"){
+        show_activities_yesterday();
+    }
+}
+
+
+
 //We should get all activities only in case there were no updates for a long time
 //We have a page with all activities, created or updated today and yesterday
 //So in case last update wasn't earlier than yestersay, we should use this page
@@ -254,25 +273,6 @@ function show_activities_list(UlHtmlElementId, plannedStartTimestamp, plannedEnd
     //Refreshing list also will reveal new items, but old will stay there as well
     $(UlHtmlElementId).listview("destroy").listview(); 
 };
-
-
-
-//Reload list of Activities titles if we're on Activities list page for specified period of time (i.e. for today, or for future)
-function reload_activities_list() {    
-    curPageID = $(':mobile-pagecontainer').pagecontainer("getActivePage").attr("id");
-    
-    if(curPageID == "page_activities_today"){
-        show_activities_today();
-    } else if(curPageID == "page_activities_tomorrow"){
-        show_activities_tomorrow();
-    } else if(curPageID == "page_activities_future"){
-        show_activities_future();
-    } else if(curPageID == "page_activities_past"){
-        show_activities_past();
-    } else if(curPageID == "page_activities_yesterday"){
-        show_activities_yesterday();
-    }
-}
 
 
 
