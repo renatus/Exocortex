@@ -3,7 +3,8 @@
 //These buttons loads Activities lists (scheduled for today, tomorrow, future etc) 
 
 //Show activities planned for today
-function show_activities_today(){
+//We have to declare function that way to make it possible to call it by name from variable
+window["fill_page_activities_today"]=function() {
     //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
     //So for now we'll use such dates as "2013-12-07 00:00:00", and in future - such as "1997-07-16T19:20+01:00"
     //Get start of current day
@@ -16,7 +17,8 @@ function show_activities_today(){
 }
 
 //Show activities planned for tomorrow
-function show_activities_tomorrow(){
+//We have to declare function that way to make it possible to call it by name from variable
+window["fill_page_activities_tomorrow"]=function() {
     //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
     //So for now we'll use such dates as "2013-12-07 00:00:00", and in future - such as "1997-07-16T19:20+01:00"
     //Get start of tomorrow
@@ -29,7 +31,8 @@ function show_activities_tomorrow(){
 }
 
 //Show activities planned for future except tomorrow
-function show_activities_future(){
+//We have to declare function that way to make it possible to call it by name from variable
+window["fill_page_activities_future"]=function() {
     //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
     //So for now we'll use such dates as "2013-12-07 00:00:00", and in future - such as "1997-07-16T19:20+01:00"
     //Get start of future except tomorrow
@@ -42,7 +45,8 @@ function show_activities_future(){
 }
              
 //Show activities planned for past except yesterday
-function show_activities_past(){
+//We have to declare function that way to make it possible to call it by name from variable
+window["fill_page_activities_past"]=function() {
     //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
     //So for now we'll use such dates as "2013-12-07 00:00:00", and in future - such as "1997-07-16T19:20+01:00"
     //Get "start" of past except yesterday - it has no "start", we can choose any day not too near to current
@@ -55,7 +59,8 @@ function show_activities_past(){
 }
 
 //Show activities planned for yesterday
-function show_activities_yesterday(){
+//We have to declare function that way to make it possible to call it by name from variable
+window["fill_page_activities_yesterday"]=function() {
     //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
     //So for now we'll use such dates as "2013-12-07 00:00:00", and in future - such as "1997-07-16T19:20+01:00"
     //Get start of yesterday
@@ -71,19 +76,21 @@ function show_activities_yesterday(){
 
 //Reload list of Activities titles if we're on Activities list page for specified period of time (i.e. for today, or for future)
 function reload_activities_list() {    
-    curPageID = $(':mobile-pagecontainer').pagecontainer("getActivePage").attr("id");
+    var curPageID = $(':mobile-pagecontainer').pagecontainer("getActivePage").attr("id");
+    var funcName = "fill_" + curPageID;
+    window[funcName]();
     
-    if(curPageID == "page_activities_today"){
-        show_activities_today();
-    } else if(curPageID == "page_activities_tomorrow"){
-        show_activities_tomorrow();
-    } else if(curPageID == "page_activities_future"){
-        show_activities_future();
-    } else if(curPageID == "page_activities_past"){
-        show_activities_past();
-    } else if(curPageID == "page_activities_yesterday"){
-        show_activities_yesterday();
-    }
+    //if(curPageID == "page_activities_today"){
+    //    show_activities_today();
+    //} else if(curPageID == "page_activities_tomorrow"){
+    //    show_activities_tomorrow();
+    //} else if(curPageID == "page_activities_future"){
+    //    show_activities_future();
+    //} else if(curPageID == "page_activities_past"){
+    //    show_activities_past();
+    //} else if(curPageID == "page_activities_yesterday"){
+    //    show_activities_yesterday();
+    //}
 }
 
 
