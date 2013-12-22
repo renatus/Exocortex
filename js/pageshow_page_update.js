@@ -24,3 +24,9 @@ $("div").on("pageshow", function(event, ui){
     //    show_activities_yesterday();
     //}
 });
+
+
+
+$(":mobile-pagecontainer").on("pagecontainershow", function(event, ui) {
+  alert($(":mobile-pagecontainer").pagecontainer("getActivePage").attr("id"));
+});

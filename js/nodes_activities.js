@@ -77,23 +77,17 @@ window["fill_page_activities_yesterday"]=function() {
 //Reload list of Activities titles if we're on Activities list page for specified period of time (i.e. for today, or for future)
 function reload_activities_list() {
     //Get pagetype property of currently opened JQM subpage
-    var webPageType = $(':mobile-pagecontainer').pagecontainer("getActivePage").attr("data-pagetype");
+    var webPageType = $(":mobile-pagecontainer").pagecontainer("getActivePage").attr("data-pagetype");
     //If we're on one of "page_activities" pages (with the tasks lists)
     if(webPageType == "page_activities") {
         //Get ID of currently opened JQM subpage
-        var curPageID = $(':mobile-pagecontainer').pagecontainer("getActivePage").attr("id");
+        var curPageID = $(":mobile-pagecontainer").pagecontainer("getActivePage").attr("id");
         //Function name to reload currently opened JQM subpage
         var funcName = "fill_" + curPageID;
         //Reload currently opened JQM subpage
         window[funcName]();
     }
 }
-
-
-
-$(":mobile-pagecontainer").on("pagecontainershow", function(event, ui) {
-  alert($(':mobile-pagecontainer').pagecontainer("getActivePage").attr("id"));
-});
 
 
 
