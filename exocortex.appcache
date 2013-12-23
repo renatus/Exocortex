@@ -47,3 +47,12 @@ libs/moment-with-langs.min.js
 
 # JSTZ
 libs/jstz.min.js
+
+
+
+NETWORK:
+#You should list all URLs your app need access to
+#Chrome and Safari understands *, while Firefox uses http://* and https://*
+*
+http://*
+https://*
