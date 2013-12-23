@@ -177,6 +177,7 @@ function checkin_sync_to_backend(entryID) {
     //.toPrecision(13) will round number to 13 digits, it will return string rather than number
     //ECMA-262 requires .toPrecision() precision of up to 21 digits, and Chrome 32 can get arguments between 1 and 21 (Firefox 26 - between 1 and 100)
     //Switch to .toPrecision(32) in the future, as backend can store up to 32 digits for latLonAccuracy, altitude, altitudeAccuracy and speed
+    alert(curEntry.altitude);
     var dataToSend = 'node[type]=check_in&node[language]=en&node[title]=' + encodeURIComponent("Check-in") +
                      '&node[field_place_latlon][und][0][lat]=' + curEntry.latitude +
                      '&node[field_place_latlon][und][0][lon]=' + curEntry.longitude +
