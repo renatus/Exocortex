@@ -58,9 +58,16 @@ function checkinAdd(position) {
 	//.getTimezoneOffset() will return result in minutes, Drupal uses seconds
     timeZoneOffset = curDateTime.getTimezoneOffset()*60;
     
+    
     //We should not put inappropriate values, like NULL, at app DB
     //So we can't put geolocation object properties directly to DB, we should check them first
     //NULL and other non-numeric values should be replaced by an empty field
+    
+    //Attempt to save more digits, than allowed by Drupal Field's Scale setting will give us error
+    //We can put more digits, than specified in Scale setting, though, so we've to limit number of all digits in decimal number
+    //.toPrecision(13) will round number to 13 digits, it will return string rather than number
+    //ECMA-262 requires .toPrecision() precision of up to 21 digits, and Chrome 32 can get arguments between 1 and 21 (Firefox 26 - between 1 and 100)
+    //Switch to .toPrecision(32) in the future, as backend can store up to 32 digits for latLonAccuracy, altitude, altitudeAccuracy and speed
     if($.isNumeric(position.coords.latitude)){
         var coordsLatitude = position.coords.latitude;
     } else {
@@ -74,31 +81,31 @@ function checkinAdd(position) {
     }
     
     if($.isNumeric(position.coords.accuracy)){
-        var coordsAccuracy = position.coords.accuracy;
+        var coordsAccuracy = (position.coords.accuracy).toPrecision(21);
     } else {
         var coordsAccuracy = "";
     }
         
     if($.isNumeric(position.coords.altitude)){
-        var coordsAltitude = position.coords.altitude;
+        var coordsAltitude = (position.coords.altitude).toPrecision(21);
     } else {
         var coordsAltitude = "";
     }
     
     if($.isNumeric(position.coords.altitudeAccuracy)){
-        var coordsAltitudeAccuracy = position.coords.altitudeAccuracy;
+        var coordsAltitudeAccuracy = (position.coords.altitudeAccuracy).toPrecision(21);
     } else {
         var coordsAltitudeAccuracy = "";
     }
     
     if($.isNumeric(position.coords.heading)){
-        var coordsHeading = position.coords.heading;
+        var coordsHeading = (position.coords.heading).toPrecision(13);
     } else {
         var coordsHeading = "";
     }
     
     if($.isNumeric(position.coords.speed)){
-        var coordsSpeed = position.coords.speed;
+        var coordsSpeed = (position.coords.speed).toPrecision(21);
     } else {
         var coordsSpeed = "";
     }
@@ -174,18 +181,15 @@ function checkin_sync_to_backend(entryID) {
     //So we can not to check whether value is here
     //Attempt to save more digits, than allowed by Drupal Field's Scale setting will give us error
     //We can put more digits, than specified in Scale setting, though, so we've to limit number of all digits in decimal number
-    //.toPrecision(13) will round number to 13 digits, it will return string rather than number
-    //ECMA-262 requires .toPrecision() precision of up to 21 digits, and Chrome 32 can get arguments between 1 and 21 (Firefox 26 - between 1 and 100)
-    //Switch to .toPrecision(32) in the future, as backend can store up to 32 digits for latLonAccuracy, altitude, altitudeAccuracy and speed
-    //alert(curEntry.altitude);
+    //We'll get error trying to limit empty value, so we've limited all numbers while adding them to app DB (it improved consistency as well)
     var dataToSend = 'node[type]=check_in&node[language]=en&node[title]=' + encodeURIComponent("Check-in") +
                      '&node[field_place_latlon][und][0][lat]=' + curEntry.latitude +
                      '&node[field_place_latlon][und][0][lon]=' + curEntry.longitude +
-                     '&node[field_latlon_accuracy][und][0][value]=' + (curEntry.latLonAccuracy).toPrecision(21) +
-                     //'&node[field_altitude][und][0][value]=' + (curEntry.altitude).toPrecision(21) +
-                     //'&node[field_altitude_accuracy][und][0][value]=' + (curEntry.altitudeAccuracy).toPrecision(21) +
-                     //'&node[field_heading][und][0][value]=' + (curEntry.heading).toPrecision(13) +
-                     //'&node[field_speed][und][0][value]=' + (curEntry.speed).toPrecision(21) +        
+                     '&node[field_latlon_accuracy][und][0][value]=' + curEntry.latLonAccuracy +
+                     '&node[field_altitude][und][0][value]=' + curEntry.altitude +
+                     '&node[field_altitude_accuracy][und][0][value]=' + curEntry.altitudeAccuracy +
+                     '&node[field_heading][und][0][value]=' + curEntry.heading +
+                     '&node[field_speed][und][0][value]=' + curEntry.speed +        
                      '&node[field_datetime_start][und][0][value][date]=' + curEntry.date +
                      '&node[field_datetime_start][und][0][value][time]=' + curEntry.time +
                      '&node[field_datetime_start][und][0][timezone][timezone]=' + curEntry.dateTimeTZ;
