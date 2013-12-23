@@ -183,7 +183,7 @@ function checkin_sync_to_backend(entryID) {
                      '&node[field_place_latlon][und][0][lon]=' + curEntry.longitude +
                      '&node[field_latlon_accuracy][und][0][value]=' + (curEntry.latLonAccuracy).toPrecision(21) +
                      //'&node[field_altitude][und][0][value]=' + (curEntry.altitude).toPrecision(21) +
-                     '&node[field_altitude_accuracy][und][0][value]=' + (curEntry.altitudeAccuracy).toPrecision(21) +
+                     //'&node[field_altitude_accuracy][und][0][value]=' + (curEntry.altitudeAccuracy).toPrecision(21) +
                      '&node[field_heading][und][0][value]=' + (curEntry.heading).toPrecision(13) +
                      '&node[field_speed][und][0][value]=' + (curEntry.speed).toPrecision(21) +        
                      '&node[field_datetime_start][und][0][value][date]=' + curEntry.date +
