@@ -1,5 +1,10 @@
 CACHE MANIFEST
-# v1.0.4 2013-12-23T23:25:07+00:00
+# v1.0.5 2013-12-24T03:20:07+00:00
+
+#Chrome 32 updates cached files on the first reload after exocortex.appcache file were modified
+#Firefox 26 will not update files immediately, you can delete cached version manually
+#in Firefox for Android - at Settings/Privacy/Clear private data - Cache and Offline website data checkboxes
+#in Firefox for Desktop - at Edit/Preferences/Network - Offline Web Content and user data
 
 # Custom app files
 index.html
@@ -37,8 +42,6 @@ libs/images/icons-svg/star-white.svg
 libs/images/icons-svg/alert-white.svg
 libs/images/icons-svg/grid-white.svg
 
-
-
 #TaffyDB
 libs/taffy-min.js
 
@@ -51,7 +54,7 @@ libs/jstz.min.js
 
 
 NETWORK:
-#You should list all URLs your app need access to
+#You should list all URLs your app need access to, or all queries will fail
 #Chrome and Safari understands *, while Firefox uses http://* and https://*
 *
 http://*
