@@ -73,14 +73,6 @@
             <script src="js/checkin.js"></script>
 
             <div data-role="content">
-                <div>
-                    <!-- Visual logged-in/logged-out indicator, changes it's color -->
-                    <!--<div id="user_logged_status"></div>-->
-                    <button id="user_logged_status"></button>
-                    <!-- Settings button -->
-                    <a href="#page_settings" data-role="button" data-theme="a" class="button_settings">Settings</a>
-                </div>
-                <p></p>
                 <div data-role="controlgroup" data-type="horizontal">
                     <!-- GPS test button -->
                     <a href="#" data-role="button" data-theme="a" class="exo_square_button button_geolocation_test">Test GPS</a>
@@ -94,8 +86,25 @@
                     <!-- Button to show list of activities -->
                     <a href="#page_activities_today" data-role="button" data-theme="b" class="button_activities_main exo_square_button">Activities</a>
                 </div>
-
+                <p></p>
+                <div>
+                    <!-- Visual logged-in/logged-out indicator, changes it's color -->
+                    <!--<div id="user_logged_status"></div>-->
+                    <button id="user_logged_status"></button>
+                </div>
             </div><!-- /content -->
+            
+            <div data-role="footer">
+                <!-- Settings button -->
+                <a href="#page_settings" data-role="button" class="button_settings" data-icon="grid" data-iconpos="notext">Local menu</a>
+            </div> <!-- /footer -->
+
+            <!--jQuery Mobile panel - Local menu -->
+            <div data-role="panel" id="page_activities_today_panel" data-position="left" data-display="overlay">
+                <p><a href="#page_dashboard" data-role="button" class="button_dashboard">Frontpage</a></p>
+                <p><a href="#page_activities_today" data-role="button" class="button_activities_main">Today activities</a></p>
+                <p><a href="#page_activities_past" data-role="button" class="button_activities_past">Outdated activities</a></p>
+            </div><!-- /panel -->
 
         </div><!-- /page -->
 
