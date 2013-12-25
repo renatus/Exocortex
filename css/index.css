@@ -12,7 +12,7 @@
 /* Make buttons square */
 .exo_square_button {
     height: 70px;
-    width: 110px;
+    /*width: 110px;*/
 }
 
 /*We should set padding-top to center text in button*/
