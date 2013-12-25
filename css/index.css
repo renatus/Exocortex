@@ -16,6 +16,10 @@
     /*width: 110px;*/
 }
 
+.button_controlgroup {
+    width: 100%;
+}
+
 /*We should set padding-top to center text in button*/
 /*We should set width to make buttons to consume all screen width, even if text is short*/
 /*
