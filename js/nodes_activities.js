@@ -317,7 +317,7 @@ function TZSplit(TZRAW){
 $(document).on('click','a.page_node_pages_list_title',function(){
     //Get Drupal node ID from app's page HTML attribute - don't forget to convert it to number
     entryID = parseInt($(this).attr('id'));
-	render_activity("#page_node_activity_view", ".content", entryID);
+	//render_activity("#page_node_activity_view", ".content", entryID);
 });
 
 
