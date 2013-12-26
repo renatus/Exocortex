@@ -317,7 +317,7 @@ function TZSplit(TZRAW){
 $(document).on('click','a.page_node_pages_list_title',function(){
     //Get Drupal node ID from app's page HTML attribute - don't forget to convert it to number
     entryID = parseInt($(this).attr('id'));
-	//render_activity("#page_node_activity_view", ".content", entryID);
+	render_activity("#page_node_activity_view", entryID);
 });
 
 
@@ -325,9 +325,8 @@ $(document).on('click','a.page_node_pages_list_title',function(){
 //Show single IS activity node
 //HTMLpageID should contain ID of app's page, where we'll insert retrieved data
 //All activities are rendered at the same empty app's page
-//ContentHtmlElementClass should contain CSS class of element we'll insert data in
 //entryID should contain app's DB entry id
-function render_activity(HTMLpageID, ContentHtmlElementClass, entryID) {
+function render_activity(HTMLpageID, entryID) {
     //Get current Activity entry from JS DB
     var curActivityEntry = activitiesTDB({id:entryID}).first();
                      
@@ -343,7 +342,7 @@ function render_activity(HTMLpageID, ContentHtmlElementClass, entryID) {
     //Set custom property with app DB entry ID
     $(HTMLpageID).attr("data-entryID", entryID);
     //Set activity description text summary
-    $(HTMLpageID + " " + ContentHtmlElementClass).html(curActivityEntry.bodySummary);
+    $(HTMLpageID + " " + "#page_activity_description_summary").html(curActivityEntry.bodySummary);
 }
 
 
@@ -400,7 +399,7 @@ $(document).on('click','.button_start_date',function(){
     }
 
     //Rebuild HTML page to show all changes
-    render_activity("#page_node_activity_view", ".content", entryID);
+    render_activity("#page_node_activity_view", entryID);
 });
 
 
@@ -472,7 +471,7 @@ $(document).on('click','.button_end_date',function(){
     }
     
     //Rebuild HTML page to show all changes
-    render_activity("#page_node_activity_view", ".content", entryID);    
+    render_activity("#page_node_activity_view", entryID);    
 });
 
 
@@ -484,7 +483,7 @@ $(document).on('click','.button_planned_to_date_plus_one',function(){
     change_activity_planned_to_date(entryID, 1);
     
     //Rebuild HTML page to show all changes
-    render_activity("#page_node_activity_view", ".content", entryID);
+    render_activity("#page_node_activity_view", entryID);
 });
 
 
@@ -496,7 +495,7 @@ $(document).on('click','.button_planned_to_date_minus_one',function(){
     change_activity_planned_to_date(entryID, -1);
     
     //Rebuild HTML page to show all changes
-    render_activity("#page_node_activity_view", ".content", entryID);
+    render_activity("#page_node_activity_view", entryID);
 });
 
 
