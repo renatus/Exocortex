@@ -11,7 +11,7 @@
 
 /* Make buttons square */
 .exo_square_button {
-    height: 70pt;
+    height: 60pt;
     /* We should set width to 47% to prevent button from positioning one under other, they should be inline */
     width: 47%;
 }
