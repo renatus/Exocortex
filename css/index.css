@@ -12,7 +12,7 @@
 /* Make buttons square */
 .exo_square_button {
     height: 70px;
-    width: 45%;
+    width: 50%;
     /*width: 110px;*/
 }
 
@@ -20,9 +20,9 @@
     width: 100%;
 }
 
-.button_controlgroup {
+/*.button_controlgroup {
     width: 100%;
-}
+}*/
 
 /*We should set padding-top to center text in button*/
 /*We should set width to make buttons to consume all screen width, even if text is short*/
