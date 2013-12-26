@@ -16,6 +16,10 @@
     /*width: 110px;*/
 }
 
+.ui-controlgroup-controls {
+    width: 100%;
+}
+
 .button_controlgroup {
     width: 100%;
 }
