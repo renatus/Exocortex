@@ -12,11 +12,12 @@
 /* Make buttons square */
 .exo_square_button {
     height: 70px;
-    width: 50%;
+    width: 49%;
     /*width: 110px;*/
 }
 
-.ui-controlgroup-controls {
+.ui-controlgroup-horizontal {
+/* .ui-controlgroup-controls { */
     width: 100%;
 }
 
