@@ -329,7 +329,7 @@
 
 
         <!-- Show single Activity node -->
-        <!-- We're providing set of custom data- attributes to store information about activity, such as completion date, in machine-readable form -->
+        <!-- We're providing data-entryID attribute to know backend Activity node ID -->
         <div data-role="page" id="page_node_activity_view" data-entryID="" data-add-back-btn="true">
 
             <div data-role="header">
@@ -337,12 +337,13 @@
                 <a href="#panel_global_menu" data-role="button" class="ui-btn-right button_menu_main" data-icon="gear" data-iconpos="notext">Menu</a>
             </div><!-- /header -->
 
-            <!-- Activity completion planned date -->
-            <div id="page_activity_planned_date"></div>
-            <!-- Date and time of the beginning of task completing -->
-            <div id="page_activity_start_date"></div>
             
             <div data-role="content" class='content'>
+                
+                <!-- Activity completion planned date -->
+                <div id="page_activity_planned_date"></div>
+                <!-- Date and time of the beginning of task completing -->
+                <div id="page_activity_start_date"></div>
                 
                 <!-- Activity node body -->
                 <div id="page_activity_description_summary"></div>
