@@ -144,7 +144,8 @@ var kelly = testdb({id:2}).first();
     
     
     
-    $("#user_logged_status").css("background-color","red");
+    //$("#user_logged_status").css("background-color","red");
+    $("#user_logged_status").css("background-color","green");
     
     
     
