@@ -144,18 +144,7 @@ var kelly = testdb({id:2}).first();
     
     
     
-    //We have to declare function that way to make it possible to call it by name from variable
-var funcName = "tstwinfunc2";
-window[funcName]=function() {
-	alert("tstwinfunc2");
-}
-
-window["tstwinfunc"]=function() {
-    alert("tstwinfunc");
-}
-    
-var alterm = "tstwinfunc";
-window[alterm]();
+    $("#user_logged_status").css("background-color","red");
     
     
     
