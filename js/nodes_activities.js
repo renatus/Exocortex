@@ -210,7 +210,8 @@ function get_activities_from_backend(URLpart){
                 window.localStorage.setItem("activitiesLastUpdatedFromServer",curTimestamp); 
                 
                 // Vibrate for 2 seconds
-                //window.navigator.vibrate is prefixed at Chrome 31, works at Firefox
+                //window.navigator.vibrate is prefixed at Chrome 31, works at Firefox, should work at Chrome 32
+                //http://www.sitepoint.com/use-html5-vibration-api/
                 if(window.navigator.vibrate){
                     window.navigator.vibrate(2000);
                 }
