@@ -1,11 +1,16 @@
 .footer_indicator {
     border-radius: 5px;
     display:inline;
-    float: center;
+    /*float: center;*/
     text-align: center;
     width: 25px;
     height: 25px;
     background-color: blue;
+}
+
+footer_wrapper {
+    float: left;
+    text-align: center;
 }
 
 /* Make buttons square */
