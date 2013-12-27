@@ -12,6 +12,7 @@
 
 .footer_wrapper {
     float: left;
+    vertical-align: middle;
     text-align: center;
 }
 
