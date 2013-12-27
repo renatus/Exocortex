@@ -5,9 +5,9 @@
     vertical-align: middle;
     /*float: center;*/
     text-align: center;
-    width: 25px;
-    height: 25px;
-    background-color: blue;
+    width: 35px;
+    height: 35px;
+    background-color: gray;
 }
 
 .footer_wrapper {
