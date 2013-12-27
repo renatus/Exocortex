@@ -11,7 +11,8 @@
 .footer_wrapper {
     float: left;
     text-align: center;
-    display:inline;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 /* Make buttons square */
