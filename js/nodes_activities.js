@@ -12,7 +12,7 @@ window["fill_page_activities_today"]=function() {
     //Get end of current day
     var plannedEndTimestamp = moment().endOf('day').format('X');
     
-    //Show activities with plannned end date between beginning and ending of current day
+    //Show activities with planned end date between beginning and ending of current day
     show_activities_list("#page_activities_today_list", plannedStartTimestamp, plannedEndTimestamp);
 }
 
@@ -26,7 +26,7 @@ window["fill_page_activities_tomorrow"]=function() {
     //Get end of tomorrow
     var plannedEndTimestamp = moment().add('days', +1).endOf('day').format('X');
     
-    //Show activities with plannned end date between beginning and ending of tomorrow
+    //Show activities with planned end date between beginning and ending of tomorrow
     show_activities_list("#page_activities_tomorrow_list", plannedStartTimestamp, plannedEndTimestamp);
 }
 
@@ -40,7 +40,7 @@ window["fill_page_activities_future"]=function() {
     //Get "end" of future except tomorrow - it has no "end", we can choose any day not too near to current
     var plannedEndTimestamp = moment().add('years', +10).endOf('day').format('X');
     
-    //Show activities with plannned end date between beginning and ending of future except tomorrow
+    //Show activities with planned end date between beginning and ending of future except tomorrow
     show_activities_list("#page_activities_future_list", plannedStartTimestamp, plannedEndTimestamp);
 }
              
@@ -54,7 +54,7 @@ window["fill_page_activities_past"]=function() {
     //Get end of past except yesterday
     var plannedEndTimestamp = moment().add('days', -2).endOf('day').format('X');
     
-    //Show activities with plannned end date between beginning and ending of past except yesterday
+    //Show activities with planned end date between beginning and ending of past except yesterday
     show_activities_list("#page_activities_past_list", plannedStartTimestamp, plannedEndTimestamp);
 }
 
@@ -68,7 +68,7 @@ window["fill_page_activities_yesterday"]=function() {
     //Get end of yesterday
     var plannedEndTimestamp = moment().add('days', -1).endOf('day').format('X');
     
-    //Show activities with plannned end date between beginning and ending of past except yesterday
+    //Show activities with planned end date between beginning and ending of past except yesterday
     show_activities_list("#page_activities_yesterday_list", plannedStartTimestamp, plannedEndTimestamp);
 }
 

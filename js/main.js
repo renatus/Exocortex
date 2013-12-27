@@ -17,17 +17,15 @@ function onLoad() {
     
     
     
-    //If menu button was pressed, fire appropriate function
-    //document.addEventListener("menubutton", onMenuKeyDown, false);
+    //Show all/important active activities for today
+    //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
+    //So for now we'll use such dates as "2013-12-07 00:00:00", and in future - such as "1997-07-16T19:20+01:00"
+    //Get start of current day
+    var plannedStartTimestamp = moment().startOf('day').format('X');
+    //Get end of current day
+    var plannedEndTimestamp = moment().endOf('day').format('X');
+    activities_active_count(plannedStartTimestamp, plannedEndTimestamp);
 }
-
-
-
-//Menu button was pressed
-//function onMenuKeyDown() {
-    //Show app Global menu
-//    $("#panel_global_menu").panel("open");
-//}
 
 
 
