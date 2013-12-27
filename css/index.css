@@ -1,7 +1,7 @@
 #user_logged_status {
-    border-radius: 15px;
+    border-radius: 5px;
     display:inline;
-    /*float: right;*/
+    float: left;
     text-align: center;
     width: 20px;
     height: 20px;
