@@ -236,6 +236,7 @@ function show_activities_list(UlHtmlElementId, plannedStartTimestamp, plannedEnd
     $(UlHtmlElementId).html("");
     
     //Function to filter out appropriate activities from TaffyDB by Planned end date and Status
+    //We use this.dateTimePlannedEndTimestamp two times, because we'd like to know, is it within date range
     activitiesTDB(function(){if(this.dateTimePlannedEndTimestamp >= plannedStartTimestamp && this.dateTimePlannedEndTimestamp <= plannedEndTimestamp && this.statusRAW != "completed" && this.statusRAW != "postponed" && this.statusRAW != "canceled"){return true;}}).each(function(record,recordnumber) {
         
         //Choose activity entry icon based on it's strategic importance
@@ -656,4 +657,29 @@ function activity_sync_to_backend(entryID) {
 window["activity_sync_to_backend_success"]=function(entryID, msgOnSuccess) {
     activitiesTDB.merge({"id":entryID, "lastUpdatedLocally":""}, "id");
 	alert(msgOnSuccess);
+}
+
+
+
+//Count active activities planned for a specified period of time (i.e. for today, or future)
+function activities_active_count(plannedStartTimestamp, plannedEndTimestamp) {
+    var allActivitiesNumber = 0;
+    var importantActivitiesNumber = 0;
+    
+    //Function to filter out appropriate activities from TaffyDB by Planned end date and Status
+    //We use this.dateTimePlannedEndTimestamp two times, because we'd like to know, is it within date range
+    activitiesTDB(function(){if(this.dateTimePlannedEndTimestamp >= plannedStartTimestamp && this.dateTimePlannedEndTimestamp <= plannedEndTimestamp && this.statusRAW != "completed" && this.statusRAW != "postponed" && this.statusRAW != "canceled"){return true;}}).each(function(record,recordnumber) {
+        
+        //Count all activities
+        allActivitiesNumber = allActivitiesNumber + 1;
+        
+        //Count important activities
+        //TaffyDB stores numbers as strings, you have to use == rather than ===
+        if(record["strategicImportanceRAW"] == 2000 || record["strategicImportanceRAW"] == 3000){
+            //If strategic importance is normal or major
+            importantActivitiesNumber = importantActivitiesNumber + 1;
+        }
+    });
+    
+    $("#activities_number").html(allActivitiesNumber + "/" + importantActivitiesNumber);
 }
