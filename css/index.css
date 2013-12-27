@@ -1,7 +1,7 @@
-.user_logged_status {
+.footer_indicator {
     border-radius: 5px;
     display:inline;
-    float: left;
+    float: center;
     text-align: center;
     width: 25px;
     height: 25px;
