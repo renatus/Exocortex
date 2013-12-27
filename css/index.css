@@ -1,10 +1,10 @@
-#user_logged_status {
+.user_logged_status {
     border-radius: 5px;
     display:inline;
     float: left;
     text-align: center;
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     background-color: blue;
 }
 
