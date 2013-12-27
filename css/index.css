@@ -1,19 +1,12 @@
 .footer_indicator {
     border-radius: 5px;
-    /*display:inline;*/
     display: inline-block;
     vertical-align: middle;
     /*float: center;*/
     text-align: center;
     width: 35px;
-    height: 35px;
+    height: 25px;
     background-color: gray;
-}
-
-.footer_wrapper {
-    float: left;
-    vertical-align: middle;
-    text-align: center;
 }
 
 /* Make buttons square */
