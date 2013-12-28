@@ -17,16 +17,16 @@ function onLoad() {
     
     
     
-    //Show all/important active and completed activities for today (for example, 10/3)
+    //Show number of all/important active and completed activities for today (for example, 10/3)
     //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
     //So for now we'll use such dates as "2013-12-07 00:00:00", and in future - such as "1997-07-16T19:20+01:00"
     //Get start of current day
     var plannedStartTimestamp = moment().startOf('day').format('X');
     //Get end of current day
     var plannedEndTimestamp = moment().endOf('day').format('X');
-    //Show all/important active activities for today (for example, 10/3)
+    //Show number of all/important active activities for today (for example, 10/3)
     activities_active_count(plannedStartTimestamp, plannedEndTimestamp);
-    //Show all/important completed activities for today (for example, 10/3)
+    //Show number of all/important completed activities for today (for example, 10/3)
     activities_completed_count(plannedStartTimestamp, plannedEndTimestamp);
 }
 

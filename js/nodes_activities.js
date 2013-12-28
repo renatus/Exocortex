@@ -14,6 +14,11 @@ window["fill_page_activities_today"]=function() {
     
     //Show activities with planned end date between beginning and ending of current day
     show_activities_list("#page_activities_today_list", plannedStartTimestamp, plannedEndTimestamp);
+    
+    //Show number of all/important active activities for today (for example, 10/3)
+    activities_active_count(plannedStartTimestamp, plannedEndTimestamp);
+    //Show number of all/important completed activities for today (for example, 10/3)
+    activities_completed_count(plannedStartTimestamp, plannedEndTimestamp);
 }
 
 //Show activities planned for tomorrow
@@ -28,6 +33,11 @@ window["fill_page_activities_tomorrow"]=function() {
     
     //Show activities with planned end date between beginning and ending of tomorrow
     show_activities_list("#page_activities_tomorrow_list", plannedStartTimestamp, plannedEndTimestamp);
+    
+    //Show number of all/important active activities for today (for example, 10/3)
+    activities_active_count(plannedStartTimestamp, plannedEndTimestamp);
+    //Show number of all/important completed activities for today (for example, 10/3)
+    activities_completed_count(plannedStartTimestamp, plannedEndTimestamp);
 }
 
 //Show activities planned for future except tomorrow
@@ -42,6 +52,11 @@ window["fill_page_activities_future"]=function() {
     
     //Show activities with planned end date between beginning and ending of future except tomorrow
     show_activities_list("#page_activities_future_list", plannedStartTimestamp, plannedEndTimestamp);
+    
+    //Show number of all/important active activities for today (for example, 10/3)
+    activities_active_count(plannedStartTimestamp, plannedEndTimestamp);
+    //Show number of all/important completed activities for today (for example, 10/3)
+    activities_completed_count(plannedStartTimestamp, plannedEndTimestamp);
 }
              
 //Show activities planned for past except yesterday
@@ -56,6 +71,11 @@ window["fill_page_activities_past"]=function() {
     
     //Show activities with planned end date between beginning and ending of past except yesterday
     show_activities_list("#page_activities_past_list", plannedStartTimestamp, plannedEndTimestamp);
+    
+    //Show number of all/important active activities for today (for example, 10/3)
+    activities_active_count(plannedStartTimestamp, plannedEndTimestamp);
+    //Show number of all/important completed activities for today (for example, 10/3)
+    activities_completed_count(plannedStartTimestamp, plannedEndTimestamp);
 }
 
 //Show activities planned for yesterday
@@ -70,6 +90,11 @@ window["fill_page_activities_yesterday"]=function() {
     
     //Show activities with planned end date between beginning and ending of past except yesterday
     show_activities_list("#page_activities_yesterday_list", plannedStartTimestamp, plannedEndTimestamp);
+    
+    //Show number of all/important active activities for today (for example, 10/3)
+    activities_active_count(plannedStartTimestamp, plannedEndTimestamp);
+    //Show number of all/important completed activities for today (for example, 10/3)
+    activities_completed_count(plannedStartTimestamp, plannedEndTimestamp);
 }
 
 
@@ -661,7 +686,7 @@ window["activity_sync_to_backend_success"]=function(entryID, msgOnSuccess) {
 
 
 
-//Count active activities planned for a specified period of time (i.e. for today, or future), and show result
+//Count active activities planned for a specified period of time (i.e. for today, or future), and show the result
 function activities_active_count(plannedStartTimestamp, plannedEndTimestamp) {
     var activitiesNumber = 0;
     var importantActivitiesNumber = 0;
@@ -682,10 +707,10 @@ function activities_active_count(plannedStartTimestamp, plannedEndTimestamp) {
     });
     
     //Show number of all/important activities (for example, 10/3)
-    $("#activities_active_number").html(activitiesNumber + "/" + importantActivitiesNumber);
+    $(".activities_active_number").html(activitiesNumber + "/" + importantActivitiesNumber);
 }
 
-//Count completed activities planned for a specified period of time (i.e. for today, or future), and show result
+//Count completed activities planned for a specified period of time (i.e. for today, or future), and show the result
 function activities_completed_count(plannedStartTimestamp, plannedEndTimestamp) {
     var activitiesNumber = 0;
     var importantActivitiesNumber = 0;
@@ -706,5 +731,5 @@ function activities_completed_count(plannedStartTimestamp, plannedEndTimestamp) 
     });
     
     //Show number of all/important activities (for example, 10/3)
-    $("#activities_completed_number").html(activitiesNumber + "/" + importantActivitiesNumber);
+    $(".activities_completed_number").html(activitiesNumber + "/" + importantActivitiesNumber);
 }
