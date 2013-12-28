@@ -733,3 +733,13 @@ function activities_completed_count(plannedStartTimestamp, plannedEndTimestamp) 
     //Show number of all/important activities (for example, 10/3)
     $(".activities_completed_number").html(activitiesNumber + "/" + importantActivitiesNumber);
 }
+
+//If we clicked on JQM subpages footer Active activities indicator
+$(document).on('click','.activities_active_number',function(){
+    alert("All active / important active");
+});
+
+//If we clicked on JQM subpages footer Completed activities indicator
+$(document).on('click','.activities_completed_number',function(){
+    alert("All completed / important completed");
+});
