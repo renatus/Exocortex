@@ -264,6 +264,9 @@ function unsynced_db_entries_count() {
     if(unsyncedDbEntriesNum > 0) {
         //Let's modify indicator background color
         $(".db_entries_unsynced").css("background-color","red");
+    } else {
+        //Let's modify indicator background color
+        $(".db_entries_unsynced").css("background-color","gray");
     }
 }
 
