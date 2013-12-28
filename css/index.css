@@ -14,6 +14,13 @@
     text-align: center;
 }
 
+/* JQM subpages footer Active activities indicator*/
+.activities_active_number {
+    background-color: "green";
+}
+
+
+
 /* Make buttons square */
 .exo_square_button {
     height: 60pt;
