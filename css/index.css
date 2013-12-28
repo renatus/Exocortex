@@ -6,7 +6,9 @@
     width: 35px;
     height: 20px;
     background-color: gray;
-    padding-left: 30%;
+    /*padding-left: 30%;*/
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Make buttons square */
