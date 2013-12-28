@@ -16,13 +16,12 @@
 
 /* JQM subpages footer Active activities indicator*/
 .activities_active_number {
-    
-    background-color: green;
+    background-color: gray;
 }
 
 /* JQM subpages footer Completed activities indicator */
 .activities_completed_number {
-    background-color: gray;
+    background-color: green;
 }
     
 
