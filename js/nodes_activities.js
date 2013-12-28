@@ -661,42 +661,50 @@ window["activity_sync_to_backend_success"]=function(entryID, msgOnSuccess) {
 
 
 
-//Count activities planned for a specified period of time (i.e. for today, or future)
-function activities_count(plannedStartTimestamp, plannedEndTimestamp) {
-    var activeActivitiesNumber = 0;
-    var importantActiveActivitiesNumber = 0;
-    var completedActivitiesNumber = 0;
-    var importantCompletedActivitiesNumber = 0;
+//Count active activities planned for a specified period of time (i.e. for today, or future), and show result
+function activities_active_count(plannedStartTimestamp, plannedEndTimestamp) {
+    var activitiesNumber = 0;
+    var importantActivitiesNumber = 0;
     
     //Function to filter out appropriate activities from TaffyDB by Planned end date and Status
     //We use this.dateTimePlannedEndTimestamp two times, because we'd like to know, is it within date range
     activitiesTDB(function(){if(this.dateTimePlannedEndTimestamp >= plannedStartTimestamp && this.dateTimePlannedEndTimestamp <= plannedEndTimestamp && this.statusRAW != "completed" && this.statusRAW != "postponed" && this.statusRAW != "canceled"){return true;}}).each(function(record,recordnumber) {
         
-        //Count active activities
-        if(record["statusRAW"] == "active" || record["statusRAW"] == "waiting") {
-            //Count all activities
-            activeActivitiesNumber = activeActivitiesNumber + 1;
+        //Count all activities
+        activitiesNumber = activitiesNumber + 1;
         
-            //Count important activities
-            //TaffyDB stores numbers as strings, you have to use == rather than ===
-            if(record["strategicImportanceRAW"] == 2000 || record["strategicImportanceRAW"] == 3000){
-                //If strategic importance is normal or major
-                importantActiveActivitiesNumber = importantActiveActivitiesNumber + 1;
-            }
-        //Count completed activities
-        } else if(record["statusRAW"] == "completed") {
-            //Count all activities
-            completedActivitiesNumber = completedActivitiesNumber + 1;
-        
-            //Count important activities
-            //TaffyDB stores numbers as strings, you have to use == rather than ===
-            if(record["strategicImportanceRAW"] == 2000 || record["strategicImportanceRAW"] == 3000){
-                //If strategic importance is normal or major
-                importantCompletedActivitiesNumber = importantCompletedActivitiesNumber + 1;
-            }
+        //Count important activities
+        //TaffyDB stores numbers as strings, you have to use == rather than ===
+        if(record["strategicImportanceRAW"] == 2000 || record["strategicImportanceRAW"] == 3000){
+            //If strategic importance is normal or major
+            importantActivitiesNumber = importantActivitiesNumber + 1;
         }
     });
     
-    $("#activities_active_number").html(activeActivitiesNumber + "/" + importantActiveActivitiesNumber);
-    $("#activities_completed_number").html(completedActivitiesNumber + "/" + importantCompletedActivitiesNumber);
+    //Show number of all/important activities (for example, 10/3)
+    $("#activities_active_number").html(activitiesNumber + "/" + importantActivitiesNumber);
+}
+
+//Count completed activities planned for a specified period of time (i.e. for today, or future), and show result
+function activities_completed_count(plannedStartTimestamp, plannedEndTimestamp) {
+    var activitiesNumber = 0;
+    var importantActivitiesNumber = 0;
+    
+    //Function to filter out appropriate activities from TaffyDB by Planned end date and Status
+    //We use this.dateTimePlannedEndTimestamp two times, because we'd like to know, is it within date range
+    activitiesTDB(function(){if(this.dateTimePlannedEndTimestamp >= plannedStartTimestamp && this.dateTimePlannedEndTimestamp <= plannedEndTimestamp && this.statusRAW == "completed"){return true;}}).each(function(record,recordnumber) {
+        
+        //Count all activities
+        activitiesNumber = activitiesNumber + 1;
+        
+        //Count important activities
+        //TaffyDB stores numbers as strings, you have to use == rather than ===
+        if(record["strategicImportanceRAW"] == 2000 || record["strategicImportanceRAW"] == 3000){
+            //If strategic importance is normal or major
+            importantActivitiesNumber = importantActivitiesNumber + 1;
+        }
+    });
+    
+    //Show number of all/important activities (for example, 10/3)
+    $("#activities_completed_number").html(activitiesNumber + "/" + importantActivitiesNumber);
 }
