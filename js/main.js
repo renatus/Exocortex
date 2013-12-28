@@ -24,7 +24,8 @@ function onLoad() {
     var plannedStartTimestamp = moment().startOf('day').format('X');
     //Get end of current day
     var plannedEndTimestamp = moment().endOf('day').format('X');
-    activities_active_count(plannedStartTimestamp, plannedEndTimestamp);
+    //activities_active_count(plannedStartTimestamp, plannedEndTimestamp);
+    activities_count(plannedStartTimestamp, plannedEndTimestamp);
 }
 
 
