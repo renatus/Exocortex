@@ -3,12 +3,16 @@
     display: inline-block;
     vertical-align: middle;
     text-align: center;
-    width: 350px;
+    width: 45px;
     height: 20px;
     background-color: gray;
     /*padding-left: 30%;*/
     margin-left: auto;
     margin-right: auto;
+}
+
+.ui-footer {
+    text-align: center;
 }
 
 /* Make buttons square */
