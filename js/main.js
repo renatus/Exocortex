@@ -14,6 +14,11 @@ function onLoad() {
     //If you'll use $('#panel_global_menu').panel(); without .enhanceWithin(), panel conten will not be enhanced by jQuery Mobile
     //You can call jQuery Mobile functions for each widget individually, if that widget is located outsude of regular subpage
     $('#panel_global_menu').panel().enhanceWithin();
+    
+    
+    
+    //Count all modified app's DB entries, unsynced to server, and show the result
+    unsynced_db_entries_count();
 }
 
 
@@ -231,3 +236,38 @@ function edit_backend_node(entryID, URLpart, requestType, dataToSend, functionOn
         } catch (error) { alert(msgOnError + " " + error); }
     }
 };
+
+
+
+//Count all modified app's DB entries, unsynced to server, and show the result
+function unsynced_db_entries_count() {
+    var unsyncedDbEntriesNum = 0;
+    
+    //Iterate through all Activities with filled lastUpdatedLocally DB properties
+    activitiesTDB({lastUpdatedLocally:{"!is":""}}).each(function(record,recordnumber) {
+	    unsyncedDbEntriesNum = unsyncedDbEntriesNum + 1;
+    });
+    
+    //Iterate through all Checkins with filled lastUpdatedLocally DB properties
+    checkinsTDB({lastUpdatedLocally:{"!is":""}}).each(function(record,recordnumber) {
+	    unsyncedDbEntriesNum = unsyncedDbEntriesNum + 1;
+    });
+    
+    //Iterate through all Timeboxes with filled lastUpdatedLocally DB properties
+    timeboxesTDB({lastUpdatedLocally:{"!is":""}}).each(function(record,recordnumber) {
+	    unsyncedDbEntriesNum = unsyncedDbEntriesNum + 1;
+    });
+    
+    //Show number of all modified app's DB entries, unsynced to server (for example, 4)
+    $(".db_entries_unsynced").html(unsyncedDbEntriesNum);
+    //If there are unsynced entries
+    if(unsyncedDbEntriesNum > 0) {
+        //Let's modify indicator background color
+        $(".db_entries_unsynced").css("background-color","red");
+    }
+}
+
+//If we clicked on JQM subpages footer Unsynced to server DB entries indicator
+$(document).on('click','.db_entries_unsynced',function(){
+    alert("Number of DB entries, unsynced to server");
+});

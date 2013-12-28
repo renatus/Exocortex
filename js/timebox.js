@@ -194,6 +194,7 @@ window["timebox_sync_to_backend_success"]=function(entryID, msgOnSuccess) {
 //Sync to backend all new and modified timeboxes one by one
 //Each new and modified timebox is marked by modification timestamp at lastUpdatedLocally column
 function sync_modified_timeboxes() {
+    //Iterate through all Timeboxes with filled lastUpdatedLocally DB properties
     timeboxesTDB({lastUpdatedLocally:{"!is":""}}).each(function(record,recordnumber) {
 	    timebox_sync_to_backend(record["id"]);
     });
