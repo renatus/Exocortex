@@ -1,17 +1,16 @@
+/* JQM subpages footer indicators*/
 .footer_indicator {
     border-radius: 5px;
+    /*Place all indicators in one row instead of a one column */
     display: inline-block;
-    vertical-align: middle;
-    text-align: center;
     width: 45px;
     height: 20px;
     background-color: gray;
-    /*padding-left: 30%;*/
-    margin-left: auto;
-    margin-right: auto;
 }
 
-.ui-footer {
+/* JQM subpages footer <div>*/
+.exo_footer {
+    /*Align all <p> tags content by footer center */
     text-align: center;
 }
 
