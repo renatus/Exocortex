@@ -31,7 +31,7 @@
 .exo_square_button {
     height: 60pt;
     /* We should set width to 47% to prevent button from positioning one under other, they should be inline */
-    width: 47%;
+    /*width: 47%;*/
     vertical-align: text-bottom !important;
     color: red !important;
 }
