@@ -32,6 +32,7 @@
     height: 60pt;
     /* We should set width to 47% to prevent button from positioning one under other, they should be inline */
     width: 47%;
+    vertical-align: middle;
 }
 
 /* Make controlgroup with buttons that should be inline 100% width */
