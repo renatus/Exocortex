@@ -176,6 +176,21 @@ var kelly = testdb({id:2}).first();
         db = request.result;
     };
 	
+	
+	
+	var tx = db.transaction("books", "readwrite");
+	var store = tx.objectStore("books");
+
+	store.put({title: "Quarry Memories", author: "Fred", isbn: 123456});
+	store.put({title: "Water Buffaloes", author: "Fred", isbn: 234567});
+	store.put({title: "Bedrock Nights", author: "Barney", isbn: 345678});
+
+	tx.oncomplete = function() {
+		// All requests have succeeded and the transaction has committed.
+	};
+	
+	
+	
 	var tx = db.transaction("books", "readonly");
 	var store = tx.objectStore("books");
 	var index = store.index("by_title");
