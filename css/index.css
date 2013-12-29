@@ -26,7 +26,7 @@
     
 
 
-
+.ui-grid-a, .ui-grid-a .ui-controlgroup-controls {width: 100%}
 /* Make buttons square */
 .exo_square_button {
     height: 60pt;
