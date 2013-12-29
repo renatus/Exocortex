@@ -26,27 +26,10 @@
     
 
 
-.ui-controlgroup-controls {
-    width: 100%;
-}
 /* Make buttons square */
 .exo_square_button {
     height: 60pt;
-    /* We should set width to 47% to prevent button from positioning one under other, they should be inline */
-    /*width: 47%;*/
-    vertical-align: text-bottom !important;
-    color: red !important;
 }
-
-/* Make controlgroup with buttons that should be inline 100% width */
-/* We can't use controlgroup class, because jQury Mobile will add additional markup inside it */
-.ui-controlgroup-controls {
-    /*width: 100%;*/
-}
-
-/*.button_controlgroup {
-    width: 100%;
-}*/
 
 /*We should set padding-top to center text in button*/
 /*We should set width to make buttons to consume all screen width, even if text is short*/
