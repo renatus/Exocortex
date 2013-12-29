@@ -145,7 +145,56 @@ var kelly = testdb({id:2}).first();
     
     
     //$("#user_logged_status").css("background-color","red");
-    $("#user_logged_status").html("tst");
+    //$("#user_logged_status").html("tst");
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    var request = indexedDB.open("library");
+
+    request.onupgradeneeded = function() {
+        // The database did not previously exist, so create object stores and indexes.
+        var db = request.result;
+        var store = db.createObjectStore("books", {keyPath: "isbn"});
+        var titleIndex = store.createIndex("by_title", "title", {unique: true});
+        var authorIndex = store.createIndex("by_author", "author");
+
+        // Populate with initial data.
+        store.put({title: "Quarry Memories", author: "Fred", isbn: 123456});
+        store.put({title: "Water Buffaloes", author: "Fred", isbn: 234567});
+        store.put({title: "Bedrock Nights", author: "Barney", isbn: 345678});
+    };
+
+    request.onsuccess = function() {
+        db = request.result;
+    };
+	
+	var tx = db.transaction("books", "readonly");
+	var store = tx.objectStore("books");
+	var index = store.index("by_title");
+	
+	var request = index.get("Bedrock Nights");
+	request.onsuccess = function() {
+		var matching = request.result;
+		if (matching !== undefined) {
+			// A match was found.
+			alert(matching.isbn);
+			report(matching.isbn, matching.title, matching.author);
+		} else {
+			// No match was found.
+			alert(null);
+			report(null);
+		}
+	};
+
+    
     
     
     
