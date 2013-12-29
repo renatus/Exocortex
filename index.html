@@ -73,6 +73,7 @@
             <script src="js/checkin.js"></script>
 
             <div data-role="content">
+                <!-- It's not possible to fully enhance true JQM controlgroup, so we use this pseudo-controlgroup -->
                 <div class="ui-grid-a">
                     <!-- GPS test button -->
                     <div class="ui-block-a"><a href="#" data-role="button" data-theme="a" class="exo_square_button button_geolocation_test">Test GPS</a></div>
@@ -86,18 +87,7 @@
                     <!-- Button to show list of activities -->
                     <div class="ui-block-b"><a href="#page_activities_today" data-role="button" data-theme="b" class="button_activities_main exo_square_button">Activities</a></div>
                 </div>
-                <p></p>
-                
-                <div class="ui-grid-a">
-                    <div class="ui-block-a"><button type="submit" data-theme="c">Cancel</button></div>
-                    <div class="ui-block-b"><button type="submit" data-theme="b">Submit</button></div>
-                </div>
-                
-                <div class="ui-grid-a">
-                    <div class="ui-block-a"><a href="#" data-role="button" data-theme="a" class="exo_square_button">Button1</a></div>
-                    <div class="ui-block-b"><a href="#" data-role="button" data-theme="a" class="exo_square_button">Button2</a></div>
-                </div> 
-                
+                <p></p>                
             </div><!-- /content -->
             
             <div data-role="footer" class="exo_footer">
@@ -135,18 +125,19 @@
 
             <div data-role="content" class='content'>
 
-                <div data-role="controlgroup" data-type="horizontal">
+                <!-- It's not possible to fully enhance true JQM controlgroup, so we use this pseudo-controlgroup -->
+                <div class="ui-grid-a">
                     <!-- Button to test arbitrary JS code -->
-                    <a href="#" data-role="button" data-theme="a" class="exo_square_button button_test">Test!</a>
+                    <div class="ui-block-a"><a href="#" data-role="button" data-theme="a" class="exo_square_button button_test">Test!</a></div>
                     <!-- Button to get to login page -->
-                    <a href="#page_login" data-role="button" data-theme="b" class="exo_square_button button_login">Log in!</a>
+                    <div class="ui-block-b"><a href="#page_login" data-role="button" data-theme="b" class="exo_square_button button_login">Log in!</a></div>
                 </div>
 
-                <div data-role="controlgroup" data-type="horizontal">
+                <div class="ui-grid-a">
                     <!-- Button to sync data from app DB to backend -->
-                    <a href="#" data-role="button" data-theme="a" class="exo_square_button button_sync_to_backend">Sync</a>
+                    <div class="ui-block-a"><a href="#" data-role="button" data-theme="a" class="exo_square_button button_sync_to_backend">Sync</a></div>
                     <!-- Button to -->
-                    <a href="#page_login" data-role="button" data-theme="b" class="exo_square_button button_not_used1"></a>
+                    <div class="ui-block-b"><a href="#page_login" data-role="button" data-theme="b" class="exo_square_button button_not_used1"></a></div>
                 </div>
 
             </div><!-- /content -->
@@ -187,11 +178,12 @@
 
                 <p></p>
 
-                <div data-role="controlgroup" data-type="horizontal">
+                <!-- It's not possible to fully enhance true JQM controlgroup, so we use this pseudo-controlgroup -->
+                <div class="ui-grid-a">
                     <!-- Logout button -->
-                    <a href="#" data-role="button" data-theme="a" class="exo_square_button button_logout">Logout</a>
+                    <div class="ui-block-a"><a href="#" data-role="button" data-theme="a" class="exo_square_button button_logout">Logout</a></div>
                     <!-- Login button -->
-                    <a href="#" data-role="button" data-theme="b" class="exo_square_button page_login_submit">Login</a>
+                    <div class="ui-block-b"><a href="#" data-role="button" data-theme="b" class="exo_square_button page_login_submit">Login</a></div>
                 </div>
 
                 <p></p>
@@ -382,18 +374,19 @@
                 <!-- Activity node body -->
                 <div id="page_activity_description_summary"></div>
 
-                <div data-role="controlgroup" data-type="horizontal">
+                <!-- It's not possible to fully enhance true JQM controlgroup, so we use this pseudo-controlgroup -->
+                <div class="ui-grid-a">
                     <!-- Button to subtract one day from "Planned to" activity property -->
-                    <a href="#" data-role="button" data-theme="b" class="exo_square_button button_planned_to_date_minus_one">p.End -1</a>
+                    <div class="ui-block-a"><a href="#" data-role="button" data-theme="b" class="exo_square_button button_planned_to_date_minus_one">p.End -1</a></div>
                     <!-- Button to add one day to "Planned to" activity property -->
-                    <a href="#" data-role="button" data-theme="a" class="exo_square_button button_planned_to_date_plus_one">p.End +1</a>
+                    <div class="ui-block-b"><a href="#" data-role="button" data-theme="a" class="exo_square_button button_planned_to_date_plus_one">p.End +1</a></div>
                 </div>
 
-                <div data-role="controlgroup" data-type="horizontal">
+                <div class="ui-grid-a">
                     <!-- Button to mark beginning of completing task -->
-                    <a href="#" data-role="button" data-theme="a" class="exo_square_button button_start_date">Start</a>
+                    <div class="ui-block-a"><a href="#" data-role="button" data-theme="a" class="exo_square_button button_start_date">Start</a></div>
                     <!-- Button to mark task completion -->
-                    <a href="#" data-role="button" data-theme="b" class="exo_square_button button_end_date">Finished</a>
+                    <div class="ui-block-b"><a href="#" data-role="button" data-theme="b" class="exo_square_button button_end_date">Finished</a></div>
                 </div>
                 
             </div><!-- /content -->
@@ -415,11 +408,12 @@
             <!-- Sleep beginnig date and time -->
             <div id="page_sleep_start_date"></div>
 
-            <div data-role="controlgroup" data-type="horizontal">
+            <!-- It's not possible to fully enhance true JQM controlgroup, so we use this pseudo-controlgroup -->
+            <div class="ui-grid-a">
                 <!-- Button to mark sleep beginning -->
-                <a href="#" data-role="button" data-theme="a" class="exo_square_button button_sleep_start_date">Start</a>
+                <div class="ui-block-a"><a href="#" data-role="button" data-theme="a" class="exo_square_button button_sleep_start_date">Start</a></div>
                 <!-- Button to mark sleep ending -->
-                <a href="#" data-role="button" data-theme="b" class="exo_square_button button_sleep_end_date">Finished</a>
+                <div class="ui-block-b"><a href="#" data-role="button" data-theme="b" class="exo_square_button button_sleep_end_date">Finished</a></div>
             </div>
 
         </div><!-- /page -->
