@@ -37,7 +37,7 @@
 /* Make controlgroup with buttons that should be inline 100% width */
 /* We can't use controlgroup class, because jQury Mobile will add additional markup inside it */
 .ui-controlgroup-controls {
-    width: 100%;
+    /*width: 100%;*/
 }
 
 /*.button_controlgroup {
