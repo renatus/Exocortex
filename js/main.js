@@ -260,7 +260,7 @@ function unsynced_db_entries_show() {
 		
 	function addRecordProperties(record){
 		for(i in record){
-			unsyncedDbEntriesValues = unsyncedDbEntriesValues + i + '\n';
+			unsyncedDbEntriesValues = unsyncedDbEntriesValues + i + ": " + record[i] + "\n";
 		}
 	}
     
