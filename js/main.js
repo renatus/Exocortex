@@ -239,6 +239,38 @@ function edit_backend_node(entryID, URLpart, requestType, dataToSend, functionOn
 
 
 
+//Show all modified app's DB entries, unsynced to server
+function unsynced_db_entries_show() {
+    var unsyncedDbEntriesValues = "";
+    
+    //Iterate through all Activities with filled lastUpdatedLocally DB properties
+    activitiesTDB({lastUpdatedLocally:{"!is":""}}).each(function(record,recordnumber) {
+	    unsyncedDbEntriesValues = unsyncedDbEntriesValues + record["id"] + '\n';
+    });
+    
+    //Iterate through all Checkins with filled lastUpdatedLocally DB properties
+    checkinsTDB({lastUpdatedLocally:{"!is":""}}).each(function(record,recordnumber) {
+	    unsyncedDbEntriesValues = unsyncedDbEntriesValues + record["id"] + '\n';
+    });
+    
+    //Iterate through all Timeboxes with filled lastUpdatedLocally DB properties
+    timeboxesTDB({lastUpdatedLocally:{"!is":""}}).each(function(record,recordnumber) {
+	    unsyncedDbEntriesValues = unsyncedDbEntriesValues + record["id"] + '\n';
+    });
+    
+    //If there are unsynced entries
+    if(unsyncedDbEntriesValues) {
+		alert(unsyncedDbEntriesValues);
+    }
+}
+
+//Button Show unsynced was pressed
+$(document).on('click','.button_show_unsynced',function(){
+	unsynced_db_entries_show();
+});
+
+
+
 //Count all modified app's DB entries, unsynced to server, and show the result
 function unsynced_db_entries_count() {
     var unsyncedDbEntriesNum = 0;

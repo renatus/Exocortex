@@ -151,63 +151,75 @@ var kelly = testdb({id:2}).first();
     
     
     
-    
-    
-    
-    
-    
-    
-    var request = indexedDB.open("library");
-
-    request.onupgradeneeded = function() {
-        // The database did not previously exist, so create object stores and indexes.
-        var db = request.result;
-        var store = db.createObjectStore("books", {keyPath: "isbn"});
-        var titleIndex = store.createIndex("by_title", "title", {unique: true});
-        var authorIndex = store.createIndex("by_author", "author");
-
-        // Populate with initial data.
-        store.put({title: "Quarry Memories", author: "Fred", isbn: 123456});
-        store.put({title: "Water Buffaloes", author: "Fred", isbn: 234567});
-        store.put({title: "Bedrock Nights", author: "Barney", isbn: 345678});
-    };
-
-    request.onsuccess = function() {
-        db = request.result;
-    };
+    //html5rocks.indexedDB
+    indexedDB = {};
 	
-	
-	
-	var tx = db.transaction("books", "readwrite");
-	var store = tx.objectStore("books");
+	//Opening the database
+	indexedDB.db = null;
 
-	store.put({title: "Quarry Memories", author: "Fred", isbn: 123456});
-	store.put({title: "Water Buffaloes", author: "Fred", isbn: 234567});
-	store.put({title: "Bedrock Nights", author: "Barney", isbn: 345678});
-
-	tx.oncomplete = function() {
-		// All requests have succeeded and the transaction has committed.
+	indexedDB.open = function() {
+		var version = 1;
+		var request = indexedDB.open("Exocortex", version);
+		
+		request.onsuccess = function(e) {
+			indexedDB.db = e.target.result;
+			// Do some more stuff in a minute
+		};
+		
+		request.onerror = indexedDB.onerror;
 	};
 	
 	
 	
-	var tx = db.transaction("books", "readonly");
-	var store = tx.objectStore("books");
-	var index = store.index("by_title");
-	
-	var request = index.get("Bedrock Nights");
-	request.onsuccess = function() {
-		var matching = request.result;
-		if (matching !== undefined) {
-			// A match was found.
-			alert(matching.isbn);
-			report(matching.isbn, matching.title, matching.author);
-		} else {
-			// No match was found.
-			alert(null);
-			report(null);
-		}
+	//Creating an Object Store
+	indexedDB.open = function() {
+		var version = 1;
+		var request = indexedDB.open("Exocortex", version);
+		
+		// We can only create Object stores in a versionchange transaction.
+		request.onupgradeneeded = function(e) {
+			var db = e.target.result;
+			
+			// A versionchange transaction is started automatically.
+			e.target.transaction.onerror = indexedDB.onerror;
+			
+			if(db.objectStoreNames.contains("Test")) {
+				db.deleteObjectStore("Test");
+			}
+			
+			var store = db.createObjectStore("Test", keyPath: "timeStamp"});
+		};
+		
+		request.onsuccess = function(e) {
+			indexedDB.db = e.target.result;
+			indexedDB.getAllTodoItems();
+		};
+		
+		request.onerror = indexedDB.onerror;
 	};
+	
+	
+	
+	//Adding data to an object store
+	indexedDB.addTodo = function(todoText) {
+		var db = indexedDB.db;
+		var trans = db.transaction(["Test"], "readwrite");
+		var store = trans.objectStore("Test");
+		var request = store.put({
+			"text": todoText,
+			"timeStamp" : new Date().getTime()
+		});
+		
+		request.onsuccess = function(e) {
+			// Re-render all the todo's
+			alert("DB entry added!");
+		};
+
+  request.onerror = function(e) {
+    console.log(e.value);
+  };
+};
+	
 
     
     
