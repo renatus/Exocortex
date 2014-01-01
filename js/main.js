@@ -245,18 +245,24 @@ function unsynced_db_entries_show() {
     
     //Iterate through all Activities with filled lastUpdatedLocally DB properties
     activitiesTDB({lastUpdatedLocally:{"!is":""}}).each(function(record,recordnumber) {
-	    unsyncedDbEntriesValues = unsyncedDbEntriesValues + record["id"] + '\n';
+		addRecordProperties(record);
     });
     
     //Iterate through all Checkins with filled lastUpdatedLocally DB properties
     checkinsTDB({lastUpdatedLocally:{"!is":""}}).each(function(record,recordnumber) {
-	    unsyncedDbEntriesValues = unsyncedDbEntriesValues + record["id"] + '\n';
+	    addRecordProperties(record);
     });
     
     //Iterate through all Timeboxes with filled lastUpdatedLocally DB properties
     timeboxesTDB({lastUpdatedLocally:{"!is":""}}).each(function(record,recordnumber) {
-	    unsyncedDbEntriesValues = unsyncedDbEntriesValues + record["id"] + '\n';
+	    addRecordProperties(record);
     });
+		
+	function addRecordProperties(record){
+		for(i in record){
+			unsyncedDbEntriesValues = unsyncedDbEntriesValues + i + '\n';
+		}
+	}
     
     //If there are unsynced entries
     if(unsyncedDbEntriesValues) {
