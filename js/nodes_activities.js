@@ -343,7 +343,7 @@ function TZSplit(TZRAW){
 //If we've pressed Activity title, we should render activity HTML page
 $(document).on('click','a.page_node_pages_list_title',function(){
     //Get Drupal node ID from app's page HTML attribute - don't forget to convert it to number
-    entryID = parseInt($(this).attr('id'));
+    var entryID = parseInt($(this).attr('id'));
 	render_activity(entryID);
 });
 
@@ -379,7 +379,7 @@ function render_activity(entryID) {
 //Set Activity completion start date at app's DB, and, if possible, in IS
 $(document).on('click','.button_start_date',function(){
     //Get current Activity entry ID from HTML5 custom property
-    entryID = parseInt($("#page_node_activity_view").attr("data-entryID"));
+    var entryID = parseInt($("#page_node_activity_view").attr("data-entryID"));
     
     //Get current Activity entry from JS DB
     var curActivityEntry = activitiesTDB({id:entryID}).first();
@@ -436,7 +436,7 @@ $(document).on('click','.button_start_date',function(){
 //Set Activity completion end date, status and difficulty at app's DB, and, if possible, in IS
 $(document).on('click','.button_end_date',function(){
     //Get current Activity entry ID from HTML5 custom property
-    entryID = parseInt($("#page_node_activity_view").attr("data-entryID"));
+    var entryID = parseInt($("#page_node_activity_view").attr("data-entryID"));
     
     //Get current Activity entry from JS DB
     var curActivityEntry = activitiesTDB({id:entryID}).first();
@@ -508,7 +508,7 @@ $(document).on('click','.button_end_date',function(){
 //Add one day to "Planned to" activity property
 $(document).on('click','.button_planned_to_date_plus_one',function(){
     //Get current Activity entry ID from HTML5 custom property
-    entryID = parseInt($("#page_node_activity_view").attr("data-entryID"));
+    var entryID = parseInt($("#page_node_activity_view").attr("data-entryID"));
     change_activity_planned_to_date(entryID, 1);
     
     //Rebuild HTML page to show all changes
@@ -520,7 +520,7 @@ $(document).on('click','.button_planned_to_date_plus_one',function(){
 //Subtract one day from "Planned to" activity property
 $(document).on('click','.button_planned_to_date_minus_one',function(){
     //Get current Activity entry ID from HTML5 custom property
-    entryID = parseInt($("#page_node_activity_view").attr("data-entryID"));
+    var entryID = parseInt($("#page_node_activity_view").attr("data-entryID"));
     change_activity_planned_to_date(entryID, -1);
     
     //Rebuild HTML page to show all changes

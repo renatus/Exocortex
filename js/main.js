@@ -313,7 +313,7 @@ $(document).on('click','.button_show_db_entries',function(){
 });
 
 $(document).on('click','.checkinID',function(){
-	dbEntryID = $(this).attr('id');
+	var entryID = $(this).attr('id');
 	//Get Checkin entry from JS DB
     var dbEntry = activitiesTDB({id:entryID}).first();
 	alert(getRecordProperties(dbEntry));
