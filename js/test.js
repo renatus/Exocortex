@@ -159,74 +159,7 @@ var kelly = testdb({id:2}).first();
     
     
     
-    //html5rocks.indexedDB
-    indexedDB = {};
-	
-	//Opening the database
-	indexedDB.db = null;
-
-	indexedDB.open = function() {
-		var version = 1;
-		var request = indexedDB.open("Exocortex", version);
-		
-		request.onsuccess = function(e) {
-			indexedDB.db = e.target.result;
-			// Do some more stuff in a minute
-		};
-		
-		request.onerror = indexedDB.onerror;
-	};
-	
-	
-	
-	//Creating an Object Store
-	indexedDB.open = function() {
-		var version = 1;
-		var request = indexedDB.open("Exocortex", version);
-		
-		// We can only create Object stores in a versionchange transaction.
-		request.onupgradeneeded = function(e) {
-			var db = e.target.result;
-			
-			// A versionchange transaction is started automatically.
-			e.target.transaction.onerror = indexedDB.onerror;
-			
-			if(db.objectStoreNames.contains("Test")) {
-				db.deleteObjectStore("Test");
-			}
-			
-			var store = db.createObjectStore("Test", keyPath: "timeStamp"});
-		};
-		
-		request.onsuccess = function(e) {
-			indexedDB.db = e.target.result;
-			indexedDB.getAllTodoItems();
-		};
-		
-		request.onerror = indexedDB.onerror;
-	};
-	
-	
-	
-	//Adding data to an object store
-	indexedDB.addTodo = function(todoText) {
-		var db = indexedDB.db;
-		var trans = db.transaction(["Test"], "readwrite");
-		var store = trans.objectStore("Test");
-		var request = store.put({
-			"text": todoText,
-			"timeStamp" : new Date().getTime()
-		});
-		
-		request.onsuccess = function(e) {
-			// Re-render all the todo's
-			alert("DB entry added!");
-		};
-
-  request.onerror = function(e) {
-    console.log(e.value);
-  };
-};
+    
 	
 
     
