@@ -305,10 +305,12 @@ function db_entries_show() {
     } else {
 		$("#db_entries_list").html("There are no DB entries!");
 	}
+	alert('b');
 }
 
 //Button Show DB entries was pressed
 $(document).on('click','button_show_db_entries',function(){
+	alert('a');
 	db_entries_show();
 });
 
