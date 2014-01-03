@@ -308,7 +308,7 @@ function db_entries_show() {
 }
 
 //Button Show DB entries was pressed
-$(document).on('click','button_show_db_entries,function(){
+$(document).on('click','button_show_db_entries',function(){
 	db_entries_show();
 });
 
