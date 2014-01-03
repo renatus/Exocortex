@@ -151,7 +151,7 @@ var kelly = testdb({id:2}).first();
 	
 	alert((21.899999618530273).toPrecision(13));
 	
-	curDateTime = new Date(position.timestamp);
+	var curDateTime = new Date();
     var curTime = moment(curDateTime).format('HH:mm:ss');
 	alert(curTime);
 	

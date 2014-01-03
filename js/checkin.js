@@ -48,8 +48,8 @@ function checkinAdd(position) {
     //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
     //So for now we'll use such dates as "2013-12-07 00:00:00", and in future - such as "1997-07-16T19:20+01:00"
     //Get current Date, Time, Timestamp and Timezone
-	curDateTime = new Date(position.timestamp);
-	curTimestamp = position.timestamp;
+	var curDateTime = new Date(position.timestamp);
+	var curTimestamp = position.timestamp;
     var curDate = moment(curDateTime).format('YYYY-MM-DD');
     var curTime = moment(curDateTime).format('HH:mm:ss');
 	//Determine the time zone of the browser client, jstz.min.js required
