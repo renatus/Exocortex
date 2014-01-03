@@ -305,13 +305,18 @@ function db_entries_show() {
     } else {
 		$("#db_entries_list").html("There are no DB entries!");
 	}
-	alert('b');
 }
 
 //Button Show DB entries was pressed
 $(document).on('click','.button_show_db_entries',function(){
-	alert('a');
 	db_entries_show();
+});
+
+$(document).on('click','.checkinID',function(){
+	dbEntryID = $(this).attr('id');
+	//Get Checkin entry from JS DB
+    var dbEntry = activitiesTDB({id:entryID}).first();
+	alert(getRecordProperties(dbEntry));
 });
 
 //Return list of all properties and it's values of received object
