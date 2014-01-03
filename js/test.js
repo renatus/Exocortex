@@ -187,7 +187,7 @@ var kelly = testdb({id:2}).first();
 				db.deleteObjectStore("Test");
 			}
 			
-			var store = db.createObjectStore("Test", keyPath: "timeStamp");
+			var store = db.createObjectStore("Test", keyPath: "timeStamp"});
 		};
 		
 		request.onsuccess = function(e) {
