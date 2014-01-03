@@ -26,6 +26,8 @@
 
         <!-- Custom JavaScript we need globally -->
         <script src="js/main.js"></script>
+		<!-- JavaScript file to test arbitrary JS code -->
+        <script src="js/test.js"></script>
 
 
 
@@ -65,6 +67,8 @@
         <div data-role="page" id="page_dashboard" data-add-back-btn="true">
 
             <div data-role="header">
+				<!-- Local menu button -->
+                <a href="#page_dashboard_panel" data-role="button" class="ui-btn-left" data-icon="grid" data-iconpos="notext">Local menu</a>
                 <h1>Exocortex</h1>
                 <a href="#panel_global_menu" data-role="button" class="ui-btn-right button_menu_main" data-icon="gear" data-iconpos="notext">Menu</a>
             </div><!-- /header -->
@@ -97,15 +101,15 @@
                 <!-- Number of all unsynced to server DB entries -->
                 <p class="db_entries_unsynced footer_indicator"></p>
                 
-                <!-- Settings button -->
-                <a href="#page_settings" data-role="button" class="ui-btn-right button_settings" data-icon="grid" data-iconpos="notext">Local menu</a>
             </div> <!-- /footer -->
 
             <!--jQuery Mobile panel - Local menu -->
-            <div data-role="panel" id="page_activities_today_panel" data-position="left" data-display="overlay">
-                <p><a href="#page_dashboard" data-role="button" class="button_dashboard">Frontpage</a></p>
-                <p><a href="#page_activities_today" data-role="button" class="button_activities_main">Today activities</a></p>
-                <p><a href="#page_activities_past" data-role="button" class="button_activities_past">Outdated activities</a></p>
+            <div data-role="panel" id="page_dashboard_panel" data-position="left" data-display="overlay">
+				<p><a href="#page_settings" data-role="button" class="ui-btn-left" data-icon="grid" data-iconpos="notext">Local Settings</a></p>
+				<p><a href="#" data-role="button" class="button_test">Test!</a></p>
+				<p><a href="#page_login" data-role="button" class="button_login">Log in!</a></p>
+				<p><a href="#" data-role="button" class="button_sync_to_backend">Sync to backend</a></p>
+				<p><a href="#" data-role="button" class="button_show_unsynced">Show unsynced</a></p>
             </div><!-- /panel -->
 
         </div><!-- /page -->
@@ -119,9 +123,6 @@
                 <h1>Settings</h1>
                 <a href="#panel_global_menu" data-role="button" class="ui-btn-right button_menu_main" data-icon="gear" data-iconpos="notext">Menu</a>
             </div><!-- /header -->
-
-            <!-- JavaScript file to test arbitrary JS code -->
-            <script src="js/test.js"></script>
 
             <div data-role="content" class='content'>
 

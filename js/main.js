@@ -239,7 +239,7 @@ function edit_backend_node(entryID, URLpart, requestType, dataToSend, functionOn
 
 
 
-//Show all modified app's DB entries, unsynced to server
+//Show all modified app's DB entries, unsynced to server; and it's properties values
 function unsynced_db_entries_show() {
     var unsyncedDbEntriesValues = "";
     
