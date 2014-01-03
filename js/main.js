@@ -316,6 +316,7 @@ $(document).on('click','.checkinID',function(){
 	var entryID = $(this).attr('id');
 	//Get Checkin entry from JS DB
     var dbEntry = activitiesTDB({id:entryID}).first();
+	alert(entryID + ' ' + dbEntry);
 	alert(getRecordProperties(dbEntry));
 });
 
