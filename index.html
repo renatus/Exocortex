@@ -126,21 +126,6 @@
 
             <div data-role="content" class='content'>
 
-                <!-- It's not possible to fully enhance true JQM controlgroup, so we use this pseudo-controlgroup -->
-                <div class="ui-grid-a">
-                    <!-- Button to test arbitrary JS code -->
-                    <div class="ui-block-a"><a href="#" data-role="button" data-theme="a" class="exo_square_button button_test">Test!</a></div>
-                    <!-- Button to get to login page -->
-                    <div class="ui-block-b"><a href="#page_login" data-role="button" data-theme="b" class="exo_square_button button_login">Log in!</a></div>
-                </div>
-
-                <div class="ui-grid-a">
-                    <!-- Button to sync data from app DB to backend -->
-                    <div class="ui-block-a"><a href="#" data-role="button" data-theme="a" class="exo_square_button button_sync_to_backend">Sync</a></div>
-                    <!-- Button to show all DB entries unsynced to server-->
-                    <div class="ui-block-b"><a href="#" data-role="button" data-theme="b" class="exo_square_button button_show_unsynced">Show unsynced</a></div>
-                </div>
-
             </div><!-- /content -->
 
         </div> <!-- /page -->
@@ -195,6 +180,26 @@
             </div><!-- /content -->
 
         </div><!-- /page -->
+		
+		
+		
+		<!-- DB entries list page -->
+        <div data-role="page" id="page_db_entries" data-add-back-btn="true">
+
+            <div data-role="header">
+                <h1>App's DB entries</h1>
+                <a href="#panel_global_menu" data-role="button" class="ui-btn-right button_menu_main" data-icon="gear" data-iconpos="notext">Menu</a>
+            </div><!-- /header -->
+
+            <div data-role="content" class='content'>
+				<div id="db_entries_list"></div>
+            </div><!-- /content -->
+
+        </div> <!-- /page -->
+		
+		<!-- Popup to show DB entry's properties and it's values -->
+		<!-- This <div> should be on the same level as JQM subpages <div>'s -->
+		<div data-role="popup" id="popup_db_entries_show"></div>
 
 
 

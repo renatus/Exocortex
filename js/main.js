@@ -241,39 +241,81 @@ function edit_backend_node(entryID, URLpart, requestType, dataToSend, functionOn
 
 //Show all modified app's DB entries, unsynced to server; and it's properties values
 function unsynced_db_entries_show() {
-    var unsyncedDbEntriesValues = "";
+    var dbEntriesValues = "";
     
     //Iterate through all Activities with filled lastUpdatedLocally DB properties
     activitiesTDB({lastUpdatedLocally:{"!is":""}}).each(function(record,recordnumber) {
-		addRecordProperties(record);
+		dbEntriesValues = "Unsynced Activities:\n";
+		//Get properties and their values of current DB entry
+		dbEntriesValues = dbEntriesValues + getRecordProperties(record);
     });
     
     //Iterate through all Checkins with filled lastUpdatedLocally DB properties
     checkinsTDB({lastUpdatedLocally:{"!is":""}}).each(function(record,recordnumber) {
-	    addRecordProperties(record);
+	    dbEntriesValues = dbEntriesValues +"<p></p>Unsynced Checkins:\n";
+		//Get properties and their values of current DB entry
+		dbEntriesValues = dbEntriesValues + getRecordProperties(record);
     });
     
     //Iterate through all Timeboxes with filled lastUpdatedLocally DB properties
     timeboxesTDB({lastUpdatedLocally:{"!is":""}}).each(function(record,recordnumber) {
-	    addRecordProperties(record);
+	    dbEntriesValues = dbEntriesValues +"<p></p>Unsynced Timeboxes:\n";
+		//Get properties and their values of current DB entry
+		dbEntriesValues = dbEntriesValues + getRecordProperties(record);
     });
-		
-	function addRecordProperties(record){
-		for(i in record){
-			unsyncedDbEntriesValues = unsyncedDbEntriesValues + i + ": " + record[i] + "\n";
-		}
-	}
     
     //If there are unsynced entries
-    if(unsyncedDbEntriesValues) {
-		alert(unsyncedDbEntriesValues);
-    }
+    if(dbEntriesValues) {
+		alert(dbEntriesValues);
+    } else {
+		alert("There are no unsynced entries!");
+	}
 }
 
 //Button Show unsynced was pressed
 $(document).on('click','.button_show_unsynced',function(){
 	unsynced_db_entries_show();
 });
+
+//Show all app's DB entries IDs
+function db_entries_show() {
+    var dbEntriesIDs = "";
+    
+    //Iterate through all Activities
+	dbEntriesIDs = "Activities:\n";
+    activitiesTDB({}).each(function(record,recordnumber) {
+		dbEntriesIDs = dbEntriesIDs + "<span class='activityID' id='" + record['id'] + "'>" + record['id'] + " </span>";
+    });
+    
+    //Iterate through all Checkins
+	dbEntriesIDs = dbEntriesIDs +"<p></p>Checkins:\n";
+    checkinsTDB({}).each(function(record,recordnumber) {
+		dbEntriesIDs = dbEntriesIDs + "<span class='checkinID' id='" + record['id'] + "'>" + record['id'] + " </span>";
+    });
+    
+    //Iterate through all Timeboxes
+	dbEntriesIDs = dbEntriesIDs +"<p></p>Timeboxes:\n";
+    timeboxesTDB({}).each(function(record,recordnumber) {
+	    dbEntriesIDs = dbEntriesIDs + "<span class='checkinID' id='" + record['id'] + "'>" + record['id'] + " </span>";
+    });
+    
+    //If there are DB entries
+    if(dbEntriesIDs) {
+		$("#db_entries_list").html(dbEntriesIDs);
+    } else {
+		$("#db_entries_list").html("There are no DB entries!");
+	}
+}
+
+//Return list of all properties and it's values of received object
+function getRecordProperties(record){
+	var recordPropertiesList = "";
+	//Iterate through all properties
+	for(i in record){
+		recordPropertiesList = recordPropertiesList + i + ": " + record[i] + "\n";
+	}
+	return recordPropertiesList;
+}
 
 
 
