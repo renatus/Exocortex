@@ -323,6 +323,7 @@ $(document).on('click','.activityID',function(){
 	//Get Checkin entry from JS DB
     var dbEntry = activitiesTDB({id:entryID}).first();
 	//Show entry's properties at popup
+	$("#popup_db_entries_show").popup();
 	$("#popup_db_entries_show").popup("open");
 	$("#popup_db_entries_show").html(getRecordProperties(dbEntry));
 	//alert(getRecordProperties(dbEntry));
