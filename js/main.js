@@ -313,7 +313,8 @@ $(document).on('click','.button_show_db_entries',function(){
 });
 
 $(document).on('click','.checkinID',function(){
-	var entryID = $(this).attr('id');
+	//Get DB entry ID from app's page HTML attribute - don't forget to convert it to number
+	var entryID = parseInt($(this).attr('id'));
 	//Get Checkin entry from JS DB
     var dbEntry = checkinsTDB({id:entryID}).first();
 	alert(entryID + ' ' + dbEntry);
