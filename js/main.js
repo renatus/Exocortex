@@ -323,10 +323,10 @@ $(document).on('click','.activityID',function(){
 	//Get Checkin entry from JS DB
     var dbEntry = activitiesTDB({id:entryID}).first();
 	//Show entry's properties at popup
+	//Initialise popup
 	$("#popup_db_entries_show").popup();
 	$("#popup_db_entries_show").popup("open");
 	$("#popup_db_entries_show").html(getRecordProperties(dbEntry));
-	//alert(getRecordProperties(dbEntry));
 });
 
 //Checkin DB entry ID was pressed, show all entry's properties
@@ -335,7 +335,12 @@ $(document).on('click','.checkinID',function(){
 	var entryID = parseInt($(this).attr('id'));
 	//Get Checkin entry from JS DB
     var dbEntry = checkinsTDB({id:entryID}).first();
-	alert(getRecordProperties(dbEntry));
+		//Show entry's properties at popup
+	//Initialise popup
+	$("#popup_db_entries_show").popup();
+	$("#popup_db_entries_show").popup("open");
+	$("#popup_db_entries_show").html(getRecordProperties(dbEntry));
+	$("#popup_db_entries_show").html(getRecordProperties(dbEntry));
 });
 
 //Return list of all properties and it's values of received object
