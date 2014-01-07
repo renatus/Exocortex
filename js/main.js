@@ -284,23 +284,27 @@ function db_entries_show() {
     //Iterate through all Activities
 	dbEntriesIDs = "Activities:\n";
     activitiesTDB({}).each(function(record,recordnumber) {
+		//Add current DB entry ID and HTML code to show entry data in case this ID will be pressed
 		dbEntriesIDs = dbEntriesIDs + "<span class='activityID' id='" + record['id'] + "'>" + record['id'] + " </span>";
     });
     
     //Iterate through all Checkins
 	dbEntriesIDs = dbEntriesIDs +"<p></p>Checkins:\n";
     checkinsTDB({}).each(function(record,recordnumber) {
+		//Add current DB entry ID and HTML code to show entry data in case this ID will be pressed
 		dbEntriesIDs = dbEntriesIDs + "<span class='checkinID' id='" + record['id'] + "'>" + record['id'] + " </span>";
     });
     
     //Iterate through all Timeboxes
 	dbEntriesIDs = dbEntriesIDs +"<p></p>Timeboxes:\n";
     timeboxesTDB({}).each(function(record,recordnumber) {
-	    dbEntriesIDs = dbEntriesIDs + "<span class='checkinID' id='" + record['id'] + "'>" + record['id'] + " </span>";
+		//Add current DB entry ID and HTML code to show entry data in case this ID will be pressed
+	    dbEntriesIDs = dbEntriesIDs + "<span class='timeboxID' id='" + record['id'] + "'>" + record['id'] + " </span>";
     });
     
     //If there are DB entries
     if(dbEntriesIDs) {
+		//Show it's IDs
 		$("#db_entries_list").html(dbEntriesIDs);
     } else {
 		$("#db_entries_list").html("There are no DB entries!");
@@ -312,12 +316,21 @@ $(document).on('click','.button_show_db_entries',function(){
 	db_entries_show();
 });
 
+//Activity DB entry ID was pressed, show all entry's properties
+$(document).on('click','.activityID',function(){
+	//Get DB entry ID from HTML tag's attribute - don't forget to convert it to number
+	var entryID = parseInt($(this).attr('id'));
+	//Get Checkin entry from JS DB
+    var dbEntry = activitiesTDB({id:entryID}).first();
+	alert(getRecordProperties(dbEntry));
+});
+
+//Checkin DB entry ID was pressed, show all entry's properties
 $(document).on('click','.checkinID',function(){
-	//Get DB entry ID from app's page HTML attribute - don't forget to convert it to number
+	//Get DB entry ID from HTML tag's attribute - don't forget to convert it to number
 	var entryID = parseInt($(this).attr('id'));
 	//Get Checkin entry from JS DB
     var dbEntry = checkinsTDB({id:entryID}).first();
-	alert(entryID + ' ' + dbEntry);
 	alert(getRecordProperties(dbEntry));
 });
 
