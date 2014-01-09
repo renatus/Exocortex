@@ -266,7 +266,7 @@ var kelly = testdb({id:2}).first();
 	
 	
 		todoDB.indexedDB.open();
-	  	todoDB.indexedDB.addTodo("Tst");
+	  	//todoDB.indexedDB.addTodo("Tst");
 
 
     
