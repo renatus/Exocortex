@@ -232,7 +232,8 @@ var kelly = testdb({id:2}).first();
         var request = store.put(data);
 
         request.onsuccess = function(e) {
-          todoDB.indexedDB.getAllTodoItems();
+			alert('e');
+          //todoDB.indexedDB.getAllTodoItems();
         };
 
         request.onerror = function(e) {
