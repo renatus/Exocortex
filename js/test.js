@@ -281,7 +281,7 @@ var kelly = testdb({id:2}).first();
           if(!!result == false)
             return;
 
-          alert(result.value);
+          alert(getRecordProperties(result.value));
           result.continue();
         };
 
@@ -291,9 +291,9 @@ var kelly = testdb({id:2}).first();
 	
 		todoDB.indexedDB.open();
 	
-	    setTimeout(function () {
-			todoDB.indexedDB.addTodo("Tst");
-		}, 3000);
+	    //setTimeout(function () {
+		//	todoDB.indexedDB.addTodo("Tst");
+		//}, 3000);
 	
 		setTimeout(function () {
 			todoDB.indexedDB.showTodoItem();
