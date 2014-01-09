@@ -177,8 +177,7 @@ var kelly = testdb({id:2}).first();
       todoDB.indexedDB = {};
       todoDB.indexedDB.db = null;
 	
-	  todoDB.indexedDB.open();
-	  todoDB.indexedDB.addTodo("Tst");
+
 
       todoDB.indexedDB.onerror = function(e) {
         console.log(e);
@@ -264,6 +263,10 @@ var kelly = testdb({id:2}).first();
 
         cursorRequest.onerror = todoDB.indexedDB.onerror;
       };
+	
+	
+		todoDB.indexedDB.open();
+	  	todoDB.indexedDB.addTodo("Tst");
 
 
     
