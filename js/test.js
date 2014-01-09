@@ -266,8 +266,32 @@ var kelly = testdb({id:2}).first();
       };
 	
 	
+	
+	  todoDB.indexedDB.showTodoItem = function() {
+        var db = todoDB.indexedDB.db;
+        var trans = db.transaction("todo", "readonly");
+        var store = trans.objectStore("todo");
+
+        // Get everything in the store;
+        var keyRange = IDBKeyRange.lowerBound(0);
+        var cursorRequest = store.openCursor(keyRange);
+
+        cursorRequest.onsuccess = function(e) {
+          var result = e.target.result;
+          if(!!result == false)
+            return;
+
+          alert(result.value);
+          result.continue();
+        };
+
+        cursorRequest.onerror = todoDB.indexedDB.onerror;
+      };
+	
+	
 		todoDB.indexedDB.open();
 	  	todoDB.indexedDB.addTodo("Tst");
+	todoDB.indexedDB.showTodoItem();
 
 
     
