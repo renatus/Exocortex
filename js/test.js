@@ -295,9 +295,10 @@ var kelly = testdb({id:2}).first();
 		//	todoDB.indexedDB.addTodo("Tst");
 		//}, 3000);
 	
-		setTimeout(function () {
-			todoDB.indexedDB.showTodoItem();
-		}, 3000);
+	
+		//setTimeout(function () {
+		//	todoDB.indexedDB.showTodoItem();
+		//}, 3000);
 	
 	
 	var n = new Notification("title", {body: "notification body"});
