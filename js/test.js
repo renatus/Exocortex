@@ -299,6 +299,9 @@ var kelly = testdb({id:2}).first();
 			todoDB.indexedDB.showTodoItem();
 		}, 3000);
 	
+	
+	var n = new Notification("title", {body: "notification body"});
+	
 	  	
 	
 
