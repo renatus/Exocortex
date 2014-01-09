@@ -290,8 +290,17 @@ var kelly = testdb({id:2}).first();
 	
 	
 		todoDB.indexedDB.open();
-	  	//todoDB.indexedDB.addTodo("Tst");
-	todoDB.indexedDB.showTodoItem();
+	
+	    setTimeout(function () {
+			todoDB.indexedDB.addTodo("Tst");
+		}, 3000);
+	
+		setTimeout(function () {
+			todoDB.indexedDB.showTodoItem();
+		}, 3000);
+	
+	  	
+	
 
 
     
