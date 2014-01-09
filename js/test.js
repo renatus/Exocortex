@@ -189,7 +189,7 @@ var kelly = testdb({id:2}).first();
         request.onsuccess = function(e) {
           console.log ("success our DB: " + dbName + " is open and ready for work");
           todoDB.indexedDB.db = e.target.result;
-          todoDB.indexedDB.getAllTodoItems();
+          //todoDB.indexedDB.getAllTodoItems();
         }
         
         request.onupgradeneeded = function(e) {
