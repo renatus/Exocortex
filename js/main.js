@@ -98,7 +98,7 @@ if (window.localStorage.getItem("userLogged") == "loggedIn") {
 
 //Set default Planned timebox duration, in seconds
 var timeboxDurationPlannedDefault = 15;
-//In the future it would be possible to modify Planned timebox duration, so timeboxDurationPlanned will be altered
+//In future it would be possible to modify Planned timebox duration, so timeboxDurationPlanned will be altered
 var timeboxDurationPlanned = timeboxDurationPlannedDefault;
     
     

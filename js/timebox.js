@@ -63,16 +63,10 @@ function timeboxStarted(durationPlanned){
 function timeboxEnded(){
     //$.mobile.changePage("#timebox_ended", {role:"dialog"});
     
-    //Beep once
-    navigator.notification.beep(1);
     
     //Ask user, what to do with ended timebox
-    navigator.notification.confirm(
-        'You can void it, accept it, or accept and immediately start a new one.',  // message
-        onTimeboxUserReaction,                                                     // callback to invoke with index of button pressed
-        'Timebox is finished',                                                     // title
-        'New,OK,Void'                                                              // buttonLabels
-    );
+    var dialogInput = confirm('Timebox is finished! You can void it, accept it, or accept and immediately start a new one.');
+	onTimeboxUserReaction(dialogInput);
 }
 
 
@@ -84,13 +78,13 @@ function onTimeboxUserReaction(buttonIndex) {
     var timeboxesTDBEntryID = parseInt(window.localStorage.getItem("timeboxesTDBEntryID"));
     window.localStorage.removeItem("timeboxesTDBEntryID");
     
-    if(buttonIndex == 1){
+    if(buttonIndex == true){
         //Timebox accepted, new one should be started
-        timeboxClosed(timeboxesTDBEntryID, "Completed", "completed");
+    //    timeboxClosed(timeboxesTDBEntryID, "Completed", "completed");
         //We have to start new timebox after timeboxClosed, because timeoutTimebox variable would be cleared
         //Probably we should clear timeoutTimebox variable only in case timebox was voided (because it can be voided before planned end)
-        timeboxStarted(timeboxDurationPlanned);
-    } else if(buttonIndex == 2){
+    //    timeboxStarted(timeboxDurationPlanned);
+    //} else if(buttonIndex == 2){
         //Timebox accepted
         timeboxClosed(timeboxesTDBEntryID, "Completed", "completed");
     } else {
