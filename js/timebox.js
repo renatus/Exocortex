@@ -63,12 +63,13 @@ function timeboxStarted(durationPlanned){
 function timeboxEnded(){
     //$.mobile.changePage("#timebox_ended", {role:"dialog"});
 	
-	setNotification();
+	//Display system-level notification
+	setNotification('Timebox is finished!', 'You can void it, accept it, or accept and immediately start a new one.');
     
     
     //Ask user, what to do with ended timebox
-    //var dialogInput = confirm('Timebox is finished! You can void it, accept it, or accept and immediately start a new one.');
-	//onTimeboxUserReaction(dialogInput);
+    var dialogInput = confirm('Timebox is finished! You can void it, accept it, or accept and immediately start a new one.');
+	onTimeboxUserReaction(dialogInput);
 }
 
 

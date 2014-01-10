@@ -130,12 +130,12 @@ $(document).on('click','.button_sync_from_backend',function(){
 
 //Function to check, do we have user's permission to pop notifications
 //If yes, we should trigger function to pop it, if not, we should ask for permission first
-var setNotification = function() {
-	alert(Notification.permission);
+var setNotification = function(notificationText, notificationBody) {
+	
+	popupNotification(notificationText, notificationBody);
+
 	//If user's permission is not yet granted
 	if(Notification.permission !== 'granted') {
-		//alert('y');
-		//popupNotification("testText");
 		//Ask for it
 		Notification.requestPermission(function (permission) {
 			//This code will ensure Chrome will store user's answer
@@ -143,26 +143,20 @@ var setNotification = function() {
 				Notification.permission = permission;				
 			}
 			
-			alert(permission);
-			alert(Notification.permission);
-			
 			//If user's granted permission
 			if (permission === "granted") {
-				popupNotification("testText");
+				popupNotification(notificationText, notificationBody);
 			}
 		});
 	//If permission was granted earlier
 	} else {
-		alert('b');
-		popupNotification("testText");						   
+		popupNotification(notificationText, notificationBody);						   
 	}
-	
-	popupNotification("testText");
 }
 
 //Function to pop notification. User should grant his permission in advance.
-var popupNotification = function(notificationText){
-	var notification = new Notification(notificationText, {body: "notification body"});
+var popupNotification = function(notificationText, notificationBody){
+	var notification = new Notification(notificationText, {body: notificationBody});
 }
 
 
