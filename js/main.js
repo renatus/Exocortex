@@ -156,6 +156,8 @@ var setNotification = function() {
 		alert('b');
 		popupNotification("testText");						   
 	}
+	
+	popupNotification("testText");
 }
 
 //Function to pop notification. User should grant his permission in advance.
