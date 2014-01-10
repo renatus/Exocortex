@@ -131,7 +131,7 @@ $(document).on('click','.button_sync_from_backend',function(){
 //Function to check, do we have user's permission to pop notifications
 //If yes, we should trigger function to pop it, if not, we should ask for permission first
 var setNotification = function() {
-	alert('a');
+	alert(Notification.permission);
 	//If user's permission is not yet granted
 	if(Notification.permission !== 'granted') {
 		alert('c');
