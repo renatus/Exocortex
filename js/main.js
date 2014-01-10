@@ -148,6 +148,7 @@ var setNotification = function() {
 		});
 	//If permission was granted earlier
 	} else {
+		alert('b');
 		popupNotification("testText");						   
 	}
 }
