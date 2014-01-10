@@ -139,6 +139,7 @@ var setNotification = function() {
 			//This code will ensure Chrome will store user's answer
 			if(!('permission' in Notification)) {
 				Notification.permission = permission;
+				alert('z');
 			}
 			
 			alert(Notification.permission);
