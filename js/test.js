@@ -330,8 +330,8 @@ var kelly = testdb({id:2}).first();
   //  });
   //}
 	
-	var setNotification = function(){
-		if(Notification.permission !== 'granted'){
+	var setNotification = function() {
+		if(Notification.permission !== 'granted') {
 			Notification.requestPermission(function (permission) {
 				// Whatever the user answers, we make sure Chrome stores the information
 				if(!('permission' in Notification)) {
@@ -341,7 +341,7 @@ var kelly = testdb({id:2}).first();
 				if (permission === "granted") {
 					popupNotification("testText");
 				}
-			}
+			});
 		} else {
 			popupNotification("testText");						   
 		}
