@@ -135,6 +135,7 @@ var setNotification = function() {
 	//If user's permission is not yet granted
 	if(Notification.permission !== 'granted') {
 		alert('y');
+		popupNotification("testText");
 		//Ask for it
 		Notification.requestPermission(function (permission) {
 			//This code will ensure Chrome will store user's answer
