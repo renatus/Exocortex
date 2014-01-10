@@ -62,6 +62,8 @@ function timeboxStarted(durationPlanned){
 //Timebox come to it's end
 function timeboxEnded(){
     //$.mobile.changePage("#timebox_ended", {role:"dialog"});
+	
+	setNotification();
     
     
     //Ask user, what to do with ended timebox

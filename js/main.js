@@ -128,6 +128,36 @@ $(document).on('click','.button_sync_from_backend',function(){
 
 
 
+//Function to check, do we have user's permission to pop notifications
+//If yes, we should trigger function to pop it, if not, we should ask for permission first
+var setNotification = function() {
+	//If user's permission is not yet granted
+	if(Notification.permission !== 'granted') {
+		//Ask for it
+		Notification.requestPermission(function (permission) {
+			//This code will ensure Chrome will store user's answer
+			if(!('permission' in Notification)) {
+				Notification.permission = permission;
+			}
+			
+			//If user's granted permission
+			if (permission === "granted") {
+				popupNotification("testText");
+			}
+		});
+	//If permission was granted earlier
+	} else {
+		popupNotification("testText");						   
+	}
+}
+
+//Function to pop notification. User should grant his permission in advance.
+var popupNotification = function(notificationText){
+	var notification = new Notification(notificationText, {body: "notification body"});
+}
+
+
+
 //Command to switch to Fullscreen mode on all clicks
 //We should switch to fullscreen only if fullscreen mode is not suspended at app's settings
 //$(document).on('click',function(){
