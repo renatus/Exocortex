@@ -134,13 +134,14 @@ var setNotification = function() {
 	alert(Notification.permission);
 	//If user's permission is not yet granted
 	if(Notification.permission !== 'granted') {
-		alert('c');
 		//Ask for it
 		Notification.requestPermission(function (permission) {
 			//This code will ensure Chrome will store user's answer
 			if(!('permission' in Notification)) {
 				Notification.permission = permission;
 			}
+			
+			alert(Notification.permission);
 			
 			//If user's granted permission
 			if (permission === "granted") {
