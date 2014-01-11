@@ -137,7 +137,7 @@ var setNotification = function(notificationText, notificationBody) {
     //Firefox will not trigger notification untill we've not asked user's permission to show notifications
     //Looks like Chrome 32 support Notification.permission, but not Notification.requestPermission
     //TODO: check this function after Chrome 32 release
-    popupNotification(notificationText, notificationBody);
+    //popupNotification(notificationText, notificationBody);
     
 
 	//If user's permission is not yet granted
