@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# v1.0.168 2014-01-10T14:51:07+00:00
+# v1.0.169 2014-01-10T14:51:07+00:00
 
 #Chrome 32 updates cached files on the first reload after exocortex.appcache file were modified
 #Firefox 26 will not update files immediately, you can delete cached version manually
@@ -7,7 +7,7 @@ CACHE MANIFEST
 #in Firefox for Desktop - at Edit/Preferences/Network - Offline Web Content and user data
 
 # Custom app files
-#index.html
+index.html
 css/index.css
 js/main.js
 js/login.js

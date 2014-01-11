@@ -132,10 +132,8 @@ $(document).on('click','.button_sync_from_backend',function(){
 //If yes, we should trigger function to pop it, if not, we should ask for permission first
 var setNotification = function(notificationText, notificationBody) {
 	
-    var isChromium = window.chrome;
-    if(isChromium === true) {
-        popupNotification(notificationText, notificationBody);
-    }
+    //popupNotification(notificationText, notificationBody);
+    
 
 	//If user's permission is not yet granted
 	if(Notification.permission !== 'granted') {
