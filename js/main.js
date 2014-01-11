@@ -132,13 +132,13 @@ $(document).on('click','.button_sync_from_backend',function(){
 //If yes, we should trigger function to pop it, if not, we should ask for permission first
 var setNotification = function(notificationText, notificationBody) {
 	
-    //Chrome 31 does not support Notification.permission, we should trigger notification right here
+    //Chrome 31 does not support Notification.permission
     //User will be asked to allow notifications automatically by Chrome
     //Firefox will not trigger notification untill we've not asked user's permission to show notifications
     //Looks like Chrome 32 support Notification.permission, but not Notification.requestPermission
     //TODO: check this function after Chrome 32 release
-    //popupNotification(notificationText, notificationBody);
     
+    //It works at Chrome, at least permission was granted earlier by user
 
 	//If user's permission is not yet granted
 	if(Notification.permission !== 'granted') {
