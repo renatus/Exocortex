@@ -300,7 +300,7 @@ var kelly = testdb({id:2}).first();
 		//	todoDB.indexedDB.showTodoItem();
 		//}, 3000);
 	
-	if (typeof Notification !== 'undefined') {
+	if ("Notification" in window){
 		alert("Defined!");
 	} else {
 		alert("Undefined!");
