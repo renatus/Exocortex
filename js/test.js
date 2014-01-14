@@ -300,6 +300,7 @@ var kelly = testdb({id:2}).first();
 		//	todoDB.indexedDB.showTodoItem();
 		//}, 3000);
 	
+	alert('y');
 	if ("Notification" in window){
 		alert("Defined!");
 	} else {
