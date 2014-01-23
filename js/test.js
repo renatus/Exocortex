@@ -310,7 +310,10 @@ var kelly = testdb({id:2}).first();
 	//Display system-level notification
 	setNotification('Timebox is finished!', 'You can void it, accept it, or accept and immediately start a new one.');
     
-    //alert('c');
+    setTimeout(function () {
+        alert('c');
+    }, 3000);
+    
 	
 	
 
