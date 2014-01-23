@@ -300,7 +300,7 @@ var kelly = testdb({id:2}).first();
 		//	todoDB.indexedDB.showTodoItem();
 		//}, 3000);
 	
-	alert('y');
+	
 	if ("Notification" in window){
 		alert("Defined!");
 	} else {
@@ -309,6 +309,8 @@ var kelly = testdb({id:2}).first();
 	
 	//Display system-level notification
 	setNotification('Timebox is finished!', 'You can void it, accept it, or accept and immediately start a new one.');
+    
+    alert('c');
 	
 	
 
