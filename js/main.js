@@ -130,6 +130,7 @@ $(document).on('click','.button_sync_from_backend',function(){
 
 //Function to check, do we have user's permission to pop notifications
 //If yes, we should trigger function to pop it, if not, we should ask for permission first
+//There can be problems with code execution after setNotification, sometimes setTimeout(function () { }, 1000); helps
 var setNotification = function(notificationText, notificationBody) {
 	
     //Chrome 31 does not support Notification.permission
@@ -140,24 +141,29 @@ var setNotification = function(notificationText, notificationBody) {
     
     //It works at Chrome, at least permission was granted earlier by user
 
-	//If user's permission is not yet granted
-	if(Notification.permission !== 'granted') {
-		//Ask for it
-		Notification.requestPermission(function (permission) {
-			//This code will ensure Chrome will store user's answer
-			if(!('permission' in Notification)) {
-				Notification.permission = permission;				
-			}
-			
-			//If user's granted permission
-			if (permission === "granted") {
-				popupNotification(notificationText, notificationBody);
-			}
-		});
-	//If permission was granted earlier
-	} else {
-		popupNotification(notificationText, notificationBody);						   
-	}
+    //If Notifications are supported 
+    //(they are at desctop Chrome, Firefox, Firefox for Android, but not at Chrome for Android 32)
+    if ("Notification" in window){
+        //If user's permission is not yet granted
+        if(Notification.permission !== 'granted') {
+            //Ask for it
+            Notification.requestPermission(function (permission) {
+                //This code will ensure Chrome will store user's answer
+                if(!('permission' in Notification)) {
+                    Notification.permission = permission;
+                }
+                
+                //If user's granted permission
+                if (permission === "granted") {
+                    popupNotification(notificationText, notificationBody);
+                }
+            });
+            
+        //If permission was granted earlier
+        } else {
+            popupNotification(notificationText, notificationBody);
+        }
+    }
 }
 
 //Function to pop notification. User should grant his permission in advance.

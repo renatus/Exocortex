@@ -301,13 +301,13 @@ var kelly = testdb({id:2}).first();
 		//}, 3000);
 	
 	
-	if ("Notification" in window){
+	//if ("Notification" in window){
 		//alert("Defined!");
         //Display system-level notification
 	    setNotification('Timebox is finished!', 'You can void it, accept it, or accept and immediately start a new one.');
-	} else {
-		alert("Undefined!");
-	}
+    //} else {
+	//	alert("Undefined!");
+	//}
 	
 	
     
