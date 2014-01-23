@@ -302,13 +302,14 @@ var kelly = testdb({id:2}).first();
 	
 	
 	if ("Notification" in window){
-		alert("Defined!");
+		//alert("Defined!");
+        //Display system-level notification
+	    setNotification('Timebox is finished!', 'You can void it, accept it, or accept and immediately start a new one.');
 	} else {
 		alert("Undefined!");
 	}
 	
-	//Display system-level notification
-	setNotification('Timebox is finished!', 'You can void it, accept it, or accept and immediately start a new one.');
+	
     
     setTimeout(function () {
         alert('c');
