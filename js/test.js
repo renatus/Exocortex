@@ -526,7 +526,7 @@ function getDBentry() {
           if(!!result == false)
             return;
 
-          alert(result.value);
+          alert(getRecordProperties(getRecordProperties(result.value)));
           result.continue();
         };
 
@@ -549,7 +549,7 @@ function getDBentry() {
             if(!!result == false)
                 return;
 
-            alert(getRecordProperties(result.value));
+            alert(getRecordProperties(getRecordProperties(result.value)));
             result.continue();
         };
 
