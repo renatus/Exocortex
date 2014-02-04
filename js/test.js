@@ -510,8 +510,8 @@ function getDBentry() {
       };
 
       todoDB.indexedDB.getAllTodoItems = function() {
-        var todos = document.getElementById("todoItems");
-        todos.innerHTML = "";
+        //var todos = document.getElementById("todoItems");
+        //todos.innerHTML = "";
 
         var db = todoDB.indexedDB.db;
         var trans = db.transaction("todo", "readonly");
