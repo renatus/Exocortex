@@ -118,21 +118,36 @@ function reload_activities_list() {
 
 //We should get all activities only in case there were no updates for a long time
 //We have a page with all activities, created or updated today and yesterday
-//So in case last update wasn't earlier than yestersay, we should use this page
+//We have a page with all activities, created or updated last week (-7 days ago)
+//We have a page with all activities, created or updated last month (-31 days ago)
+//TODO: Page with activities for all times should content all relevant activities, not only active
 function get_new_activities_from_backend(){
     //Date (and hence Services) module can't handle ISO 8601-formatted dates, but Views module can
     //So for now we'll use such dates as "2013-12-07 00:00:00", and in future - such as "1997-07-16T19:20+01:00"
     //Get timestamp for the beginnig of yesterday
-    var yesterDayStartTimestamp = moment().add('days', -1).startOf('day').format('X');
+    var dayAgoStartTimestamp = moment().add('days', -1).startOf('day').format('X');
+	//Get timestamp for the beginnig of day 7 days ago
+    var weekAgoStartTimestamp = moment().add('days', -7).startOf('day').format('X');
+	//Get timestamp for the beginnig of day 31 days ago
+    var monthAgoStartTimestamp = moment().add('days', -31).startOf('day').format('X');
+	
     //Get timestamp from LocalStorage to find out, when we've synced activities from the server the last time
     var lastSyncTimestamp = parseInt(window.localStorage.getItem("activitiesLastUpdatedFromServer"));
     
-    if(lastSyncTimestamp > yesterDayStartTimestamp){
+    if(lastSyncTimestamp > dayAgoStartTimestamp){
         //We've synced today or yesterday
-        //Put from backend to app DB only those active activities, that were created and updated today or yesterday
+        //Put from backend to app DB only those active activities, that were created and/or updated today or yesterday
         get_activities_from_backend("/json/activities/updated-today-yesterday");
+	} else if (lastSyncTimestamp > weekAgoStartTimestamp) {
+		//We've synced last week
+        //Put from backend to app DB only those active activities, that were created and/or updated last week
+		get_activities_from_backend("/json/activities/updated-7-days");
+	} else if (lastSyncTimestamp > monthAgoStartTimestamp) {
+		//We've synced last month
+        //Put from backend to app DB only those active activities, that were created and/or updated last month
+		get_activities_from_backend("/json/activities/updated-31-days");
     } else {
-        //We've NOT synced today or yesterday
+        //We've NOT synced for a month at least
         //Put all active activities from backend to app DB
         get_activities_from_backend("/json/activities/active");
     }

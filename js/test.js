@@ -304,16 +304,16 @@ var kelly = testdb({id:2}).first();
 	//if ("Notification" in window){
 		//alert("Defined!");
         //Display system-level notification
-	    setNotification('Timebox is finished!', 'You can void it, accept it, or accept and immediately start a new one.');
+	    //setNotification('Timebox is finished!', 'You can void it, accept it, or accept and immediately start a new one.');
     //} else {
 	//	alert("Undefined!");
 	//}
 	
 	
     
-    setTimeout(function () {
-        alert('c');
-    }, 3000);
+    //setTimeout(function () {
+    //    alert('c');
+    //}, 3000);
     
 	
 	
@@ -455,3 +455,134 @@ function onError7(error) {
 //    alert($(this).attr('id'));
     //alert("a");
 //});
+
+
+
+function getDBentry() {
+	var dbName = "jqm-todo";
+    var dbVersion = 1;
+    var todoDB = {};
+    var indexedDB = window.indexedDB;
+
+    todoDB.indexedDB = {};
+    todoDB.indexedDB.db = null;
+	
+
+
+    todoDB.indexedDB.onerror = function(e) {
+    	console.log(e);
+    };
+
+    todoDB.indexedDB.open = function() {
+        var request = indexedDB.open(dbName, dbVersion);
+
+        request.onsuccess = function(e) {
+            console.log ("success our DB: " + dbName + " is open and ready for work");
+            todoDB.indexedDB.db = e.target.result;
+            todoDB.indexedDB.getAllTodoItems();
+        }
+        
+        request.onupgradeneeded = function(e) {
+            todoDB.indexedDB.db = e.target.result;
+            var db = todoDB.indexedDB.db;
+            console.log ("Going to upgrade our DB from version: "+ e.oldVersion + " to " + e.newVersion);
+
+            try {
+                if (db.objectStoreNames && db.objectStoreNames.contains("todo")) {
+                    db.deleteObjectStore("todo");
+                }
+            }
+            catch (err) {
+                console.log("got err in objectStoreNames:" + err);
+            }
+            var store = db.createObjectStore("todo",
+                {keyPath: "timeStamp"});
+            console.log("-- onupgradeneeded store:"+ JSON.stringify(store));
+        }
+       
+        request.onfailure = function(e) {
+            console.error("could not open our DB! Err:"+e);  
+        }
+        
+        request.onerror = function(e) {
+            console.error("Well... How should I put it? We have some issues with our DB! Err:"+e);
+        }
+      };
+
+      todoDB.indexedDB.getAllTodoItems = function() {
+        var todos = document.getElementById("todoItems");
+        todos.innerHTML = "";
+
+        var db = todoDB.indexedDB.db;
+        var trans = db.transaction("todo", "readonly");
+        var store = trans.objectStore("todo");
+
+        // Get everything in the store;
+        var keyRange = IDBKeyRange.lowerBound(0);
+        var cursorRequest = store.openCursor(keyRange);
+
+        cursorRequest.onsuccess = function(e) {
+          var result = e.target.result;
+          if(!!result == false)
+            return;
+
+          alert(result.value);
+          result.continue();
+        };
+
+        cursorRequest.onerror = todoDB.indexedDB.onerror;
+    };
+	
+	
+	
+	todoDB.indexedDB.showTodoItem = function() {
+        var db = todoDB.indexedDB.db;
+        var trans = db.transaction("todo", "readonly");
+        var store = trans.objectStore("todo");
+
+        // Get everything in the store;
+        var keyRange = IDBKeyRange.lowerBound(0);
+        var cursorRequest = store.openCursor(keyRange);
+
+        cursorRequest.onsuccess = function(e) {
+            var result = e.target.result;
+            if(!!result == false)
+                return;
+
+            alert(getRecordProperties(result.value));
+            result.continue();
+        };
+
+        cursorRequest.onerror = todoDB.indexedDB.onerror;
+    };
+	
+	
+	todoDB.indexedDB.open();
+	
+}
+
+
+
+function setDBentry(){
+	todoDB.indexedDB.addTodo = function(todoText) {
+        var db = todoDB.indexedDB.db;
+        var trans = todoDB.indexedDB.db.transaction("todo", "readwrite");
+        var store = trans.objectStore("todo");
+
+        var data = {
+            "text": todoText,
+            "timeStamp": new Date().getTime()
+        };
+
+        var request = store.put(data);
+
+        request.onsuccess = function(e) {
+			alert('e');
+            //todoDB.indexedDB.getAllTodoItems();
+        };
+
+        request.onerror = function(e) {
+            console.error("Error Adding an item: ", e);
+        };
+    };
+}
