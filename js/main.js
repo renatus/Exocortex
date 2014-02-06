@@ -105,6 +105,13 @@ var timeboxDurationPlanned = timeboxDurationPlannedDefault;
     
 //Clear all app's cache, if appropriate button was pressed
 $(document).on('click','.page_login_clear_cache',function() {
+	//We should log out, because backend connection data will be erased
+	var backendDomain = window.localStorage.getItem("backendDomain");
+	if (backendDomain) {
+		backendLogout(backendDomain);
+	}
+	
+	//Clear cache
 	window.localStorage.clear();
 	alert("Cache cleared!")
 })

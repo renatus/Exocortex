@@ -29,7 +29,7 @@ $(document).on('click','.page_login_submit',function(){
 
 //Button Log out of IS was pressed
 $(document).on('click','.button_logout',function(){
-	backendDomain = window.localStorage.getItem("backendDomain");
+	var backendDomain = window.localStorage.getItem("backendDomain");
 	if (!backendDomain) { backendDomain = "http://ren.renat.biz" }
 	backendLogout(backendDomain);
 });
