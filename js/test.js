@@ -589,6 +589,7 @@ function setDBentry(){
 
 function notTest(){
 	//Display system-level notification
-	setNotification('Timebox is finished!', 'You can void it, accept it, or accept and immediately start a new one.');
+	setNotification('111!', 'You can void it, accept it, or accept and immediately start a new one.');
 	console.log('aaa');
+	alert('b');
 }
