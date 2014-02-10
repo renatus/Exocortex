@@ -158,7 +158,8 @@ function get_new_activities_from_backend(){
 //Get list of nodes (with all properties) from IS and put that list to app's DB
 //URLpart should contain last part of the list URL at IS, like this: "/json/activities/waiting"
 function get_activities_from_backend(URLpart){
-    
+    var backendDomain = getBackendDomain();
+	
     //Get current timestamp
     curDateTime = new Date();
     curTimestamp = Date.parse(curDateTime);
