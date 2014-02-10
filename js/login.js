@@ -29,8 +29,7 @@ $(document).on('click','.page_login_submit',function(){
 
 //Button Log out of IS was pressed
 $(document).on('click','.button_logout',function(){
-	var backendDomain = window.localStorage.getItem("backendDomain");
-	if (!backendDomain) { backendDomain = getCurDomain(); }
+	var backendDomain = getBackendDomain();
 	backendLogout(backendDomain);
 });
 

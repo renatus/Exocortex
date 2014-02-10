@@ -87,15 +87,6 @@ function getNewTDBEntryID(TDBTableName) {
 
 
 
-//If we're logged in, set global variable with IS domain
-if (window.localStorage.getItem("userLogged") == "loggedIn") {
-    //Don't forget to change backendDomain when you log in or log out
-    //backendDomain variable should be global
-	var backendDomain = window.localStorage.getItem("backendDomain");
-}
-
-
-
 //Set default Planned timebox duration, in seconds
 var timeboxDurationPlannedDefault = 15;
 //In future it would be possible to modify Planned timebox duration, so timeboxDurationPlanned will be altered
@@ -106,7 +97,7 @@ var timeboxDurationPlanned = timeboxDurationPlannedDefault;
 //Clear all app's cache, if appropriate button was pressed
 $(document).on('click','.page_login_clear_cache',function() {
 	//We should log out, because backend connection data will be erased
-	var backendDomain = window.localStorage.getItem("backendDomain");
+	var backendDomain = getBackendDomain();
 	if (backendDomain) {
 		backendLogout(backendDomain);
 	}
