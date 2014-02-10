@@ -1,7 +1,7 @@
 //Open IS Login app's page
 $(document).on("click", ".button_login", function() {
-	//We should fill Domain name and login textboxes with values we entered during previous login attempts
-	$('#page_login_domain').val(window.localStorage.getItem("backendDomain"));
+	//We should fill Domain name and login textboxes with values we entered during previous login attempts or default values
+	$('#page_login_domain').val(getBackendDomain());
 	$('#page_login_name').val(window.localStorage.getItem("userLogin"));
 	
 })
