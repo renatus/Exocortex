@@ -564,6 +564,8 @@ function getDBentry() {
 
 
 function openDB(){
+	console.log('a');
+	
 	var dbName = "jqm-todo";
     var dbVersion = 1;
     var todoDB = {};
