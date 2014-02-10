@@ -217,6 +217,13 @@ var loggedInIndicator = function() {
 
 
 
+//Returns current app's domain, like "http://ren.renat.biz", with correct protocol
+var getCurDomain = function() {
+	return window.location.protocol + "//" + window.location.hostname;
+}
+
+
+
 //Get Drupal Services token (security measure implemented by this module)
 //To put jQuery AJAX request in a separate function, make it synchronous: async:false,
 //You should return a value after the call to AJAX, not inside success handler
