@@ -222,6 +222,21 @@ var getCurDomain = function() {
 	return window.location.protocol + "//" + window.location.hostname;
 }
 
+//Returns backend domain, like "http://ren.renat.biz"
+//If user explicitly entered backend domain, that domain will be returned. If not, current webapp domain will be returned.
+//TODO: add pre-defined backend domain for Exocortex app, it doesn't have current domain name
+var getBackendDomain = function() {
+	var backendDomain = "";
+	if(window.localStorage.getItem("backendDomain")) {
+		//If there is user-entered backend domain
+		backendDomain = window.localStorage.getItem("backendDomain");
+	} else {
+		//If there is NO user-entered backend domain
+		backendDomain = getCurDomain;
+	}
+	return backendDomain;
+}
+
 
 
 //Get Drupal Services token (security measure implemented by this module)
