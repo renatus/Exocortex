@@ -563,7 +563,7 @@ function getDBentry() {
 
 
 
-function setDBentry(){
+function setDBentry(todoText){
 	todoDB.indexedDB.addTodo = function(todoText) {
         var db = todoDB.indexedDB.db;
         var trans = todoDB.indexedDB.db.transaction("todo", "readwrite");
@@ -577,7 +577,7 @@ function setDBentry(){
         var request = store.put(data);
 
         request.onsuccess = function(e) {
-			alert('e');
+			alert('Data added to DB');
             //todoDB.indexedDB.getAllTodoItems();
         };
 
