@@ -692,29 +692,6 @@ function getDBentry() {
 
         cursorRequest.onerror = todoDB.indexedDB.onerror;
     };
-	
-	
-	
-	todoDB.indexedDB.showTodoItem = function() {
-        var db = todoDB.indexedDB.db;
-        var trans = db.transaction("todo", "readonly");
-        var store = trans.objectStore("todo");
-
-        // Get everything in the store;
-        var keyRange = IDBKeyRange.lowerBound(0);
-        var cursorRequest = store.openCursor(keyRange);
-
-        cursorRequest.onsuccess = function(e) {
-            var result = e.target.result;
-            if(!!result == false)
-                return;
-
-            alert(getRecordProperties(getRecordProperties(result.value)));
-            result.continue();
-        };
-
-        cursorRequest.onerror = todoDB.indexedDB.onerror;
-    };
 
 
 
