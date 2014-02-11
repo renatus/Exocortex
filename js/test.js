@@ -411,7 +411,7 @@ todoDB.indexedDB.open = function() {
 		//Create object store
 		//Object Store is a storage for objects, instead of tables at SQL databases
         var store = db.createObjectStore("todo", {keyPath: "timeStamp"});
-		var store = db.createObjectStore("store2", {autoIncrement: true});
+		//var store = db.createObjectStore("store2", {autoIncrement: true});
         console.log("Onupgradeneeded: "+ JSON.stringify(store));
     }
        
