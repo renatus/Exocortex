@@ -366,7 +366,7 @@ function onError7(error) {
 
 //IndexedDB database name
 var dbName = "jqm-todo";
-//Database version (should be increased, when structure updates)
+//Database version (should be increased, when structure updates). Should be of integer type.
 var dbVersion = 1;
 var todoDB = {};
 var indexedDB = window.indexedDB;
@@ -376,56 +376,66 @@ todoDB.indexedDB.db = null;
 	
 
 
+//Handle DB-related errors
 todoDB.indexedDB.onerror = function(e) {
 	console.log(e);
 };
 
+
+
+//Function to open DB and upgrade it's data structure, if needed
 todoDB.indexedDB.open = function() {
+	//Open database
 	var request = indexedDB.open(dbName, dbVersion);
 	
 	request.onsuccess = function(e) {
-		console.log ("success our DB: " + dbName + " is open and ready for work");
+		console.log ("DB " + dbName + " was opened and ready for work");
         todoDB.indexedDB.db = e.target.result;
-		//todoDB.indexedDB.getAllTodoItems();
     }
         
     request.onupgradeneeded = function(e) {
 		todoDB.indexedDB.db = e.target.result;
         var db = todoDB.indexedDB.db;
-        console.log ("Going to upgrade our DB from version: "+ e.oldVersion + " to " + e.newVersion);
+        console.log ("Going to upgrade DB from version "+ e.oldVersion + " to version " + e.newVersion);
 
-        try {
-			if (db.objectStoreNames && db.objectStoreNames.contains("todo")) {
-				db.deleteObjectStore("todo");
-			}
-        }
+        //try {
+		//	if (db.objectStoreNames && db.objectStoreNames.contains("todo")) {
+		//		db.deleteObjectStore("todo");
+		//	}
+        //}
 		
-        catch (err) {
-			console.log("got err in objectStoreNames:" + err);
-        }
+        //catch (err) {
+		//	console.log("Error in objectStoreNames: " + err);
+        //}
 		
+		//Create object store
+		//Object Store is a storage for objects, instead of tables at SQL databases
         var store = db.createObjectStore("todo", {keyPath: "timeStamp"});
-        console.log("-- onupgradeneeded store:"+ JSON.stringify(store));
+        console.log("Onupgradeneeded: "+ JSON.stringify(store));
     }
        
     request.onfailure = function(e) {
-		console.error("could not open our DB! Err:"+e);
+		console.error("Failed to open DB: " + e);
 	}
         
     request.onerror = function(e) {
-		console.error("Well... How should I put it? We have some issues with our DB! Err:"+e);
+		console.error("Error while opening DB: " + e);
 	}
 };
 
+//Open DB and upgrade it's data structure, if needed
 todoDB.indexedDB.open();
 
 
 
+//Add entry to DB
 todoDB.indexedDB.addEntry = function(todoText) {
-	var dbTableName = "todo"
+	//Database table name
+	var dbTableName = "todo";
 	var db = todoDB.indexedDB.db;
-    var trans = todoDB.indexedDB.db.transaction(dbTableName, "readwrite");
-    var store = trans.objectStore(dbTableName);
+	//Create transaction
+    var transact = todoDB.indexedDB.db.transaction(dbTableName, "readwrite");
+    var store = transact.objectStore(dbTableName);
 	
     var data = {
 		"text": todoText,
@@ -435,8 +445,7 @@ todoDB.indexedDB.addEntry = function(todoText) {
 	var request = store.put(data);
 
     request.onsuccess = function(e) {
-		alert('Data added to DB');
-		//todoDB.indexedDB.getAllTodoItems();
+		console.log('Data added to DB');
 	};
 
     request.onerror = function(e) {
@@ -447,9 +456,12 @@ todoDB.indexedDB.addEntry = function(todoText) {
 
 
 todoDB.indexedDB.getTodoItem = function(entryID) {
+	//Database table name
+	var dbTableName = "todo";
     var db = todoDB.indexedDB.db;
-    var trans = db.transaction("todo", "readonly");
-    var store = trans.objectStore("todo");
+	//Create transaction
+    var transact = db.transaction(dbTableName, "readonly");
+    var store = transact.objectStore(dbTableName);
 
     //
     var keyRange = IDBKeyRange.only(entryID);
@@ -466,9 +478,12 @@ todoDB.indexedDB.getTodoItem = function(entryID) {
 
 
 todoDB.indexedDB.getAllTodoItems = function() {
+	//Database table name
+	var dbTableName = "todo";
     var db = todoDB.indexedDB.db;
-    var trans = db.transaction("todo", "readonly");
-    var store = trans.objectStore("todo");
+	//Create transaction
+    var transact = db.transaction(dbTableName, "readonly");
+    var store = transact.objectStore(dbTableName);
 
     // Get everything in the store;
     var keyRange = IDBKeyRange.lowerBound(0);
@@ -488,9 +503,12 @@ todoDB.indexedDB.getAllTodoItems = function() {
 
 
 todoDB.indexedDB.deleteTodo = function(id) {
+	//Database table name
+	var dbTableName = "todo";
 	var db = todoDB.indexedDB.db;
-    var trans = db.transaction("todo", "readwrite");
-    var store = trans.objectStore("todo");
+	//Create transaction
+    var transact = db.transaction(dbTableName, "readwrite");
+    var store = transact.objectStore(dbTableName);
 
     var request = store.delete(id);
 
