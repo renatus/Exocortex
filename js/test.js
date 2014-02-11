@@ -564,6 +564,30 @@ function getDBentry() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 	var dbName = "jqm-todo";
     var dbVersion = 1;
@@ -643,6 +667,54 @@ function getDBentry() {
         };
     };
 
+
+
+      todoDB.indexedDB.getAllTodoItems = function() {
+        //var todos = document.getElementById("todoItems");
+        //todos.innerHTML = "";
+
+        var db = todoDB.indexedDB.db;
+        var trans = db.transaction("todo", "readonly");
+        var store = trans.objectStore("todo");
+
+        // Get everything in the store;
+        var keyRange = IDBKeyRange.lowerBound(0);
+        var cursorRequest = store.openCursor(keyRange);
+
+        cursorRequest.onsuccess = function(e) {
+          var result = e.target.result;
+          if(!!result == false)
+            return;
+
+          alert(getRecordProperties(getRecordProperties(result.value)));
+          result.continue();
+        };
+
+        cursorRequest.onerror = todoDB.indexedDB.onerror;
+    };
+	
+	
+	
+	todoDB.indexedDB.showTodoItem = function() {
+        var db = todoDB.indexedDB.db;
+        var trans = db.transaction("todo", "readonly");
+        var store = trans.objectStore("todo");
+
+        // Get everything in the store;
+        var keyRange = IDBKeyRange.lowerBound(0);
+        var cursorRequest = store.openCursor(keyRange);
+
+        cursorRequest.onsuccess = function(e) {
+            var result = e.target.result;
+            if(!!result == false)
+                return;
+
+            alert(getRecordProperties(getRecordProperties(result.value)));
+            result.continue();
+        };
+
+        cursorRequest.onerror = todoDB.indexedDB.onerror;
+    };
 
 
 
