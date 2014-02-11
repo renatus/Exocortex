@@ -683,7 +683,7 @@ todoDB.indexedDB.getAllTodoItems = function() {
     cursorRequest.onsuccess = function(e) {
 		var result = e.target.result;
 		if(!!result == false) return;
-		/Alert all found DB items (objects in objects should be printed first)
+		//Alert all found DB items (objects in objects should be printed first)
 		alert(getRecordProperties(getRecordProperties(result.value)));
         result.continue();
     };
