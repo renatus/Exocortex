@@ -668,6 +668,31 @@ todoDB.indexedDB.addTodo = function(todoText) {
 
 
 
+todoDB.indexedDB.addEntry = function(todoText) {
+	var dbTableName = "todo"
+	var db = todoDB.indexedDB.db;
+    var trans = todoDB.indexedDB.db.transaction(dbTableName, "readwrite");
+    var store = trans.objectStore(dbTableName);
+	
+    var data = {
+		"text": todoText,
+		"timeStamp": new Date().getTime()
+    };
+	
+	var request = store.put(data);
+
+    request.onsuccess = function(e) {
+		alert('Data added to DB');
+		//todoDB.indexedDB.getAllTodoItems();
+	};
+
+    request.onerror = function(e) {
+		console.error("Error Adding an item: ", e);
+	};
+};
+
+
+
 todoDB.indexedDB.getAllTodoItems = function() {
 	//var todos = document.getElementById("todoItems");
     //todos.innerHTML = "";
@@ -689,6 +714,24 @@ todoDB.indexedDB.getAllTodoItems = function() {
     };
 
     cursorRequest.onerror = todoDB.indexedDB.onerror;
+};
+
+
+
+todoDB.indexedDB.deleteTodo = function(id) {
+	var db = todoDB.indexedDB.db;
+    var trans = db.transaction("todo", "readwrite");
+    var store = trans.objectStore("todo");
+
+    var request = store.delete(id);
+
+    request.onsuccess = function(e) {
+		todoDB.indexedDB.getAllTodoItems();
+    };
+
+    request.onerror = function(e) {
+		console.error("Error deleteing: ", e);
+	};
 };
 
 
