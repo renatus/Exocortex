@@ -457,7 +457,7 @@ todoDB.indexedDB.getTodoItem = function(entryID) {
 
     cursorRequest.onsuccess = function(e) {
 		var result = e.target.result;
-		alert(getRecordProperties(getRecordProperties(result.value)));
+		alert(getObjProperties(result.value));
     };
 
     cursorRequest.onerror = todoDB.indexedDB.onerror;
@@ -478,7 +478,7 @@ todoDB.indexedDB.getAllTodoItems = function() {
 		var result = e.target.result;
 		if(!!result == false) return;
 		//Alert all found DB items (objects in objects should be printed first)
-		alert(getRecordProperties(getRecordProperties(result.value)));
+		alert(getObjProperties(getObjProperties(result.value)));
         result.continue();
     };
 
@@ -503,6 +503,17 @@ todoDB.indexedDB.deleteTodo = function(id) {
 	};
 };
 
+
+
+//Return list of all properties and it's values of received object
+function getObjProperties(obj){
+	var objPropertiesList = "";
+	//Iterate through all properties
+	for(i in obj){
+		objPropertiesList = objPropertiesList + i + ": " + obj[i] + "\n";
+	}
+	return objPropertiesList;
+}
 
 
 
