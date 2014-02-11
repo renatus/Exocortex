@@ -614,7 +614,8 @@ function openDB(){
             console.error("Well... How should I put it? We have some issues with our DB! Err:"+e);
         }
       };
-	var db = todoDB.indexedDB.db;
+	
+	todoDB.indexedDB.open();
 }
 
 
