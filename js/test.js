@@ -367,7 +367,7 @@ function onError7(error) {
 //IndexedDB database name
 var dbName = "jqm-todo";
 //Database version (should be increased, when structure updates). Should be of integer type.
-var dbVersion = 1;
+var dbVersion = 2;
 var todoDB = {};
 var indexedDB = window.indexedDB;
 
