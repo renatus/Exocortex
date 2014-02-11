@@ -367,7 +367,7 @@ function onError7(error) {
 //IndexedDB database name
 var dbName = "jqm-todo";
 //Database version (should be increased, when structure updates). Should be of integer type.
-var dbVersion = 2;
+var dbVersion = 3;
 var todoDB = {};
 var indexedDB = window.indexedDB;
 
@@ -398,12 +398,13 @@ todoDB.indexedDB.open = function() {
         var db = todoDB.indexedDB.db;
         console.log ("Going to upgrade DB from version "+ e.oldVersion + " to version " + e.newVersion);
 
+		//If there is Object store with the same name at DB from previous revision, we'll face error while trying to upgrade DB
+		//We should delete existing Object store (and all it's data, of course)
         try {
 			if (db.objectStoreNames && db.objectStoreNames.contains("todo")) {
 				db.deleteObjectStore("todo");
 			}
         }
-		
         catch (err) {
 			console.log("Error in objectStoreNames: " + err);
         }
@@ -411,7 +412,7 @@ todoDB.indexedDB.open = function() {
 		//Create object store
 		//Object Store is a storage for objects, instead of tables at SQL databases
         var store = db.createObjectStore("todo", {keyPath: "timeStamp"});
-		//var store = db.createObjectStore("store2", {autoIncrement: true});
+		var store = db.createObjectStore("store2", {autoIncrement: true});
         console.log("Onupgradeneeded: "+ JSON.stringify(store));
     }
        
