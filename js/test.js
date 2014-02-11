@@ -563,7 +563,7 @@ function getDBentry() {
 
 
 
-function openDB(){
+
 	
 	var dbName = "jqm-todo";
     var dbVersion = 1;
@@ -616,11 +616,11 @@ function openDB(){
       };
 	
 	todoDB.indexedDB.open();
-}
 
 
 
-function setDBentry(todoText){
+
+
 	todoDB.indexedDB.addTodo = function(todoText) {
         var db = todoDB.indexedDB.db;
         var trans = todoDB.indexedDB.db.transaction("todo", "readwrite");
@@ -642,7 +642,6 @@ function setDBentry(todoText){
             console.error("Error Adding an item: ", e);
         };
     };
-}
 
 
 
