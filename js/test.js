@@ -398,15 +398,15 @@ todoDB.indexedDB.open = function() {
         var db = todoDB.indexedDB.db;
         console.log ("Going to upgrade DB from version "+ e.oldVersion + " to version " + e.newVersion);
 
-        //try {
-		//	if (db.objectStoreNames && db.objectStoreNames.contains("todo")) {
-		//		db.deleteObjectStore("todo");
-		//	}
-        //}
+        try {
+			if (db.objectStoreNames && db.objectStoreNames.contains("todo")) {
+				db.deleteObjectStore("todo");
+			}
+        }
 		
-        //catch (err) {
-		//	console.log("Error in objectStoreNames: " + err);
-        //}
+        catch (err) {
+			console.log("Error in objectStoreNames: " + err);
+        }
 		
 		//Create object store
 		//Object Store is a storage for objects, instead of tables at SQL databases
