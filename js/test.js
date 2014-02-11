@@ -478,7 +478,7 @@ todoDB.indexedDB.getAllTodoItems = function() {
 		var result = e.target.result;
 		if(!!result == false) return;
 		//Alert all found DB items (objects in objects should be printed first)
-		alert(getObjProperties(getObjProperties(result.value)));
+		alert(getObjProperties(result.value));
         result.continue();
     };
 
