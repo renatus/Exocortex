@@ -466,6 +466,33 @@ todoDB.indexedDB.addEntry = function(todoText) {
 	};
 };
 
+todoDB.indexedDB.addEntry2 = function(todoText) {
+	//Database table name
+	var dbTableName = "todo";
+	var db = todoDB.indexedDB.db;
+	//Create transaction, define Object stores it will cover
+    var transact = todoDB.indexedDB.db.transaction(dbTableName, "readwrite");
+    var store = transact.objectStore(dbTableName);
+	
+    var data = {
+		"last": todoText,
+		"date": "date",
+		"timeStamp": new Date().getTime()
+    };
+	
+	//Request to store data at DB
+	var request = store.put(data);
+
+    request.onsuccess = function(e) {
+		console.log('Data added to DB');
+	};
+
+    request.onerror = function(e) {
+		console.error("Error Adding an item: ", e);
+	};
+};
+
+
 
 todoDB.indexedDB.getTodoItem = function(entryID) {
 	//Database table name
