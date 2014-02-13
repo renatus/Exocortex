@@ -405,6 +405,10 @@ todoDB.indexedDB.open = function() {
 			if (db.objectStoreNames && db.objectStoreNames.contains("todo")) {
 				db.deleteObjectStore("todo");
 			}
+			
+			if (db.objectStoreNames && db.objectStoreNames.contains("store2")) {
+				db.deleteObjectStore("store2");
+			}
         }
         catch (err) {
 			console.log("Error in objectStoreNames: " + err);
