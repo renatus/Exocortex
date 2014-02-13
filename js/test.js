@@ -416,6 +416,8 @@ todoDB.indexedDB.open = function() {
 		
 		//Create object store
 		//Object Store is a storage for objects, instead of tables at SQL databases
+		//We do not define objects structure here other than "fields" for keyPath, and for indexes
+		//While adding objects, you can omit fields, including indexing ones, but keyPath field should be filled
 		//We can make one of it's "fields" (with unique values) an in-line key with keyPath
         var store = db.createObjectStore("todo", {keyPath: "timeStamp"});
 		// Create an index to search customers by text field. We may have duplicates so we can't use a unique index.
@@ -535,10 +537,12 @@ todoDB.indexedDB.getAllTodoItems = function() {
 
     cursorRequest.onsuccess = function(e) {
 		var result = e.target.result;
-		if(!!result == false) return;
-		//Alert all found DB items (objects in objects should be printed first)
-		alert(getObjProperties(result.value));
-        result.continue();
+		//if(!!result == false) return;
+		if(result){
+			//Alert all found DB items (objects should be printed first)
+			alert(getObjProperties(result.value));
+			result.continue();
+		}
     };
 
     cursorRequest.onerror = todoDB.indexedDB.onerror;
