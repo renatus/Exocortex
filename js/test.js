@@ -415,7 +415,7 @@ todoDB.indexedDB.open = function() {
 		//We can make one of it's "fields" (with unique values) an in-line key with keyPath
         var store = db.createObjectStore("todo", {keyPath: "timeStamp"});
 		// Create an index to search customers by text field. We may have duplicates so we can't use a unique index.
-  		objectStore.createIndex("todo", "todo", {unique: false});
+  		store.createIndex("todo", "todo", {unique: false});
 		
 		//Or we can make unique integer out-of-line keys (1,2,3 ...) with keyGenerator, enabled by {autoIncrement: true}
 		var store = db.createObjectStore("store2", {autoIncrement: true});
