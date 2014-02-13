@@ -367,7 +367,7 @@ function onError7(error) {
 //IndexedDB database name
 var dbName = "jqm-todo";
 //Database version (should be increased, when structure updates). Should be of integer type.
-var dbVersion = 3;
+var dbVersion = 4;
 var todoDB = {};
 var indexedDB = window.indexedDB;
 
@@ -385,7 +385,7 @@ todoDB.indexedDB.onerror = function(e) {
 
 //Function to open DB and upgrade it's data structure, if needed
 todoDB.indexedDB.open = function() {
-	//Open database
+	//Request to open database. Will return IDBOpenDBRequest object.
 	var request = indexedDB.open(dbName, dbVersion);
 	
 	request.onsuccess = function(e) {
@@ -400,6 +400,7 @@ todoDB.indexedDB.open = function() {
 
 		//If there is Object store with the same name at DB from previous revision, we'll face error while trying to upgrade DB
 		//We should delete existing Object store (and all it's data, of course)
+		//TODO: consider Object Store updating rather then recreating (versionchange transaction?)
         try {
 			if (db.objectStoreNames && db.objectStoreNames.contains("todo")) {
 				db.deleteObjectStore("todo");
@@ -411,7 +412,12 @@ todoDB.indexedDB.open = function() {
 		
 		//Create object store
 		//Object Store is a storage for objects, instead of tables at SQL databases
+		//We can make one of it's "fields" (with unique values) an in-line key with keyPath
         var store = db.createObjectStore("todo", {keyPath: "timeStamp"});
+		// Create an index to search customers by text field. We may have duplicates so we can't use a unique index.
+  		objectStore.createIndex("todo", "todo", {unique: false});
+		
+		//Or we can make unique integer out-of-line keys (1,2,3 ...) with keyGenerator, enabled by {autoIncrement: true}
 		var store = db.createObjectStore("store2", {autoIncrement: true});
         console.log("Onupgradeneeded: "+ JSON.stringify(store));
     }
@@ -435,7 +441,7 @@ todoDB.indexedDB.addEntry = function(todoText) {
 	//Database table name
 	var dbTableName = "todo";
 	var db = todoDB.indexedDB.db;
-	//Create transaction
+	//Create transaction, define Object stores it will cover
     var transact = todoDB.indexedDB.db.transaction(dbTableName, "readwrite");
     var store = transact.objectStore(dbTableName);
 	
@@ -444,6 +450,7 @@ todoDB.indexedDB.addEntry = function(todoText) {
 		"timeStamp": new Date().getTime()
     };
 	
+	//Request to store data at DB
 	var request = store.put(data);
 
     request.onsuccess = function(e) {
@@ -454,30 +461,6 @@ todoDB.indexedDB.addEntry = function(todoText) {
 		console.error("Error Adding an item: ", e);
 	};
 };
-
-todoDB.indexedDB.addEntry2 = function(todoText) {
-	//Database table name
-	var dbTableName = "store2";
-	var db = todoDB.indexedDB.db;
-	//Create transaction
-    var transact = todoDB.indexedDB.db.transaction(dbTableName, "readwrite");
-    var store = transact.objectStore(dbTableName);
-	
-    var data = {
-		"text": todoText
-    };
-	
-	var request = store.put(data);
-
-    request.onsuccess = function(e) {
-		console.log('Data added to DB');
-	};
-
-    request.onerror = function(e) {
-		console.error("Error Adding an item: ", e);
-	};
-};
-
 
 
 todoDB.indexedDB.getTodoItem = function(entryID) {
@@ -488,8 +471,10 @@ todoDB.indexedDB.getTodoItem = function(entryID) {
     var transact = db.transaction(dbTableName, "readonly");
     var store = transact.objectStore(dbTableName);
 
-    //
+    //Get entry with matching key
+	//keyRange is a continuous interval over keys, for example greater than X and smaller then Y
     var keyRange = IDBKeyRange.only(entryID);
+	//Cursor is a mechanism for iterating over multiple records within a key range
     var cursorRequest = store.openCursor(keyRange);
 
     cursorRequest.onsuccess = function(e) {
@@ -510,8 +495,10 @@ todoDB.indexedDB.getAllTodoItems = function() {
     var transact = db.transaction(dbTableName, "readonly");
     var store = transact.objectStore(dbTableName);
 
-    // Get everything in the store;
+    // Get everything in the store
+	//keyRange is a continuous interval over keys, for example greater than X and smaller then Y
     var keyRange = IDBKeyRange.lowerBound(0);
+	//Cursor is a mechanism for iterating over multiple records within a key range
     var cursorRequest = store.openCursor(keyRange);
 
     cursorRequest.onsuccess = function(e) {
