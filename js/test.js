@@ -477,6 +477,7 @@ todoDB.indexedDB.addEntry2 = function(todoText) {
     var data = {
 		"last": todoText,
 		"date": "date",
+		"todo": 1,
 		"timeStamp": new Date().getTime()
     };
 	
