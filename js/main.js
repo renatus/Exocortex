@@ -267,6 +267,7 @@ var getServicesToken = function(backendDomain) {
 //dataToSend should be JSON data to modify Drupal node
 //fuctionOnSuccess should contain function name (in specific format) to call after this function execution will be completed
 function edit_backend_node(entryID, URLpart, requestType, dataToSend, functionOnSuccess, msgOnSuccess, msgOnError) {
+	var backendDomain = getBackendDomain();
     //We have to get Services token for security
     //We can think about it's caching - now we have to make two requests instead of one for node modification
     var servicesToken = getServicesToken(backendDomain);
